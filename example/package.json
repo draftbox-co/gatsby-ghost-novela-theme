@@ -11,6 +11,7 @@
   "dependencies": {
     "gatsby": "^2.22.15",
     "gatsby-theme-minimal": "^1.0.0",
+    "gatsby-source-ghost": "^4.0.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }

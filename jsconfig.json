@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./gatsby-ghost-novela-theme/src",
+    "jsx": "react",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@icons/*": ["icons/*"],
+      "@styles/*": ["styles/*"],
+      "@utils": ["utils/"],
+      "@types": ["types/"]
+    }
+  }
+}
