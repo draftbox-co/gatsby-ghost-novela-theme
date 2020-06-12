@@ -10,88 +10,6 @@ const GatsbyFluid_withWebp = `
   sizes
 `;
 
-module.exports.local = {
-  articles: `{
-    articles: allArticle(
-      sort: { fields: [date, title], order: DESC }
-      limit: 1000
-    ) {
-      edges {
-        node {
-          id
-          slug
-          secret
-          title
-          author
-          date(formatString: "MMMM Do, YYYY")
-          dateForSEO: date
-          timeToRead
-          excerpt
-          canonical_url
-          subscription
-          body
-          hero {
-            full: childImageSharp {
-              fluid(maxWidth: 944, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-            regular: childImageSharp {
-              fluid(maxWidth: 653, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-            narrow: childImageSharp {
-              fluid(maxWidth: 457, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-            seo: childImageSharp {
-              fixed(width: 1200, quality: 100) {
-                src
-              }
-            }
-          }
-        }
-      }
-    }
-  }`,
-  authors: `{
-    authors: allAuthor {
-      edges {
-        node {
-          authorsPage
-          bio
-          id
-          name
-          featured
-          social {
-            url
-          }
-          slug
-          avatar {
-            small: childImageSharp {
-              fluid(maxWidth: 50, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-            medium: childImageSharp {
-              fluid(maxWidth: 100, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-            large: childImageSharp {
-              fluid(maxWidth: 328, quality: 100) {
-                ${GatsbyFluid_withWebp}
-              }
-            }
-          }
-        }
-      }
-    }
-  }`,
-};
-
 module.exports.ghost = {
   articles: `{
     articles: allGhostPost(
@@ -114,6 +32,10 @@ module.exports.ghost = {
             slug
             bio
             profile_image
+          }
+          tags {
+            slug
+            name
           }
           hero: localFeatureImage {
             full: childImageSharp {
@@ -152,6 +74,17 @@ module.exports.ghost = {
           profile_image
           twitter 
           facebook
+        }
+      }
+    }
+  }`,
+  tags: `{
+    tags: allGhostTag {
+      edges {
+        node {
+          name
+          slug
+          description
         }
       }
     }

@@ -13,6 +13,7 @@ const templates = {
   articles: path.resolve(templatesDirectory, "articles.template.tsx"),
   article: path.resolve(templatesDirectory, "article.template.tsx"),
   author: path.resolve(templatesDirectory, "author.template.tsx"),
+  tag: path.resolve(templatesDirectory, "tag.template.tsx"),
 };
 
 const query = require("../data/data.query");
@@ -73,12 +74,10 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
 
   let authors;
   let articles;
+  let tags;
 
   const dataSources = {
-    local: { authors: [], articles: [] },
-    contentful: { authors: [], articles: [] },
-    netlify: { authors: [], articles: [] },
-    ghost: { authors: [], articles: [] },
+    ghost: { authors: [], articles: [], tags: [] },
   };
 
   if (rootPath) {
@@ -94,6 +93,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   try {
     const ghostArticles = await graphql(query.ghost.articles);
     const ghostAuthors = await graphql(query.ghost.authors);
+    const ghostTags = await graphql(query.ghost.tags);
 
     console.log(ghostArticles, "ghost articles");
 
@@ -105,6 +105,8 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     dataSources.ghost.authors = ghostAuthors.data.authors.edges.map(
       (author) => author.node
     );
+
+    dataSources.ghost.tags = ghostTags.data.tags.edges.map((tag) => tag.node);
   } catch (error) {
     console.log(error);
   }
@@ -113,6 +115,8 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   articles = [...dataSources.ghost.articles].sort(byDate);
 
   authors = [...dataSources.ghost.authors];
+
+  tags = [...dataSources.ghost.tags];
 
   const articlesThatArentSecret = articles.filter((article) => !article.secret);
 
@@ -239,6 +243,35 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       buildPath: buildPaginatedPath,
       context: {
         author: modifiedAuthor,
+        originalPath: path,
+        // originalPath: author.slug,
+        skip: pageLength,
+        limit: pageLength,
+      },
+    });
+  });
+
+  const articlesWithFlatTagNames = articles.map((article) => ({
+    ...article,
+    tags: [...article.tags.map((tag) => tag.slug)],
+  }));
+
+  tags.forEach((tag) => {
+    const articlesWithTag = articlesWithFlatTagNames.filter((article) =>
+      article.tags.includes(tag.slug)
+    );
+
+    const path = slugify(tag.slug, "/tags");
+
+    createPaginatedPages({
+      edges: articlesWithTag,
+      pathPrefix: tag.slug,
+      createPage,
+      pageLength,
+      pageTemplate: templates.tag,
+      buildPath: buildPaginatedPath,
+      context: {
+        tag: tag,
         originalPath: path,
         // originalPath: author.slug,
         skip: pageLength,

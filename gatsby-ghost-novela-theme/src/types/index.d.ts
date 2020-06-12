@@ -47,10 +47,17 @@ export interface IAuthor {
   social: { name: string; url: string }[];
 }
 
+export interface ITag {
+  name: string;
+  slug: string;
+  description: string;
+}
+
 export interface IArticle {
   title: string;
   slug: string;
   authors: IAuthor[];
+  tags: ITag[];
   excerpt: string;
   body: string;
   id: string;
