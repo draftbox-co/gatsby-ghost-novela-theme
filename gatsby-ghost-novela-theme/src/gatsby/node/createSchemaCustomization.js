@@ -1,27 +1,34 @@
+const htmlToMdx = require("html-to-compiled-mdx");
+const readingTime = require("reading-time");
+
 module.exports = ({ actions }) => {
-  const { createTypes, createFieldExtension } = actions;
-
-  const typeDefs = `
-    type PluginOptions {
-      basePath: String
-      rootPath: String
-    }
-    type SitePlugin implements Node {
-      pluginOptions: PluginOptions
-    }
-  `;
-
-  createTypes(typeDefs);
-  
+  const { createFieldExtension, createTypes } = actions;
   createFieldExtension({
-    name: 'readingTime',
+    name: "readingTime",
     extend(options, prevFieldConfig) {
       return {
         resolve(source) {
-          if (source.primary_author) {
-            return source.primary_author.name;
+          if (source.html) {
+            const readingTimeValue = readingTime(source.html);
+            return readingTimeValue.text;
           } else {
-            return '';
+            return "1 min read";
+          }
+        },
+      };
+    },
+  });
+
+  createFieldExtension({
+    name: "mdx",
+    extend(options, prevFieldConfig) {
+      return {
+        resolve(source) {
+          if (source.html) {
+            const mdx = htmlToMdx(source.html);
+            return mdx;
+          } else {
+            return "";
           }
         },
       };
@@ -30,13 +37,15 @@ module.exports = ({ actions }) => {
 
   createTypes(`
     type GhostPost implements Node {
-      author: String @readingTime
+      readingTime: String @readingTime
+      mdx: String @mdx
     }
   `);
 
   createTypes(`
     type GhostPage implements Node {
-      author: String @readingTime
+      readingTime: String @readingTime
+      mdx: String @mdx
     }
   `);
 };

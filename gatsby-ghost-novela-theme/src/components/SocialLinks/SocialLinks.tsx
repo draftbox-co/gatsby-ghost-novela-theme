@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
-import Icons from '@icons';
-import mediaqueries from '@styles/media';
+import Icons from "@icons";
+import mediaqueries from "@styles/media";
 
 interface SocialLinksProps {
   links: {
@@ -34,28 +34,32 @@ const icons = {
   mailto: Icons.Mailto,
 };
 
-const getHostname = url => {
-  return new URL(url.toLowerCase()).hostname.replace(/www|com|net|\.so|org|[.-]/g,'').split('.')[0];
+const getHostname = (url) => {
+  return new URL(url.toLowerCase()).hostname
+    .replace(/www|com|net|\.so|org|[.-]/g, "")
+    .split(".")[0];
 };
 
-const getServicename = url => {
-  return url.toLowerCase().split(':')[0];
+const getServicename = (url) => {
+  return url.toLowerCase().split(":")[0];
 };
 
 const SocialLinks: React.FC<SocialLinksProps> = ({
   links,
-  fill = '#73737D',
+  fill = "#73737D",
 }) => {
+  console.log(links, 'links are here');
   if (!links) return null;
 
   return (
     <>
-      {links.map(option => {
-        const name = option.name || getHostname(option.url) || getServicename(option.url);
+      {links.map((option) => {
+        const name =
+          option.name || getHostname(option.url) || getServicename(option.url);
         const Icon = icons[name];
         if (!Icon) {
           throw new Error(
-            `unsupported social link name=${name} / url=${option.url}`,
+            `unsupported social link name=${name} / url=${option.url}`
           );
         }
         return (
@@ -87,7 +91,7 @@ const SocialIconContainer = styled.a`
   &:hover {
     svg {
       &:hover * {
-        fill: ${p => p.theme.colors.primary};
+        fill: ${(p) => p.theme.colors.primary};
       }
       * {
         transition: fill 0.25s var(--ease-in-out-quad);
@@ -103,14 +107,14 @@ const SocialIconContainer = styled.a`
     margin-right: 0;
   }
 
-  &[data-a11y='true']:focus::after {
-    content: '';
+  &[data-a11y="true"]:focus::after {
+    content: "";
     position: absolute;
     left: -50%;
     top: -20%;
     width: 200%;
     height: 160%;
-    border: 2px solid ${p => p.theme.colors.accent};
+    border: 2px solid ${(p) => p.theme.colors.accent};
     background: rgba(255, 255, 255, 0.01);
     border-radius: 5px;
   }

@@ -7,8 +7,6 @@ const GatsbyFluid_withWebp = `
   aspectRatio
   src
   srcSet
-  srcWebp
-  srcSetWebp
   sizes
 `;
 
@@ -109,8 +107,8 @@ module.exports.ghost = {
           dateForSEO: updated_at(formatString: "MMMM Do, YYYY")
           excerpt
           canonical_url
-          reading_time
-          body: html
+          readingTime
+          body: mdx
           authors {
             name
             slug
@@ -139,6 +137,21 @@ module.exports.ghost = {
               }
             }
           }
+        }
+      }
+    }
+  }`,
+  authors: `{
+    authors: allGhostAuthor {
+      edges {
+        node {
+          bio
+          name
+          slug
+          postCount
+          profile_image
+          twitter 
+          facebook
         }
       }
     }

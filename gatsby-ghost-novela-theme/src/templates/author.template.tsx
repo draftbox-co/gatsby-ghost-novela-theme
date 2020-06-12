@@ -15,13 +15,15 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
   const author = pageContext.additionalContext.author;
   const articles = pageContext.group;
 
+  console.log(author, "author is here");
+
   return (
     <Layout>
-      <SEO
+      {/* <SEO
         pathname={location.pathname}
         title={author.name}
         description={author.bio}
-      />
+      /> */}
       <Section narrow>
         <AuthorHero author={author} />
         <AuthorArticles articles={articles} />
@@ -32,7 +34,7 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
       <AuthorsGradient />
     </Layout>
   );
-}
+};
 
 export default ArticlesPage;
 
@@ -44,8 +46,8 @@ const AuthorsGradient = styled.div`
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: ${p => p.theme.colors.gradient};
-  transition: ${p => p.theme.colorModeTransition};
+  background: ${(p) => p.theme.colors.gradient};
+  transition: ${(p) => p.theme.colorModeTransition};
 `;
 
 const AuthorPaginator = styled.div`

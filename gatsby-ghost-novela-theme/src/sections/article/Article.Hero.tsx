@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
-import Headings from '@components/Headings';
-import Image, { ImagePlaceholder } from '@components/Image';
+import Headings from "@components/Headings";
+import Image, { ImagePlaceholder } from "@components/Image";
 
-import mediaqueries from '@styles/media';
-import { IArticle, IAuthor } from '@types';
+import mediaqueries from "@styles/media";
+import { IArticle, IAuthor } from "@types";
 
-import ArticleAuthors from './Article.Authors';
+import ArticleAuthors from "./Article.Authors";
 
 interface ArticleHeroProps {
   article: IArticle;
@@ -15,7 +15,7 @@ interface ArticleHeroProps {
 }
 
 const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
-  // const hasCoAUthors = authors.length > 1;
+  const hasCoAUthors = article.authors.length > 1;
   const hasHeroImage =
     article.hero &&
     Object.keys(article.hero.full).length !== 0 &&
@@ -25,19 +25,18 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
     <Hero>
       <Header>
         <HeroHeading>{article.title}</HeroHeading>
-        {/* <HeroSubtitle hasCoAUthors={hasCoAUthors}>
+        <HeroSubtitle hasCoAUthors={hasCoAUthors}>
           <ArticleAuthors authors={authors} />
           <ArticleMeta hasCoAUthors={hasCoAUthors}>
-            {article.date} · {article.reading_time} min read
+            {article.date} · {article.readingTime}
           </ArticleMeta>
-        </HeroSubtitle> */}
+        </HeroSubtitle>
       </Header>
       <HeroImage id="ArticleImage__Hero">
         {hasHeroImage ? (
           <Image src={article.hero.full} />
-        ) : (
-          <ImagePlaceholder />
-        )}
+        ) : // <ImagePlaceholder />
+        null}
       </HeroImage>
     </Hero>
   );
@@ -46,7 +45,7 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
 export default ArticleHero;
 
 const Hero = styled.div`
-  ${p => mediaqueries.phablet`
+  ${(p) => mediaqueries.phablet`
     &::before {
       content: "";
       width: 100%;
@@ -74,7 +73,7 @@ const Hero = styled.div`
 `;
 
 const ArticleMeta = styled.div<{ hasCoAUthors: boolean }>`
-  margin-left: ${p => (p.hasCoAUthors ? '10px' : '0')};
+  margin-left: ${(p) => (p.hasCoAUthors ? "10px" : "0")};
 
   ${mediaqueries.phablet`
     margin-left: 0;
@@ -112,7 +111,7 @@ const Header = styled.header`
 
 const HeroHeading = styled(Headings.h1)`
   font-size: 48px;
-  font-family: ${p => p.theme.fonts.serif};
+  font-family: ${(p) => p.theme.fonts.serif};
   margin-bottom: 25px;
   font-weight: bold;
   line-height: 1.32;
@@ -131,9 +130,9 @@ const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
   position: relative;
   display: flex;
   font-size: 18px;
-  color: ${p => p.theme.colors.grey};
+  color: ${(p) => p.theme.colors.grey};
 
-  ${p => mediaqueries.phablet`
+  ${(p) => mediaqueries.phablet`
     font-size: 14px;
     flex-direction: column;
 

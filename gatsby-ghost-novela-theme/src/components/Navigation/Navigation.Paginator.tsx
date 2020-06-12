@@ -75,7 +75,7 @@ class Paginator extends Component<IPaginator, {}> {
       truncatedRange.splice(
         pagesRange.length - 1 - maxPages,
         0,
-        pagesRange[0] - 1,
+        pagesRange[0] - 1
       );
     }
 
@@ -98,13 +98,13 @@ class Paginator extends Component<IPaginator, {}> {
         // Otherwise render a PageButton
         <PageNumberBUtton
           key={`PaginatorPage_${page}`}
-          to={this.getFullPath(page)}
+          to={`${this.getFullPath(page)}`}
           style={{ opacity: current === page ? 1 : 0.3 }}
           className="Paginator__pageLink"
         >
           {page}
         </PageNumberBUtton>
-      ),
+      )
     );
   }
 
@@ -139,12 +139,12 @@ class Paginator extends Component<IPaginator, {}> {
           {hasNext && <link rel="next" href={nextPath} />}
         </Helmet>
         <Frame>
-          {hasPrevious && <PageButton to={previousPath}>Prev</PageButton>}
+          {hasPrevious && <PageButton to={`${previousPath}`}>Prev</PageButton>}
           {this.getPageLinks}
           <MobileReference aria-hidden="true">
             <em>{current}</em>&nbsp;of {count}
           </MobileReference>
-          {hasNext && <PageButton to={nextPath}>Next</PageButton>}
+          {hasNext && <PageButton to={`${nextPath}`}>Next</PageButton>}
         </Frame>
       </>
     );
@@ -153,7 +153,7 @@ class Paginator extends Component<IPaginator, {}> {
 
 export default Paginator;
 
-const paginationItemMixin = p => css`
+const paginationItemMixin = (p) => css`
   line-height: 1;
   color: ${p.theme.colors.primary};
   padding: 0;
@@ -184,7 +184,7 @@ const PageButton = styled(Link)`
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
-  color: ${p => p.theme.colors.primary};
+  color: ${(p) => p.theme.colors.primary};
   ${paginationItemMixin}
 
   &:hover,
@@ -198,7 +198,7 @@ const PageNumberBUtton = styled(Link)`
   font-weight: 400;
   font-size: 18px;
   text-decoration: none;
-  color: ${p => p.theme.colors.primary};
+  color: ${(p) => p.theme.colors.primary};
   ${paginationItemMixin}
 
   &:hover,
@@ -219,11 +219,11 @@ const Spacer = styled.span`
 const MobileReference = styled.span`
   font-weight: 400;
   ${paginationItemMixin}
-  color: ${p => p.theme.colors.primary};
+  color: ${(p) => p.theme.colors.primary};
 
   em {
     font-style: normal;
-    color: ${p => p.theme.colors.primary};
+    color: ${(p) => p.theme.colors.primary};
   }
 `;
 

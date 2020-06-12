@@ -42,6 +42,9 @@ export interface IAuthor {
   slug: string;
   bio: string;
   profile_image: string;
+  twitter: string;
+  facebook: string;
+  social: { name: string; url: string }[];
 }
 
 export interface IArticle {
@@ -57,7 +60,7 @@ export interface IArticle {
     regular: IGatsbyImageFluid;
     seo: string;
   };
-  reading_time: string;
+  readingTime: string;
   date: string;
 }
 

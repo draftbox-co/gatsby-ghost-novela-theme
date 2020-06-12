@@ -90,6 +90,8 @@ export default ArticlesList;
 const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
   if (!article) return null;
 
+  console.log(article, "article is here");
+
   const { gridLayout } = useContext(GridLayoutContext);
   const hasOverflow = narrow && article.title.length > 35;
   const imageSource = narrow ? article.hero.narrow : article.hero.regular;
@@ -101,7 +103,7 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
   console.log(hasHeroImage, "has hero image");
 
   return (
-    <ArticleLink to={article.slug} data-a11y="false">
+    <ArticleLink to={`/${article.slug}`} data-a11y="false">
       <Item gridLayout={gridLayout}>
         <ImageContainer narrow={narrow} gridLayout={gridLayout}>
           {hasHeroImage ? <Image src={imageSource} /> : <ImagePlaceholder />}
@@ -118,7 +120,7 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
             {article.excerpt}
           </Excerpt>
           <MetaData>
-            {article.date} · {article.reading_time} min read
+            {article.date} · {article.readingTime}
           </MetaData>
         </div>
       </Item>
