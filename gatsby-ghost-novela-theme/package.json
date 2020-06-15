@@ -1,5 +1,5 @@
 {
-  "name": "@draftbox-co/gatsby-ghost-balsa-theme",
+  "name": "@draftbox-co/gatsby-ghost-novela-theme",
   "version": "1.0.0",
   "main": "index.js",
   "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
@@ -22,6 +22,7 @@
     "@mdx-js/mdx": "^1.6.5",
     "@mdx-js/react": "^1.6.5",
     "@raae/gatsby-remark-oembed": "^0.1.1",
+    "@tryghost/helpers": "^1.1.27",
     "adm-zip": "^0.4.13",
     "babel-plugin-emotion": "^10.0.14",
     "contentful-cli": "^0.36.0",

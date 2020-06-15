@@ -24,7 +24,6 @@ const normalize = require("../data/data.normalize");
 // ///////////////// Utility functions ///////////////////
 
 function buildPaginatedPath(index, basePath) {
-  fs.appendFileSync('basePaths.txt', basePath + '\n');
   if (basePath === "/") {
     return index > 1 ? `${basePath}page/${index}` : basePath;
   }

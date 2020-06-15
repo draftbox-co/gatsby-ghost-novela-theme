@@ -22,6 +22,13 @@ module.exports.ghost = {
           date: updated_at(formatString: "MMMM Do, YYYY")
           slug
           title
+          og_title
+          og_description
+          feature_image 
+          twitter_title
+          twitter_description
+          meta_title
+          meta_description
           dateForSEO: updated_at(formatString: "MMMM Do, YYYY")
           excerpt
           canonical_url
@@ -36,6 +43,26 @@ module.exports.ghost = {
           tags {
             slug
             name
+            visibility
+          }
+          primary_author {
+            name
+            slug
+          }
+          published_at(formatString: "DD MMMM YYYY")
+          updated_at(formatString: "DD MMMM YYYY")
+          localFeatureImage {
+            childImageSharp {
+              fluid(maxWidth: 2000, sizes: "90") {
+                src
+                srcSet
+                src
+                srcSet
+                srcWebp
+                srcSetWebp
+              }
+            }
+            extension
           }
           hero: localFeatureImage {
             full: childImageSharp {

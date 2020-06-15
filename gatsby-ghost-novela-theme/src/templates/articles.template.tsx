@@ -9,7 +9,8 @@ import Paginator from "@components/Navigation/Navigation.Paginator";
 import ArticlesHero from "../sections/articles/Articles.Hero";
 import ArticlesList from "../sections/articles/Articles.List";
 
-import { Template } from "@types";
+import { Template, IAuthor } from "@types";
+import { MetaData } from "@components/meta";
 
 const ArticlesPage: Template = ({ location, pageContext }) => {
   const articles = pageContext.group;
@@ -17,7 +18,8 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
 
   return (
     <Layout>
-      <SEO pathname={location.pathname} />
+      <MetaData location={location} />
+      {/* <SEO pathname={location.pathname} /> */}
       <ArticlesHero authors={authors} />
       <Section narrow>
         <ArticlesList articles={articles} />
@@ -40,10 +42,10 @@ const ArticlesGradient = styled.div`
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: ${p => p.theme.colors.gradient};
-  transition: ${p => p.theme.colorModeTransition};
+  background: ${(p) => p.theme.colors.gradient};
+  transition: ${(p) => p.theme.colorModeTransition};
 `;
 
 const ArticlesPaginator = styled.div<{ show: boolean }>`
-  ${p => p.show && `margin-top: 95px;`}
+  ${(p) => p.show && `margin-top: 95px;`}
 `;

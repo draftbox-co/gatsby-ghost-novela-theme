@@ -16,7 +16,7 @@ import {
 
 const siteQuery = graphql`
   {
-    sitePlugin(name: { eq: "@draftbox-co/gatsby-ghost-balsa-theme" }) {
+    sitePlugin(name: { eq: "@draftbox-co/gatsby-ghost-novela-theme" }) {
       pluginOptions {
         rootPath
         basePath

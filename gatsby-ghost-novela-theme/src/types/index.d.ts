@@ -51,16 +51,33 @@ export interface ITag {
   name: string;
   slug: string;
   description: string;
+  visibility: boolean;
 }
 
 export interface IArticle {
   title: string;
+  og_title: string;
+  og_description: string;
+  feature_image: string;
+  twitter_title: string;
+  twitter_description: string;
+  meta_title: string;
+  meta_description: string;
+  primary_author: {
+    name: string;
+    slug: string;
+  };
+  published_at: string;
+  updated_at: string;
   slug: string;
   authors: IAuthor[];
   tags: ITag[];
   excerpt: string;
   body: string;
   id: string;
+  localFeatureImage: {
+    childImageSharp: any;
+  };
   hero: {
     full: IGatsbyImageFluid;
     preview: IGatsbyImageFluid;

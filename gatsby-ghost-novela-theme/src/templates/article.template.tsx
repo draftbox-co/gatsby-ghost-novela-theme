@@ -20,6 +20,7 @@ import ArticleSEO from "../sections/article/Article.SEO";
 import ArticleShare from "../sections/article/Article.Share";
 
 import { Template } from "@types";
+import { MetaData } from "@components/meta";
 
 const siteQuery = graphql`
   {
@@ -84,6 +85,7 @@ const Article: Template = ({ pageContext, location }) => {
 
   return (
     <Layout>
+      <MetaData data={{ ghostPost: article }} location={location} />
       {/* <ArticleSEO article={article} authors={authors} location={location} /> */}
       <ArticleHero article={article} authors={article.authors} />
       <ArticleAside contentHeight={contentHeight}>

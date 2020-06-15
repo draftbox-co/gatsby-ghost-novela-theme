@@ -33,7 +33,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `@draftbox-co/gatsby-ghost-balsa-theme`,
+      resolve: `@draftbox-co/gatsby-ghost-novela-theme`,
       options: { basePath: "/", rootPath: "/" },
     },
     {

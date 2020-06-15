@@ -2165,6 +2165,13 @@
   dependencies:
     axios "0.19.2"
 
+"@tryghost/helpers@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-1.1.27.tgz#4686e709971df432f08cf52db787f671ad182e3b"
+  integrity sha512-5DkGcbJHJopVk1S3zvEzPgy8WAHWysQHhUqVSL0dhfvUITcrQuwcqVERi72r/rT/gixqyb2lNBVIsSo1wevERA==
+  dependencies:
+    lodash-es "^4.17.11"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
