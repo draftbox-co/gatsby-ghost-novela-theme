@@ -98,7 +98,7 @@ const Article: Template = ({ pageContext, location }) => {
           <ArticleShare />
         </MDXRenderer>
       </ArticleBody>
-      {/* {mailchimp && article.subscription && <Subscription />} */}
+      <Subscription />
       {next.length > 0 && (
         <NextArticle narrow>
           <FooterNext>More articles from {name}</FooterNext>

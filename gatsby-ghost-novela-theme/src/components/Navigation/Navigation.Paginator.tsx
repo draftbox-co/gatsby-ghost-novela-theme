@@ -117,7 +117,7 @@ class Paginator extends Component<IPaginator, {}> {
     if (this.pageRoot === "/") {
       return n === 1 ? this.pageRoot : this.pageRoot + "page/" + n;
     } else {
-      return n === 1 ? this.pageRoot : this.pageRoot + "/page/" + n;
+      return n === 1 ? '/' + this.pageRoot :  '/' + this.pageRoot + "/page/" + n;
     }
   };
 

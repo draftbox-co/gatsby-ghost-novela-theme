@@ -2,6 +2,8 @@
 
 require("dotenv").config();
 
+const fs = require('fs');
+
 const log = (message, section) =>
   console.log(`\n\u001B[36m${message} \u001B[4m${section}\u001B[0m\u001B[0m\n`);
 
@@ -22,6 +24,7 @@ const normalize = require("../data/data.normalize");
 // ///////////////// Utility functions ///////////////////
 
 function buildPaginatedPath(index, basePath) {
+  fs.appendFileSync('basePaths.txt', basePath + '\n');
   if (basePath === "/") {
     return index > 1 ? `${basePath}page/${index}` : basePath;
   }
