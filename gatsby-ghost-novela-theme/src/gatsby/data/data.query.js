@@ -44,6 +44,89 @@ module.exports.ghost = {
             slug
             name
             visibility
+            postCount
+            feature_image
+          }
+          primary_author {
+            name
+            slug
+          }
+          published_at(formatString: "DD MMMM YYYY")
+          updated_at(formatString: "DD MMMM YYYY")
+          localFeatureImage {
+            childImageSharp {
+              fluid(maxWidth: 2000, sizes: "90") {
+                src
+                srcSet
+                src
+                srcSet
+                srcWebp
+                srcSetWebp
+              }
+            }
+            extension
+          }
+          hero: localFeatureImage {
+            full: childImageSharp {
+              fluid(maxWidth: 944, quality: 100) {
+                ${GatsbyFluid_withWebp}
+              }
+            }
+            regular: childImageSharp {
+              fluid(maxWidth: 653, quality: 100) {
+                ${GatsbyFluid_withWebp}
+              }
+            }
+            narrow: childImageSharp {
+              fluid(maxWidth: 457, quality: 100) {
+                ${GatsbyFluid_withWebp}
+              }
+            }
+            seo: childImageSharp {
+              fixed(width: 1200, quality: 100) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+  }`,
+  pages: `{
+    pages: allGhostPage(
+      sort: { fields: [updated_at, title], order: DESC }
+      limit: 1000
+    ) {
+      edges {
+        node {
+          id
+          date: updated_at(formatString: "MMMM Do, YYYY")
+          slug
+          title
+          og_title
+          og_description
+          feature_image 
+          twitter_title
+          twitter_description
+          meta_title
+          meta_description
+          dateForSEO: updated_at(formatString: "MMMM Do, YYYY")
+          excerpt
+          canonical_url
+          readingTime
+          body: mdx
+          authors {
+            name
+            slug
+            bio
+            profile_image
+          }
+          tags {
+            slug
+            name
+            visibility
+            postCount
+            feature_image
           }
           primary_author {
             name
@@ -112,6 +195,8 @@ module.exports.ghost = {
           name
           slug
           description
+          postCount
+          feature_image
         }
       }
     }

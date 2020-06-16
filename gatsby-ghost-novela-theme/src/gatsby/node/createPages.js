@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 
-const fs = require('fs');
+const fs = require("fs");
 
 const log = (message, section) =>
   console.log(`\n\u001B[36m${message} \u001B[4m${section}\u001B[0m\u001B[0m\n`);
@@ -16,6 +16,7 @@ const templates = {
   article: path.resolve(templatesDirectory, "article.template.tsx"),
   author: path.resolve(templatesDirectory, "author.template.tsx"),
   tag: path.resolve(templatesDirectory, "tag.template.tsx"),
+  page: path.resolve(templatesDirectory, "page.template.tsx"),
 };
 
 const query = require("../data/data.query");
@@ -77,9 +78,10 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   let authors;
   let articles;
   let tags;
+  let pages;
 
   const dataSources = {
-    ghost: { authors: [], articles: [], tags: [] },
+    ghost: { authors: [], articles: [], tags: [], pages: [] },
   };
 
   if (rootPath) {
@@ -96,6 +98,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     const ghostArticles = await graphql(query.ghost.articles);
     const ghostAuthors = await graphql(query.ghost.authors);
     const ghostTags = await graphql(query.ghost.tags);
+    const ghostPages = await graphql(query.ghost.pages);
 
     console.log(ghostArticles, "ghost articles");
 
@@ -106,6 +109,10 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     // Normalize author here if required
     dataSources.ghost.authors = ghostAuthors.data.authors.edges.map(
       (author) => author.node
+    );
+
+    dataSources.ghost.pages = ghostPages.data.pages.edges.map(
+      (page) => page.node
     );
 
     dataSources.ghost.tags = ghostTags.data.tags.edges.map((tag) => tag.node);
@@ -119,6 +126,8 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   authors = [...dataSources.ghost.authors];
 
   tags = [...dataSources.ghost.tags];
+
+  pages = [...dataSources.ghost.pages];
 
   const articlesThatArentSecret = articles.filter((article) => !article.secret);
 
@@ -169,6 +178,29 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         canonicalUrl: article.canonical_url,
         mailchimp,
         next,
+      },
+    });
+  });
+
+  // Genration of pages
+
+  pages.forEach((article, index) => {
+    //   /**
+    //    * We need a way to find the next artiles to suggest at the bottom of the articles page.
+    //    * To accomplish this there is some special logic surrounding what to show next.
+    //    */
+    console.log(article, "ye hai page");
+    createPage({
+      path: article.slug,
+      component: templates.page,
+      context: {
+        article,
+        basePath,
+        permalink: `${data.site.siteMetadata.siteUrl}${article.slug}/`,
+        slug: article.slug,
+        id: article.id,
+        title: article.title,
+        canonicalUrl: article.canonical_url,
       },
     });
   });

@@ -10,6 +10,7 @@ import AuthorHero from "../sections/author/Author.Hero";
 import AuthorArticles from "../sections/author/Author.Articles";
 
 import { Template } from "@types";
+import { MetaData } from "@components/meta";
 
 const ArticlesPage: Template = ({ location, pageContext }) => {
   const author = pageContext.additionalContext.author;
@@ -19,6 +20,7 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
 
   return (
     <Layout>
+      <MetaData data={{ ghostAuthor: author }} location={location} />
       {/* <SEO
         pathname={location.pathname}
         title={author.name}

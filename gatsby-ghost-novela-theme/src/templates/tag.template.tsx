@@ -9,6 +9,7 @@ import Paginator from "@components/Navigation/Navigation.Paginator";
 import { Template } from "@types";
 import TagHero from "../sections/tag/Tag.Hero";
 import TagArticles from "../sections/tag/Tag.Articles";
+import { MetaData } from "@components/meta";
 
 const TagPage: Template = ({ location, pageContext }) => {
   const tag = pageContext.additionalContext.tag;
@@ -18,6 +19,7 @@ const TagPage: Template = ({ location, pageContext }) => {
 
   return (
     <Layout>
+      <MetaData data={{ ghostTag: tag }} location={location} />
       {/* <SEO
         pathname={location.pathname}
         title={author.name}

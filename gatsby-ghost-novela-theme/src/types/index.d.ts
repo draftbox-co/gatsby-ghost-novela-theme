@@ -52,6 +52,8 @@ export interface ITag {
   slug: string;
   description: string;
   visibility: boolean;
+  postCount: number;
+  feature_image: string;
 }
 
 export interface IArticle {
