@@ -16,7 +16,6 @@ import ArticleAside from "../sections/article/Article.Aside";
 import ArticleHero from "../sections/article/Article.Hero";
 import ArticleControls from "../sections/article/Article.Controls";
 import ArticlesNext from "../sections/article/Article.Next";
-import ArticleSEO from "../sections/article/Article.SEO";
 import ArticleShare from "../sections/article/Article.Share";
 
 import { Template } from "@types";
@@ -111,7 +110,6 @@ const Article: Template = ({ pageContext, location }) => {
   return (
     <Layout>
       <MetaData data={{ ghostPost: article }} location={location} />
-      {/* <ArticleSEO article={article} authors={authors} location={location} /> */}
       <ArticleHero article={article} authors={article.authors} />
       <ArticleAside contentHeight={contentHeight}>
         <Progress contentHeight={contentHeight} />

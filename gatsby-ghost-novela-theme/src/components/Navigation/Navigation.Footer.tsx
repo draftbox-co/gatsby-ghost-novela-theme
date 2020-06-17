@@ -10,19 +10,6 @@ import { result } from "lodash";
 
 const siteQuery = graphql`
   {
-    allSite {
-      edges {
-        node {
-          siteMetadata {
-            name
-            social {
-              url
-              name
-            }
-          }
-        }
-      }
-    }
     ghostSettings {
       facebook
       twitter
@@ -32,7 +19,6 @@ const siteQuery = graphql`
 
 const Footer: React.FC<{}> = () => {
   const results = useStaticQuery(siteQuery);
-  const { name } = results.allSite.edges[0].node.siteMetadata;
 
   const social = [];
 

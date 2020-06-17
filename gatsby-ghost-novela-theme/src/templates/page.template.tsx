@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import throttle from "lodash/throttle";
-import { graphql, useStaticQuery } from "gatsby";
 
 import Layout from "@components/Layout";
 import MDXRenderer from "@components/MDX";
@@ -20,19 +19,6 @@ import { Template } from "@types";
 import { MetaData } from "@components/meta";
 import PageHero from "../sections/page/Page.Hero";
 
-const siteQuery = graphql`
-  {
-    allSite {
-      edges {
-        node {
-          siteMetadata {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
 
 const Page: Template = ({ pageContext, location }) => {
   const contentSectionRef = useRef<HTMLElement>(null);
@@ -40,8 +26,6 @@ const Page: Template = ({ pageContext, location }) => {
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [contentHeight, setContentHeight] = useState<number>(0);
 
-  const results = useStaticQuery(siteQuery);
-  const name = results.allSite.edges[0].node.siteMetadata.name;
 
   const { article } = pageContext;
 
@@ -84,7 +68,6 @@ const Page: Template = ({ pageContext, location }) => {
   return (
     <Layout>
       <MetaData data={{ ghostPage: article }} location={location} />
-      {/* <ArticleSEO article={article} authors={authors} location={location} /> */}
       <PageHero article={article} />
       <ArticleAside contentHeight={contentHeight}>
         <Progress contentHeight={contentHeight} />
