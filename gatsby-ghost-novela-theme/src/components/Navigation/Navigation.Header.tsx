@@ -16,12 +16,6 @@ import {
 
 const siteQuery = graphql`
   {
-    sitePlugin(name: { eq: "@draftbox-co/gatsby-ghost-novela-theme" }) {
-      pluginOptions {
-        rootPath
-        basePath
-      }
-    }
     ghostSettings {
       navigation {
         label
@@ -107,30 +101,12 @@ const NavigationHeader: React.FC<{}> = () => {
 
   const [colorMode] = useColorMode();
   const fill = colorMode === "dark" ? "#fff" : "#000";
-  const { rootPath, basePath } = sitePlugin.pluginOptions;
-
-  useEffect(() => {
-    const { width } = getWindowDimensions();
-    const phablet = getBreakpointFromTheme("phablet");
-
-    const prev = localStorage.getItem("previousPath");
-    const previousPathWasHomepage =
-      prev === (rootPath || basePath) || (prev && prev.includes("/page/"));
-    const currentPathIsHomepage =
-      location.pathname === (rootPath || basePath) ||
-      location.pathname.includes("/page/");
-
-    setShowBackArrow(
-      previousPathWasHomepage && !currentPathIsHomepage && width <= phablet
-    );
-    setPreviousPath(prev);
-  }, []);
 
   return (
     <Section>
       <NavContainer>
         <LogoLink
-          to={rootPath || basePath}
+          to={"/"}
           data-a11y="false"
           title="Navigate back to the homepage"
           aria-label="Navigate back to the homepage"

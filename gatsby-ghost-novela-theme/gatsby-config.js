@@ -1,39 +1,44 @@
 /* eslint-disable */
 
-module.exports = () => ({
-  pathPrefix: "",
-  siteMetadata: {
-    siteUrl: `https://blog.getarmada.app`, // Site domain. Do not include a trailing slash!
+const siteConfigDefaults = require(`./src/utils/siteConfig`);
+const ghostConfigDefaults = require(`./src/utils/.ghost.json`);
 
-    postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
+module.exports = (themeOptions) => {
+  const siteConfig = themeOptions.siteConfig || siteConfigDefaults;
+  const ghostConfig = themeOptions.ghostConfig || ghostConfigDefaults;
+  const finalConfig =
+    process.env.NODE_ENV === `development`
+      ? ghostConfig.development
+      : ghostConfig.production;
 
-    siteTitleMeta: `Ghost Gatsby Starter`, // This allows an alternative site title for meta data for pages.
-    siteDescriptionMeta: `A starter template to build amazing static websites with Ghost and Gatsby`, // This allows an alternative site description for meta data for pages.
+  siteConfig.apiUrl = finalConfig.apiUrl;
 
-    shareImageWidth: 1000, // Change to the width of your default share image
-    shareImageHeight: 523, // Change to the height of your default share image
-
-    shortTitle: `Ghost`, // Used for App manifest e.g. Mobile Home Screen
-    siteIcon: `favicon.png`, // Logo in /static dir used for SEO, RSS, and App manifest
-    backgroundColor: `#e9e9e9`, // Used for Offline Manifest
-    themeColor: `#15171A`, // Used for Offline Manifest
-    apiUrl: "",
-  },
-  plugins: [
-    `gatsby-plugin-typescript`,
-    `gatsby-image`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    `gatsby-transformer-remark`,
-    `gatsby-transformer-yaml`,
-    `gatsby-plugin-theme-ui`,
-    `gatsby-plugin-mdx`,
-    {
-      resolve: `gatsby-plugin-emotion`,
-      options: {
-        displayName: process.env.NODE_ENV === `development`,
+  return {
+    pathPrefix: "",
+    siteMetadata: siteConfig,
+    plugins: [
+      `gatsby-plugin-typescript`,
+      `gatsby-image`,
+      `gatsby-plugin-react-helmet`,
+      `gatsby-plugin-sharp`,
+      `gatsby-transformer-sharp`,
+      `gatsby-transformer-remark`,
+      `gatsby-transformer-yaml`,
+      `gatsby-plugin-theme-ui`,
+      `gatsby-plugin-mdx`,
+      {
+        resolve: `gatsby-plugin-emotion`,
+        options: {
+          displayName: process.env.NODE_ENV === `development`,
+        },
       },
-    },
-  ],
-});
+      {
+        resolve: `gatsby-source-ghost`,
+        options:
+          process.env.NODE_ENV === `development`
+            ? ghostConfig.development
+            : ghostConfig.production,
+      },
+    ],
+  };
+};
