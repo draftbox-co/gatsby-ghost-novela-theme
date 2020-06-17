@@ -22,6 +22,18 @@ const siteQuery = graphql`
         basePath
       }
     }
+    ghostSettings {
+      navigation {
+        label
+        url
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
+        apiUrl
+      }
+    }
   }
 `;
 
@@ -84,7 +96,14 @@ const SharePageButton: React.FC<{}> = () => {
 const NavigationHeader: React.FC<{}> = () => {
   const [showBackArrow, setShowBackArrow] = useState<boolean>(false);
   const [previousPath, setPreviousPath] = useState<string>("/");
-  const { sitePlugin } = useStaticQuery(siteQuery);
+  const [menuToggled, setMenuToggled] = useState(false);
+  const {
+    sitePlugin,
+    ghostSettings: { navigation },
+    site: {
+      siteMetadata: { siteUrl, apiUrl },
+    },
+  } = useStaticQuery(siteQuery);
 
   const [colorMode] = useColorMode();
   const fill = colorMode === "dark" ? "#fff" : "#000";
@@ -98,10 +117,11 @@ const NavigationHeader: React.FC<{}> = () => {
     const previousPathWasHomepage =
       prev === (rootPath || basePath) || (prev && prev.includes("/page/"));
     const currentPathIsHomepage =
-      location.pathname === (rootPath || basePath) || location.pathname.includes("/page/");
+      location.pathname === (rootPath || basePath) ||
+      location.pathname.includes("/page/");
 
     setShowBackArrow(
-      previousPathWasHomepage && !currentPathIsHomepage && width <= phablet,
+      previousPathWasHomepage && !currentPathIsHomepage && width <= phablet
     );
     setPreviousPath(prev);
   }, []);
@@ -116,29 +136,52 @@ const NavigationHeader: React.FC<{}> = () => {
           aria-label="Navigate back to the homepage"
           back={showBackArrow ? "true" : "false"}
         >
-          {showBackArrow && (
+          {/* {showBackArrow && (
             <BackArrowIconContainer>
               <Icons.ChevronLeft fill={fill} />
             </BackArrowIconContainer>
-          )}
+          )} */}
           <Logo fill={fill} />
           <Hidden>Navigate back to the homepage</Hidden>
         </LogoLink>
-        <NavControls>
-          {showBackArrow ? (
-            <button
-              onClick={() => navigate(previousPath)}
-              title="Navigate back to the homepage"
-              aria-label="Navigate back to the homepage"
-            >
-              <Icons.Ex fill={fill} />
-            </button>
-          ) : (
-            <>
-              <SharePageButton />
-              <DarkModeToggle />
-            </>
-          )}
+        <Hamburger onClick={(e) => setMenuToggled(!menuToggled)}>
+          <Icons.HamBurgerIcon fill={fill} />
+        </Hamburger>
+        <NavControls className={menuToggled ? "menu-toggled" : ""}>
+          <NavbarLinksContainer>
+            {navigation.map(({ url, label }, index) => {
+              return url.startsWith("/") ||
+                url.startsWith(siteUrl) ||
+                url.startsWith(apiUrl) ? (
+                <NavLink
+                  key={index}
+                  to={`${
+                    url.startsWith("/")
+                      ? url
+                      : url.startsWith(siteUrl)
+                      ? url.slice(siteUrl.length, url.length)
+                      : url.slice(apiUrl.length, url.length)
+                  }`}
+                  as={Link}
+                >
+                  {label}
+                </NavLink>
+              ) : (
+                <NavLink
+                  key={index}
+                  href={url}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {label}
+                </NavLink>
+              );
+            })}
+          </NavbarLinksContainer>
+          <NavControlsSettings>
+            <SharePageButton />
+            <DarkModeToggle />
+          </NavControlsSettings>
         </NavControls>
       </NavContainer>
     </Section>
@@ -170,6 +213,7 @@ const NavContainer = styled.div`
   padding-top: 100px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   ${mediaqueries.desktop_medium`
     padding-top: 50px;
@@ -184,7 +228,7 @@ const LogoLink = styled(Link)<{ back: string }>`
   position: relative;
   display: flex;
   align-items: center;
-  left: ${p => (p.back === "true" ? "-54px" : 0)};
+  left: ${(p) => (p.back === "true" ? "-54px" : 0)};
 
   ${mediaqueries.desktop_medium`
     left: 0
@@ -197,7 +241,7 @@ const LogoLink = styled(Link)<{ back: string }>`
     top: -30%;
     width: 120%;
     height: 160%;
-    border: 2px solid ${p => p.theme.colors.accent};
+    border: 2px solid ${(p) => p.theme.colors.accent};
     background: rgba(255, 255, 255, 0.01);
     border-radius: 5px;
   }
@@ -209,26 +253,82 @@ const LogoLink = styled(Link)<{ back: string }>`
   }
 `;
 
+const Hamburger = styled.button`
+  display: none;
+  svg {
+    height: 30px;
+    width: 20px;
+  }
+
+  ${mediaqueries.phablet`
+    display: block
+  `}
+`;
+
 const NavControls = styled.div`
   position: relative;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+
+  ${mediaqueries.phablet`
+    padding: 20px 0;
+    right: -5px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    display: none;
+
+    &.menu-toggled {
+      display: flex
+    }
+  `}
+`;
+
+const NavbarLinksContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 60px;
+  margin-top: 3px;
+
+  ${mediaqueries.phablet`
+  margin-left: 20px;
+  margin-top: 3px;
+  margin-bottom: 20px;
+`}
+`;
+
+const NavLink = styled.a`
+  color: ${(p) => p.theme.colors.grey};
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const NavControlsSettings = styled.div`
   display: flex;
   align-items: center;
 
   ${mediaqueries.phablet`
-    right: -5px;
-  `}
+  right: -5px;
+`}
 `;
 
 const ToolTip = styled.div<{ isDark: boolean; hasCopied: boolean }>`
   position: absolute;
   padding: 4px 13px;
-  background: ${p => (p.isDark ? "#000" : "rgba(0,0,0,0.1)")};
-  color: ${p => (p.isDark ? "#fff" : "#000")};
+  background: ${(p) => (p.isDark ? "#000" : "rgba(0,0,0,0.1)")};
+  color: ${(p) => (p.isDark ? "#fff" : "#000")};
   border-radius: 5px;
   font-size: 14px;
   top: -35px;
-  opacity: ${p => (p.hasCopied ? 1 : 0)};
-  transform: ${p => (p.hasCopied ? "translateY(-3px)" : "none")};
+  opacity: ${(p) => (p.hasCopied ? 1 : 0)};
+  transform: ${(p) => (p.hasCopied ? "translateY(-3px)" : "none")};
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   &::after {
@@ -242,7 +342,7 @@ const ToolTip = styled.div<{ isDark: boolean; hasCopied: boolean }>`
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid ${p => (p.isDark ? "#000" : "rgba(0,0,0,0.1)")};
+    border-top: 6px solid ${(p) => (p.isDark ? "#000" : "rgba(0,0,0,0.1)")};
   }
 `;
 
@@ -269,7 +369,7 @@ const IconWrapper = styled.button<{ isDark: boolean }>`
     top: -30%;
     width: 100%;
     height: 160%;
-    border: 2px solid ${p => p.theme.colors.accent};
+    border: 2px solid ${(p) => p.theme.colors.accent};
     background: rgba(255, 255, 255, 0.01);
     border-radius: 5px;
   }
@@ -292,12 +392,12 @@ const MoonOrSun = styled.div<{ isDark: boolean }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: ${p => (p.isDark ? "4px" : "2px")} solid
-    ${p => p.theme.colors.primary};
-  background: ${p => p.theme.colors.primary};
-  transform: scale(${p => (p.isDark ? 0.55 : 1)});
+  border: ${(p) => (p.isDark ? "4px" : "2px")} solid
+    ${(p) => p.theme.colors.primary};
+  background: ${(p) => p.theme.colors.primary};
+  transform: scale(${(p) => (p.isDark ? 0.55 : 1)});
   transition: all 0.45s ease;
-  overflow: ${p => (p.isDark ? "visible" : "hidden")};
+  overflow: ${(p) => (p.isDark ? "visible" : "hidden")};
 
   &::before {
     content: "";
@@ -306,10 +406,10 @@ const MoonOrSun = styled.div<{ isDark: boolean }>`
     top: -9px;
     height: 24px;
     width: 24px;
-    border: 2px solid ${p => p.theme.colors.primary};
+    border: 2px solid ${(p) => p.theme.colors.primary};
     border-radius: 50%;
-    transform: translate(${p => (p.isDark ? "14px, -14px" : "0, 0")});
-    opacity: ${p => (p.isDark ? 0 : 1)};
+    transform: translate(${(p) => (p.isDark ? "14px, -14px" : "0, 0")});
+    opacity: ${(p) => (p.isDark ? 0 : 1)};
     transition: transform 0.45s ease;
   }
 
@@ -322,18 +422,18 @@ const MoonOrSun = styled.div<{ isDark: boolean }>`
     position: absolute;
     top: 50%;
     left: 50%;
-    box-shadow: 0 -23px 0 ${p => p.theme.colors.primary},
-      0 23px 0 ${p => p.theme.colors.primary},
-      23px 0 0 ${p => p.theme.colors.primary},
-      -23px 0 0 ${p => p.theme.colors.primary},
-      15px 15px 0 ${p => p.theme.colors.primary},
-      -15px 15px 0 ${p => p.theme.colors.primary},
-      15px -15px 0 ${p => p.theme.colors.primary},
-      -15px -15px 0 ${p => p.theme.colors.primary};
-    transform: scale(${p => (p.isDark ? 1 : 0)});
+    box-shadow: 0 -23px 0 ${(p) => p.theme.colors.primary},
+      0 23px 0 ${(p) => p.theme.colors.primary},
+      23px 0 0 ${(p) => p.theme.colors.primary},
+      -23px 0 0 ${(p) => p.theme.colors.primary},
+      15px 15px 0 ${(p) => p.theme.colors.primary},
+      -15px 15px 0 ${(p) => p.theme.colors.primary},
+      15px -15px 0 ${(p) => p.theme.colors.primary},
+      -15px -15px 0 ${(p) => p.theme.colors.primary};
+    transform: scale(${(p) => (p.isDark ? 1 : 0)});
     transition: all 0.35s ease;
 
-    ${p => mediaqueries.tablet`
+    ${(p) => mediaqueries.tablet`
       transform: scale(${p.isDark ? 0.92 : 0});
     `}
   }
@@ -347,10 +447,10 @@ const MoonMask = styled.div<{ isDark: boolean }>`
   width: 24px;
   border-radius: 50%;
   border: 0;
-  background: ${p => p.theme.colors.background};
-  transform: translate(${p => (p.isDark ? "14px, -14px" : "0, 0")});
-  opacity: ${p => (p.isDark ? 0 : 1)};
-  transition: ${p => p.theme.colorModeTransition}, transform 0.45s ease;
+  background: ${(p) => p.theme.colors.background};
+  transform: translate(${(p) => (p.isDark ? "14px, -14px" : "0, 0")});
+  opacity: ${(p) => (p.isDark ? 0 : 1)};
+  transition: ${(p) => p.theme.colorModeTransition}, transform 0.45s ease;
 `;
 
 const Hidden = styled.span`

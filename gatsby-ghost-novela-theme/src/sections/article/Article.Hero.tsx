@@ -46,29 +46,29 @@ export default ArticleHero;
 
 const Hero = styled.div`
   ${(p) => mediaqueries.phablet`
-    &::before {
-      content: "";
-      width: 100%;
-      height: 20px;
-      background: ${p.theme.colors.primary};
-      position: absolute;
-      left: 0;
-      top: 0;
-      transition: ${p.theme.colorModeTransition};
-    }
+    // &::before {
+    //   content: "";
+    //   width: 100%;
+    //   height: 20px;
+    //   background: ${p.theme.colors.primary};
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   transition: ${p.theme.colorModeTransition};
+    // }
 
-    &::after {
-      content: "";
-      width: 100%;
-      height: 10px;
-      background: ${p.theme.colors.background};
-      position: absolute;
-      left: 0;
-      top: 10px;
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-      transition: ${p.theme.colorModeTransition};
-    }
+    // &::after {
+    //   content: "";
+    //   width: 100%;
+    //   height: 10px;
+    //   background: ${p.theme.colors.background};
+    //   position: absolute;
+    //   left: 0;
+    //   top: 10px;
+    //   border-top-left-radius: 25px;
+    //   border-top-right-radius: 25px;
+    //   transition: ${p.theme.colorModeTransition};
+    // }
   `}
 `;
 
@@ -100,7 +100,7 @@ const Header = styled.header`
   `}
 
   ${mediaqueries.phablet`
-    margin: 170px auto 180px;
+    margin: 80px auto;
     padding: 0 40px;
   `}
 

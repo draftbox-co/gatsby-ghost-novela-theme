@@ -95,12 +95,12 @@ const Header = styled.header`
   `}
 
   ${mediaqueries.phablet`
-    margin: 170px auto 180px;
+    margin: 80px auto;
     padding: 0 40px;
   `}
 
   @media screen and (max-height: 700px) {
-    margin: 100px auto;
+    margin: 80px auto;
   }
 `;
 
