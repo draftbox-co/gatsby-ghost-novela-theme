@@ -30,6 +30,7 @@ const authorQuery = graphql`
 const siteSettingsQuery = graphql`
   {
     ghostSettings {
+      title
       description
     }
   }
@@ -43,7 +44,8 @@ const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
   // const results = useStaticQuery(authorQuery);
   const siteSettings = useStaticQuery(siteSettingsQuery);
 
-  const siteDescription = siteSettings.ghostSettings.description;
+  const title = siteSettings.ghostSettings.title;
+  const description = siteSettings.ghostSettings.description;
   // const hero = results.site.edges[0].node.siteMetadata.hero;
   const tilesIsActive = hasSetGridLayout && gridLayout === "tiles";
   // const featuredAuthor = authors.find((author) => author.featured);
@@ -61,7 +63,8 @@ const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
         <HeroHeading dangerouslySetInnerHTML={{ __html: hero.heading }} />
       </HeadingContainer> */}
       <HeadingContainer style={{ maxWidth: `600px` }}>
-        <HeroHeading dangerouslySetInnerHTML={{ __html: siteDescription }} />
+        <HeroHeading dangerouslySetInnerHTML={{ __html: title }} />
+        <HeroDescription>{description}</HeroDescription>
       </HeadingContainer>
       <SubheadingContainer>
         {/* <Bio author={featuredAuthor} /> */}
@@ -151,6 +154,12 @@ const HeroHeading = styled.h1`
     font-size: 32px;
   `}
 `;
+
+const HeroDescription = styled.p`
+  color: ${(p) => p.theme.colors.grey};
+  font-size: 20px;
+  margin-top: 10px;
+`
 
 const GridButton = styled.button<{ active: boolean }>`
   position: relative;

@@ -7,8 +7,19 @@ import Headings from "@components/Headings";
 import styled from "@emotion/styled";
 import mediaqueries from "@styles/media";
 import { useForm } from "../../hooks/useForm";
+import { useStaticQuery, graphql } from "gatsby";
 
 const Subscription: React.FC<{}> = () => {
+  const {
+    ghostSettings: { title },
+  } = useStaticQuery(graphql`
+    query {
+      ghostSettings {
+        title
+      }
+    }
+  `);
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -56,6 +67,11 @@ const Subscription: React.FC<{}> = () => {
             </Button>
             {error && <Error dangerouslySetInnerHTML={{ __html: error }} />}
           </Form>
+          {succeeded && (
+            <SuccessText>
+              You've successfully subscribed to {title}.
+            </SuccessText>
+          )}
         </Content>
       </SubscriptionContainer>
     </Section>
@@ -80,7 +96,8 @@ const SubscriptionContainer = styled.div`
   `}
 
   ${mediaqueries.phablet`
-    margin: -20px auto 80px;
+    // margin: -20px auto 80px;
+    margin: 20px auto 80px;
   `}
 `;
 
@@ -254,3 +271,9 @@ const CheckMarkIcon = () => (
     />
   </svg>
 );
+
+const SuccessText = styled.div`
+  color: ${(p) => p.theme.colors.success};
+  font-size: 16px;
+  margin: 20px auto;
+`;

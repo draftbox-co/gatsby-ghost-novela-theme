@@ -120,7 +120,12 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
             {article.excerpt}
           </Excerpt>
           <MetaData>
-            {article.date} · {article.readingTime}
+            {article.date} · {article.readingTime} ·{" "}
+            {article.tags && (
+              <TagLink as={Link} to={`/${article.tags[0].slug}`}>
+                {article.tags[0].name}
+              </TagLink>
+            )}
           </MetaData>
         </div>
       </Item>
@@ -390,4 +395,11 @@ const ArticleLink = styled(Link)`
       transform: scale(0.97) translateY(3px);
     }
   `}
+`;
+
+const TagLink = styled.a`
+  color: ${(p) => p.theme.colors.grey};
+  &:hover {
+    text-decoration: underline;
+  }
 `;

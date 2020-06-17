@@ -89,6 +89,9 @@ const Contact = () => {
               >
                 {succeeded ? <CheckMarkIcon /> : "Send"}
               </Button>
+              {succeeded && (
+                <SuccessText>We'll get in touch with you soon.</SuccessText>
+              )}
             </Form>
           </ContactContainer>
         </Content>
@@ -308,5 +311,11 @@ const CheckMarkIcon = () => (
     />
   </svg>
 );
+
+const SuccessText = styled.div`
+  color: ${(p) => p.theme.colors.success};
+  font-size: 16px;
+  margin: 20px 0;
+`;
 
 export default Contact;

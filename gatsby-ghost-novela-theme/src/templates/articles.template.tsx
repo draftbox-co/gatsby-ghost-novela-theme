@@ -11,6 +11,7 @@ import ArticlesList from "../sections/articles/Articles.List";
 
 import { Template, IAuthor } from "@types";
 import { MetaData } from "@components/meta";
+import mediaqueries from "@styles/media";
 
 const ArticlesPage: Template = ({ location, pageContext }) => {
   const articles = pageContext.group;
@@ -48,4 +49,10 @@ const ArticlesGradient = styled.div`
 
 const ArticlesPaginator = styled.div<{ show: boolean }>`
   ${(p) => p.show && `margin-top: 95px;`}
+
+  ${mediaqueries.phablet`
+      margin-top: 0;
+      display: flex;
+      justify-content: center;
+    `};
 `;

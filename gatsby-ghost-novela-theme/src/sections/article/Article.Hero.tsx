@@ -105,7 +105,7 @@ const Header = styled.header`
   `}
 
   @media screen and (max-height: 700px) {
-    margin: 100px auto;
+    margin: 80px auto;
   }
 `;
 

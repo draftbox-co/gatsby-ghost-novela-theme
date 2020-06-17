@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import throttle from "lodash/throttle";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
 
 import Layout from "@components/Layout";
 import MDXRenderer from "@components/MDX";
@@ -21,31 +21,56 @@ import ArticleShare from "../sections/article/Article.Share";
 
 import { Template } from "@types";
 import { MetaData } from "@components/meta";
+import Icons from "@icons";
+import CopyLink from "@components/Misc/CopyLink";
+
+const icons = {
+  linkedin: Icons.LinkedIn,
+  twitter: Icons.Twitter,
+  facebook: Icons.Facebook,
+  mailto: Icons.Mailto,
+};
+
+const LinkedInIcon = Icons.LinkedIn;
+const FacebookIcon = Icons.Facebook;
+const TwitterIcon = Icons.Twitter;
+const MailToIcon = Icons.Mailto;
+const CopyIcon = Icons.Copy;
 
 const siteQuery = graphql`
   {
-    allSite {
-      edges {
-        node {
-          siteMetadata {
-            name
-          }
-        }
-      }
+    ghostSettings {
+      title
     }
   }
 `;
 
 const Article: Template = ({ pageContext, location }) => {
+  const [href, sethref] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      sethref(window.location.href);
+    }
+  }, []);
+
   const contentSectionRef = useRef<HTMLElement>(null);
 
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [contentHeight, setContentHeight] = useState<number>(0);
 
   const results = useStaticQuery(siteQuery);
-  const name = results.allSite.edges[0].node.siteMetadata.name;
+  const name = results.ghostSettings.title;
 
   const { article, authors, mailchimp, next } = pageContext;
+
+  const twitterShareUrl = `https://twitter.com/share?text=${article.title}&url=${href}`;
+
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${href}`;
+
+  const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${href}&title=${article.title}`;
+
+  const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
 
   console.log(article, "ye hai article");
 
@@ -100,6 +125,49 @@ const Article: Template = ({ pageContext, location }) => {
           <ArticleShare />
         </MDXRenderer>
       </ArticleBody>
+      <TagsContainer>
+        {article.tags.map((tag, i) => (
+          <Tag key={i} to={`/${tag.slug}`} as={Link}>
+            {tag.name}
+          </Tag>
+        ))}
+      </TagsContainer>
+      <SocialShareContainer>
+        <ShareLabel>Share:</ShareLabel>
+        <ShareButtonsContainer>
+          <ShareButton
+            href={facebookShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FacebookIcon fill="#73737D" />
+          </ShareButton>
+          <ShareButton
+            href={twitterShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TwitterIcon fill="#73737D" />
+          </ShareButton>
+          <ShareButton
+            href={linkedInShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkedInIcon fill="#73737D" />
+          </ShareButton>
+          <ShareButton
+            href={mailShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MailToIcon fill="#73737D" />
+          </ShareButton>
+          <ShareButton>
+            <CopyLink textToCopy={href} fill="#73737D" />
+          </ShareButton>
+        </ShareButtonsContainer>
+      </SocialShareContainer>
       <Subscription />
       {next.length > 0 && (
         <NextArticle narrow>
@@ -140,8 +208,79 @@ const ArticleBody = styled.article`
   `}
 
   ${mediaqueries.phablet`
-    padding: 60px 0;
+    padding: 60px 0 20px;
   `}
+`;
+
+const TagsContainer = styled.div`
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 40px;
+
+  ${mediaqueries.desktop`
+    max-width: 507px;
+  `}
+
+  ${mediaqueries.tablet`
+    max-width: 486px;
+  `};
+
+  ${mediaqueries.phablet`
+    padding: 0 20px;
+  `};
+`;
+
+const Tag = styled.a`
+  padding: 6px 15px;
+  // background-color: ${(p) => p.theme.colors.accent};
+  border-radius: 5555px;
+  border: 1px solid ${(p) => p.theme.colors.accent};
+  color: ${(p) => p.theme.colors.accent};
+  margin-right: 10px;
+  font-size: 14px;
+
+  &:hover {
+    background: ${(p) => p.theme.colors.accent};
+    color: ${(p) => p.theme.colors.background};
+  }
+`;
+
+const SocialShareContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 40px;
+
+  ${mediaqueries.desktop`
+    max-width: 507px;
+  `}
+
+  ${mediaqueries.tablet`
+    max-width: 486px;
+  `};
+
+  ${mediaqueries.phablet`
+    padding: 0 20px;
+  `};
+`;
+
+const ShareLabel = styled.div`
+  color: ${(p) => p.theme.colors.grey};
+`;
+
+const ShareButtonsContainer = styled.div`
+  display: flex;
+  margin-left: 10px;
+`;
+
+const ShareButton = styled.a`
+  margin-right: 20px;
+
+  svg {
+    width: 18px;
+    height: 30px;
+  }
 `;
 
 const NextArticle = styled(Section)`
@@ -154,6 +293,7 @@ const FooterNext = styled.h3`
   margin-bottom: 100px;
   font-weight: 400;
   color: ${(p) => p.theme.colors.primary};
+  
 
   ${mediaqueries.tablet`
     margin-bottom: 60px;
@@ -163,17 +303,21 @@ const FooterNext = styled.h3`
     content: '';
     position: absolute;
     background: ${(p) => p.theme.colors.grey};
-    width: ${(910 / 1140) * 100}%;
+    // width: ${(910 / 1140) * 100}%;
+    width: ${(860 / 1140) * 100}%;
     height: 1px;
     right: 0;
     top: 11px;
+    z-index: -1;
 
     ${mediaqueries.tablet`
-      width: ${(600 / 1140) * 100}%;
+      // width: ${(600 / 1140) * 100}%;
+      width: ${(530 / 1140) * 100}%;
     `}
 
     ${mediaqueries.phablet`
-      width: ${(400 / 1140) * 100}%;
+      // width: ${(400 / 1140) * 100}%;
+      width: ${(330 / 1140) * 100}%;
     `}
 
     ${mediaqueries.phone`
