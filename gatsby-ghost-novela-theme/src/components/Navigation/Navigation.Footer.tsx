@@ -61,7 +61,7 @@ const Footer: React.FC<{}> = () => {
             <FooterLink as={Link} to="/sitemap.xml">
               Sitemap
             </FooterLink>
-            <FooterLink as={Link} to="/rss">
+            <FooterLink as={Link} to="/rss.xml">
               RSS
             </FooterLink>
             <FooterLink as={Link} to="/contact">
