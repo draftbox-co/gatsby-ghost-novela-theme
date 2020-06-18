@@ -3,6 +3,7 @@
 const siteConfigDefaults = require(`./src/utils/siteConfig`);
 const ghostConfigDefaults = require(`./src/utils/.ghost.json`);
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`);
+const path = require("path");
 
 module.exports = (themeOptions) => {
   const siteConfig = themeOptions.siteConfig || siteConfigDefaults;
@@ -23,13 +24,17 @@ module.exports = (themeOptions) => {
       `gatsby-plugin-react-helmet`,
       `gatsby-plugin-sharp`,
       `gatsby-transformer-sharp`,
-      `gatsby-transformer-remark`,
-      `gatsby-transformer-yaml`,
-      `gatsby-plugin-theme-ui`,
       `gatsby-plugin-mdx`,
       `gatsby-plugin-catch-links`,
       `gatsby-plugin-force-trailing-slashes`,
       `gatsby-plugin-offline`,
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: path.join(__dirname, `src`, `images`),
+          name: `images`,
+        },
+      },
       {
         resolve: `gatsby-plugin-emotion`,
         options: {
@@ -42,6 +47,41 @@ module.exports = (themeOptions) => {
           process.env.NODE_ENV === `development`
             ? ghostConfig.development
             : ghostConfig.production,
+      },
+      {
+        resolve: require.resolve(`./plugins/gatsby-plugin-ghost-manifest`),
+        options: {
+          short_name: siteConfig.shortTitle,
+          start_url: `/`,
+          background_color: siteConfig.backgroundColor,
+          theme_color: siteConfig.themeColor,
+          display: `minimal-ui`,
+          icon: `static/${siteConfig.siteIcon}`,
+          legacy: true,
+          query: `{
+            allGhostSettings {
+              edges {
+                node {
+                  title
+                  description
+                }
+              }
+            }
+          }`,
+        },
+      },
+      {
+        resolve: `@armada-inc/gatsby-plugin-amp`,
+        options: {
+          canonicalBaseUrl: siteConfig.siteUrl,
+          components: [`amp-form`],
+          excludedPaths: [`/404*`, `/`],
+          pathIdentifier: `amp/`,
+          relAmpHtmlPattern: `{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}`,
+          useAmpClientIdApi: true,
+          dirName: __dirname,
+          themePath: `src/amp-styles/post.amp.css`,
+        },
       },
       {
         resolve: `gatsby-plugin-feed`,
@@ -127,6 +167,13 @@ module.exports = (themeOptions) => {
           ],
           createLinkInHead: true,
           addUncaughtPages: true,
+        },
+      },
+      `gatsby-plugin-theme-ui`,
+      {
+        resolve: `gatsby-plugin-remove-generator`,
+        options: {
+          content: `Draftbox`,
         },
       },
     ],

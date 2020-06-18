@@ -17,6 +17,7 @@ const templates = {
   author: path.resolve(templatesDirectory, "author.template.tsx"),
   tag: path.resolve(templatesDirectory, "tag.template.tsx"),
   page: path.resolve(templatesDirectory, "page.template.tsx"),
+  ampPage: path.resolve(templatesDirectory, "article.template.amp.tsx"),
 };
 
 const query = require("../data/data.query");
@@ -79,6 +80,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   let articles;
   let tags;
   let pages;
+  let ghostSettings;
 
   const dataSources = {
     ghost: { authors: [], articles: [], tags: [], pages: [] },
@@ -99,6 +101,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     const ghostAuthors = await graphql(query.ghost.authors);
     const ghostTags = await graphql(query.ghost.tags);
     const ghostPages = await graphql(query.ghost.pages);
+    const ghostSettingsData = await graphql(query.ghost.siteSettings);
 
     console.log(ghostArticles, "ghost articles");
 
@@ -116,6 +119,8 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     );
 
     dataSources.ghost.tags = ghostTags.data.tags.edges.map((tag) => tag.node);
+
+    ghostSettings = ghostSettingsData.data.ghostSettings;
   } catch (error) {
     console.log(error);
   }
@@ -178,6 +183,20 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         canonicalUrl: article.canonical_url,
         mailchimp,
         next,
+      },
+    });
+  });
+
+  // Generation of Amp Pages
+
+  articles.forEach((article) => {
+    createPage({
+      path: `${article.slug}/amp`,
+      component: templates.ampPage,
+      context: {
+        slug: article.slug,
+        title: ghostSettings.title,
+        amp: true,
       },
     });
   });

@@ -58,6 +58,8 @@ export interface ITag {
 
 export interface IArticle {
   title: string;
+  html?: string;
+  mdx: string;
   og_title: string;
   og_description: string;
   feature_image: string;

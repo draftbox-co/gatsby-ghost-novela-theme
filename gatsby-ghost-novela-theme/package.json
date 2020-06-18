@@ -16,6 +16,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
+    "@armada-inc/gatsby-plugin-amp": "^0.2.3",
     "@blocks/kit": "^0.0.28",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
@@ -39,6 +40,7 @@
     "gatsby-plugin-mdx": "^1.2.15",
     "gatsby-plugin-offline": "^3.2.9",
     "gatsby-plugin-react-helmet": "^3.1.2",
+    "gatsby-plugin-remove-generator": "^1.0.5",
     "gatsby-plugin-sharp": "^2.2.9",
     "gatsby-plugin-theme-ui": "^0.2.40",
     "gatsby-plugin-typescript": "^2.1.2",
@@ -52,7 +54,7 @@
     "gatsby-remark-prismjs": "^3.3.3",
     "gatsby-remark-smartypants": "^2.1.2",
     "gatsby-remark-typescript": "^0.0.12",
-    "gatsby-source-filesystem": "^2.1.6",
+    "gatsby-source-filesystem": "^2.3.11",
     "gatsby-source-ghost": "^4.0.5",
     "gatsby-transformer-remark": "^2.6.9",
     "gatsby-transformer-sharp": "^2.2.4",

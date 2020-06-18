@@ -201,4 +201,9 @@ module.exports.ghost = {
       }
     }
   }`,
+  siteSettings: `{
+    ghostSettings {
+      title
+    }
+  }`,
 };
