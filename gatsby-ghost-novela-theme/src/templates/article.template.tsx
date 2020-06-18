@@ -22,6 +22,9 @@ import { Template } from "@types";
 import { MetaData } from "@components/meta";
 import Icons from "@icons";
 import CopyLink from "@components/Misc/CopyLink";
+import { Styled } from "theme-ui";
+import HorizontalRule from "@components/HorizontalRule";
+import Disqus from "@components/disqus";
 
 const icons = {
   linkedin: Icons.LinkedIn,
@@ -137,6 +140,7 @@ const Article: Template = ({ pageContext, location }) => {
             href={facebookShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Facebook Share"
           >
             <FacebookIcon fill="#73737D" />
           </ShareButton>
@@ -144,6 +148,7 @@ const Article: Template = ({ pageContext, location }) => {
             href={twitterShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Twitter Share"
           >
             <TwitterIcon fill="#73737D" />
           </ShareButton>
@@ -151,6 +156,7 @@ const Article: Template = ({ pageContext, location }) => {
             href={linkedInShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Linkedin Share"
           >
             <LinkedInIcon fill="#73737D" />
           </ShareButton>
@@ -158,6 +164,7 @@ const Article: Template = ({ pageContext, location }) => {
             href={mailShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Mail Share"
           >
             <MailToIcon fill="#73737D" />
           </ShareButton>
@@ -166,6 +173,10 @@ const Article: Template = ({ pageContext, location }) => {
           </ShareButton>
         </ShareButtonsContainer>
       </SocialShareContainer>
+      <HorizontalRule />
+      <DiscusContainer>
+        <Disqus slug={article.slug} title={article.title} />
+      </DiscusContainer>
       <Subscription />
       {next.length > 0 && (
         <NextArticle narrow>
@@ -322,6 +333,30 @@ const FooterNext = styled.h3`
       width: 90px
     `}
   }
+`;
+
+const DiscusContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 40px;
+
+  > div {
+    width: 100%;
+  }
+
+  ${mediaqueries.desktop`
+    max-width: 507px;
+  `}
+
+  ${mediaqueries.tablet`
+    max-width: 486px;
+  `};
+
+  ${mediaqueries.phablet`
+    padding: 0 20px;
+  `};
 `;
 
 const FooterSpacer = styled.div`

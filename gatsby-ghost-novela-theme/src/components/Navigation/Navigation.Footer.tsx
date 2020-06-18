@@ -73,7 +73,7 @@ const Footer: React.FC<{}> = () => {
           </SocialLinksContainer>
         </FooterContainer>
         <CreditsContainer>
-          <FooterLink href="https://draftbox.co" target="_blank">
+          <FooterLink rel="noreferrer noopener" href="https://draftbox.co" target="_blank">
             PUBLISHED WITH DRAFTBOX
           </FooterLink>
         </CreditsContainer>

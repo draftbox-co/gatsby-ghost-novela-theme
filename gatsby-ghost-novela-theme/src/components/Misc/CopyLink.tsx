@@ -9,7 +9,7 @@ const CopyIcon = ({ fill }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="Capa_1"
-    enable-background="new 0 0 512 512"
+    enableBackground="new 0 0 512 512"
     height="512px"
     viewBox="0 0 512 512"
     width="512px"
@@ -46,7 +46,7 @@ const CopiedIcon = ({ fill }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="bold"
-    enable-background="new 0 0 24 24"
+    enableBackground="new 0 0 24 24"
     height="512px"
     viewBox="0 0 24 24"
     width="512px"
@@ -113,7 +113,7 @@ const CopyLink: React.FC<CopyLinkProps> = ({ textToCopy, fill }) => {
 
   return (
     <div>
-      <button onClick={(e) => copyToClipboard()}>
+      <button aria-label="Copy to clipboard" onClick={(e) => copyToClipboard()}>
         {copiedToClipBoard ? (
           <CopiedIcon fill={fill} />
         ) : (

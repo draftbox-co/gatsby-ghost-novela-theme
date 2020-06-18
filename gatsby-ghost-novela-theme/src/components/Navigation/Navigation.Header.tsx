@@ -153,6 +153,9 @@ const NavigationHeader: React.FC<{}> = () => {
                 </NavLink>
               );
             })}
+            <NavLink as={Link} to="/contact">
+              Contact
+            </NavLink>
           </NavbarLinksContainer>
           <NavControlsSettings>
             <SharePageButton />
@@ -275,15 +278,23 @@ const NavbarLinksContainer = styled.div`
   margin-left: 20px;
   margin-top: 3px;
   margin-bottom: 20px;
+  flex-direction: column;
+  align-items: flex-start;
 `}
 `;
 
 const NavLink = styled.a`
   color: ${(p) => p.theme.colors.grey};
+  margin-right: 32px;
 
   &:hover {
     text-decoration: underline;
   }
+
+  ${mediaqueries.phablet`
+  margin-right: 0;
+  margin-bottom: 20px;
+`}
 `;
 
 const NavControlsSettings = styled.div`
