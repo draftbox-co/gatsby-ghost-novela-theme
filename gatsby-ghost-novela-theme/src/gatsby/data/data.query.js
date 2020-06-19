@@ -8,23 +8,26 @@ const GatsbyFluid_withWebp = `
   src
   srcSet
   sizes
+  srcWebp
+  srcSetWebp
 `;
 
 module.exports.ghost = {
   articles: `{
     articles: allGhostPost(
-      sort: { fields: [updated_at, title], order: DESC }
-      limit: 1000
+      sort: {fields: [featured, published_at], order: [DESC, DESC]}
+      filter: { slug: { ne: "data-schema" } }
     ) {
       edges {
         node {
           id
-          date: updated_at(formatString: "MMMM Do, YYYY")
+          date: published_at(formatString: "MMMM Do, YYYY")
           slug
           title
           og_title
           og_description
           feature_image 
+          featured
           twitter_title
           twitter_description
           meta_title

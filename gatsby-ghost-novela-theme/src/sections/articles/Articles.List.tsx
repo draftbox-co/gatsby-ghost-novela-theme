@@ -10,6 +10,9 @@ import mediaqueries from "@styles/media";
 import { IArticle } from "@types";
 
 import { GridLayoutContext } from "./Articles.List.Context";
+import ImagePlaceholderAlt from "@components/Image/Image.Placeholder.alt";
+
+import Icons from "@icons";
 
 /**
  * Tiles
@@ -111,7 +114,18 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
     <ArticleLink to={`/${article.slug}`} data-a11y="false">
       <Item gridLayout={gridLayout}>
         <ImageContainer narrow={narrow} gridLayout={gridLayout}>
-          {hasHeroImage ? <Image src={imageSource} /> : <ImagePlaceholder />}
+          <>
+            {article.featured && (
+              <FeaturedTag>
+                <Icons.StarIcon /> Featured
+              </FeaturedTag>
+            )}
+            {hasHeroImage ? (
+              <Image src={imageSource} />
+            ) : (
+              <ImagePlaceholderAlt firstLetter={article.title[0]} />
+            )}
+          </>
         </ImageContainer>
         <div>
           <Title dark hasOverflow={hasOverflow} gridLayout={gridLayout}>
@@ -406,5 +420,23 @@ const TagLink = styled.span`
   color: ${(p) => p.theme.colors.grey};
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const FeaturedTag = styled.span`
+  background: white;
+  color: black;
+  border-radius: 555px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  z-index: 3;
+  display: flex;
+
+  svg {
+    height: 12px;
+    margin-right: 5px;
   }
 `;

@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby";
 import { MetaData } from "@components/meta";
 
 type PostTemplateProps = {
-  data: {ghostPost: any};
+  data: { ghostPost: any };
   location: any;
   pageContext: {
     title: string;
@@ -55,8 +55,9 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
             data.ghostPost.localFeatureImage.childImageSharp && (
               <figure className="post-image">
                 <img
-                  src={
-                    data.ghostPost.localFeatureImage.childImageSharp.fluid.src
+                  srcSet={
+                    data.ghostPost.localFeatureImage.childImageSharp.fluid
+                      .srcSet
                   }
                   alt={data.ghostPost.title}
                 />
@@ -71,15 +72,26 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
                 />
               </figure>
             )}
-          {data.ghostPost.html &&
-            data.ghostPost.html && (
-              <section
-                className="post-content"
-                dangerouslySetInnerHTML={{
-                  __html: data.ghostPost.html,
-                }}
-              ></section>
-            )}
+          {data.ghostPost.html && data.ghostPost.html && (
+            <section
+              className="post-content"
+              dangerouslySetInnerHTML={{
+                __html: data.ghostPost.html,
+              }}
+            ></section>
+          )}
+          <div className="tags">
+            <span>Tag:</span>
+            <a className="tag" href={`/${data.ghostPost.primary_tag.slug}`}>
+              {data.ghostPost.primary_tag.name}
+            </a>
+          </div>
+
+          <div className="comment-button-container">
+            <button>
+              <a href="/">Leave a comment</a>
+            </button>
+          </div>
         </article>
       </main>
     </>

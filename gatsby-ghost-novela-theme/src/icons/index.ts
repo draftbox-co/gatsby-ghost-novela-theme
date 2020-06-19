@@ -30,6 +30,7 @@ import ToggleClose from "./ui/ToggleClose.Icon";
 import Rows from "./ui/Rows.Icon";
 import Tiles from "./ui/Tiles.Icon";
 import HamBurgerIcon from "./ui/Hamburger.Icon";
+import StarIcon from "./ui/Star.icon";
 
 export default {
   Behance,
@@ -62,4 +63,5 @@ export default {
   Rows,
   Tiles,
   HamBurgerIcon,
+  StarIcon,
 };

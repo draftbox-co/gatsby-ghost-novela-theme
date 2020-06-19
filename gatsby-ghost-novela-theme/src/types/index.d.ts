@@ -61,6 +61,7 @@ export interface IArticle {
   html?: string;
   mdx: string;
   og_title: string;
+  featured: boolean;
   og_description: string;
   feature_image: string;
   twitter_title: string;

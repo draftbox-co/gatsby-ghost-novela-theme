@@ -123,7 +123,7 @@ const Article: Template = ({ pageContext, location }) => {
       {/* <div dangerouslySetInnerHTML={{__html: article.body}}></div> */}
       <ArticleBody ref={contentSectionRef}>
         <MDXRenderer content={article.body}>
-          <ArticleShare />
+          {/* <ArticleShare /> */}
         </MDXRenderer>
       </ArticleBody>
       <TagsContainer>

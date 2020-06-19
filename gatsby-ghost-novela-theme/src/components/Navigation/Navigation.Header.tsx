@@ -195,7 +195,6 @@ const NavContainer = styled.div`
   padding-top: 100px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 
   ${mediaqueries.desktop_medium`
     padding-top: 50px;
@@ -204,6 +203,10 @@ const NavContainer = styled.div`
   @media screen and (max-height: 800px) {
     padding-top: 50px;
   }
+
+  ${mediaqueries.phablet`
+    flex-wrap: wrap;
+  `}
 `;
 
 const LogoLink = styled(Link)<{ back: string }>`
