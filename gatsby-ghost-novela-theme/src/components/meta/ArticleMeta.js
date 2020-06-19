@@ -15,8 +15,6 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
   const config = settings.site.siteMetadata;
   settings = settings.allGhostSettings.edges[0].node;
 
-  console.log({ ghostPost });
-
   const author = getAuthorProperties(ghostPost.primary_author);
   const publicTags = _.map(
     tagsHelper(ghostPost, { visibility: `public`, fn: (tag) => tag }),

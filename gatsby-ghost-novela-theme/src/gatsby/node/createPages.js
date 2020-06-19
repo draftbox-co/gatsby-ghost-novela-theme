@@ -72,7 +72,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     }
   `);
 
-  console.log(sources);
   // Defaulting to look at the local MDX files as sources.
   const { local = true, contentful = false } = sources;
 
@@ -103,7 +102,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     const ghostPages = await graphql(query.ghost.pages);
     const ghostSettingsData = await graphql(query.ghost.siteSettings);
 
-    console.log(ghostArticles, "ghost articles");
 
     dataSources.ghost.articles = ghostArticles.data.articles.edges.map(
       normalize.ghost.articles
@@ -208,7 +206,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     //    * We need a way to find the next artiles to suggest at the bottom of the articles page.
     //    * To accomplish this there is some special logic surrounding what to show next.
     //    */
-    console.log(article, "ye hai page");
     createPage({
       path: article.slug,
       component: templates.page,
@@ -240,7 +237,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
   }));
 
   authors.forEach((author) => {
-    console.log(author, "author is here");
     // const articlesTheAuthorHasWritten = articlesThatArentSecret.filter(
     //   (article) =>
     //     article.author.toLowerCase().includes(author.name.toLowerCase())
@@ -283,7 +279,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       { social: [] }
     );
 
-    console.log(JSON.stringify(modifiedAuthor, null, 2), "modified author");
 
     const path = slugify(author.slug, authorsPath);
 

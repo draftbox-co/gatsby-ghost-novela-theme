@@ -9,7 +9,6 @@ interface TagHeroProps {
 }
 
 const TagHero: React.FC<TagHeroProps> = ({ tag }) => {
-  console.log(tag, "tag is here");
   return (
     <Hero>
       <Heading>{tag.name}</Heading>

@@ -10,9 +10,25 @@ import { result } from "lodash";
 
 const siteQuery = graphql`
   {
-    ghostSettings {
-      facebook
-      twitter
+    site {
+      siteMetadata {
+        siteUrl
+        apiUrl
+        socialLinks {
+          twitter
+          facebook
+          instagram
+          linkedin
+          github
+        }
+        footer {
+          navigation {
+            label
+            url
+          }
+          copyright
+        }
+      }
     }
   }
 `;
@@ -22,27 +38,17 @@ const Footer: React.FC<{}> = () => {
 
   const social = [];
 
-  if (results.ghostSettings.facebook) {
-    social.push({
-      name: "facebook",
-      url: `https://facebook.com/${results.ghostSettings.facebook}`,
-    });
-  }
+  const {
+    site: {
+      siteMetadata: { socialLinks = [], footer, siteUrl, apiUrl },
+    },
+  } = results;
 
-  if (results.ghostSettings.twitter) {
-    social.push({
-      name: "twitter",
-      url: `https://twitter.com/${results.ghostSettings.twitter}`,
-    });
-  }
-
-  // const copyrightDate = (() => {
-  //   const { edges } = results.allMdx;
-  //   const years = [0, edges.length - 1].map((edge) =>
-  //     new Date(edges[edge].node.frontmatter.date).getFullYear()
-  //   );
-  //   return years[0] === years[1] ? `${years[0]}` : `${years[0]}–${years[1]}`;
-  // })();
+  Object.keys(socialLinks).forEach((key) => {
+    if (socialLinks[key]) {
+      social.push({ name: key, url: socialLinks[key] });
+    }
+  });
 
   return (
     <>
@@ -52,10 +58,39 @@ const Footer: React.FC<{}> = () => {
         <FooterContainer>
           <FooterText>
             {/* © {copyrightDate} {name} */}
-            Built with Draftbox © {new Date().getFullYear()}
+            {footer.copyright} © {new Date().getFullYear()}
           </FooterText>
           <FooterLinksContainer>
-            <FooterLink as={Link} to="/">
+            {footer.navigation.map(({ label, url }, index) => {
+              return url.startsWith("/") ||
+                url.startsWith(siteUrl) ||
+                url.startsWith(apiUrl) ? (
+                <FooterLink
+                  key={index}
+                  to={`${
+                    url.startsWith("/")
+                      ? url
+                      : url.startsWith(siteUrl)
+                      ? url.slice(siteUrl.length, url.length)
+                      : url.slice(apiUrl.length, url.length)
+                  }`}
+                  as={Link}
+                >
+                  {label}
+                </FooterLink>
+              ) : (
+                <FooterLink
+                  key={index}
+                  href={url}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {label}
+                </FooterLink>
+              );
+            })}
+            {/* <pre>{JSON.stringify(footer.navigation, null, 2)}</pre> */}
+            {/* <FooterLink as={Link} to="/">
               Home
             </FooterLink>
             <FooterLink as={Link} to="/sitemap.xml">
@@ -66,14 +101,18 @@ const Footer: React.FC<{}> = () => {
             </FooterLink>
             <FooterLink as={Link} to="/contact">
               Contact Us
-            </FooterLink>
+            </FooterLink> */}
           </FooterLinksContainer>
           <SocialLinksContainer>
             <SocialLinks links={social} />
           </SocialLinksContainer>
         </FooterContainer>
         <CreditsContainer>
-          <FooterLink rel="noreferrer noopener" href="https://draftbox.co" target="_blank">
+          <FooterLink
+            rel="noreferrer noopener"
+            href="https://draftbox.co"
+            target="_blank"
+          >
             PUBLISHED WITH DRAFTBOX
           </FooterLink>
         </CreditsContainer>

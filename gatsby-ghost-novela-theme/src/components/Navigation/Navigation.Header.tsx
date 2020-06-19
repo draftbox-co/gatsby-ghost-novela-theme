@@ -16,16 +16,16 @@ import {
 
 const siteQuery = graphql`
   {
-    ghostSettings {
-      navigation {
-        label
-        url
-      }
-    }
     site {
       siteMetadata {
         siteUrl
         apiUrl
+        header {
+          navigation {
+            label
+            url
+          }
+        }
       }
     }
   }
@@ -93,9 +93,12 @@ const NavigationHeader: React.FC<{}> = () => {
   const [menuToggled, setMenuToggled] = useState(false);
   const {
     sitePlugin,
-    ghostSettings: { navigation },
     site: {
-      siteMetadata: { siteUrl, apiUrl },
+      siteMetadata: {
+        siteUrl,
+        apiUrl,
+        header: { navigation },
+      },
     },
   } = useStaticQuery(siteQuery);
 
@@ -156,9 +159,6 @@ const NavigationHeader: React.FC<{}> = () => {
                 </NavLink>
               );
             })}
-            <NavLink as={Link} to="/contact">
-              Contact
-            </NavLink>
           </NavbarLinksContainer>
           <NavControlsSettings>
             <SharePageButton />

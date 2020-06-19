@@ -29,8 +29,6 @@ const Page: Template = ({ pageContext, location }) => {
 
   const { article } = pageContext;
 
-  console.log(article, "ye hai article");
-
   useEffect(() => {
     const calculateBodySize = throttle(() => {
       const contentSection = contentSectionRef.current;

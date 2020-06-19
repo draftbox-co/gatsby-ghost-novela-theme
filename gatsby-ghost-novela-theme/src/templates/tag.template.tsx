@@ -15,8 +15,6 @@ const TagPage: Template = ({ location, pageContext }) => {
   const tag = pageContext.additionalContext.tag;
   const articles = pageContext.group;
 
-  console.log(tag, "author is here");
-
   return (
     <Layout>
       <MetaData data={{ ghostTag: tag }} location={location} />

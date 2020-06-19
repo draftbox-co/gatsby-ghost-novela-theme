@@ -16,7 +16,6 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
   const author = pageContext.additionalContext.author;
   const articles = pageContext.group;
 
-  console.log(author, "author is here");
 
   return (
     <Layout>

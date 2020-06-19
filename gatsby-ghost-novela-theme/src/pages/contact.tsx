@@ -9,11 +9,23 @@ import { useStaticQuery, graphql } from "gatsby";
 
 const Contact = () => {
   const {
+    site: {
+      siteMetadata: { contactWidget },
+    },
     ghostSettings: { title },
   } = useStaticQuery(graphql`
     query {
       ghostSettings {
         title
+      }
+
+      site {
+        siteMetadata {
+          contactWidget {
+            title
+            successMessage
+          }
+        }
       }
     }
   `);
@@ -56,7 +68,13 @@ const Contact = () => {
         <Content>
           <ContactContainer>
             <Heading>
-              Contact <span dangerouslySetInnerHTML={{ __html: title }}></span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: contactWidget.title
+                    ? contactWidget.title
+                    : `Contact ` + title,
+                }}
+              ></span>
             </Heading>
             <Form onSubmit={(e) => handleSubmit(e)}>
               <Label htmlFor="name">Your Name</Label>
@@ -93,7 +111,11 @@ const Contact = () => {
                 {succeeded ? <CheckMarkIcon /> : "Send"}
               </Button>
               {succeeded && (
-                <SuccessText>We'll get in touch with you soon.</SuccessText>
+                <SuccessText>
+                  {contactWidget.successMessage
+                    ? contactWidget.successMessage
+                    : `We'll get in touch with you soon.`}
+                </SuccessText>
               )}
             </Form>
           </ContactContainer>

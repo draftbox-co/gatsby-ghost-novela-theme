@@ -48,7 +48,6 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
   links,
   fill = "#73737D",
 }) => {
-  console.log(links, 'links are here');
   if (!links) return null;
 
   return (
@@ -87,6 +86,10 @@ const SocialIconContainer = styled.a`
   margin-left: 3.2rem;
   text-decoration: none;
   max-width: 16px;
+
+  svg {
+    height: 18px;
+  }
 
   &:hover {
     svg {

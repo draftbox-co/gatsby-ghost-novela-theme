@@ -25,6 +25,7 @@ import CopyLink from "@components/Misc/CopyLink";
 import { Styled } from "theme-ui";
 import HorizontalRule from "@components/HorizontalRule";
 import Disqus from "@components/disqus";
+import FbComments from "@components/fb-comments";
 
 const icons = {
   linkedin: Icons.LinkedIn,
@@ -74,7 +75,6 @@ const Article: Template = ({ pageContext, location }) => {
 
   const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
 
-  console.log(article, "ye hai article");
 
   useEffect(() => {
     const calculateBodySize = throttle(() => {
@@ -173,10 +173,22 @@ const Article: Template = ({ pageContext, location }) => {
           </ShareButton>
         </ShareButtonsContainer>
       </SocialShareContainer>
-      <HorizontalRule />
-      <DiscusContainer>
-        <Disqus slug={article.slug} title={article.title} />
-      </DiscusContainer>
+      {process.env.GATSBY_DISQUS_SHORTNAM && (
+        <>
+          <HorizontalRule />
+          <EmbedContainer>
+            <Disqus slug={article.slug} title={article.title} />
+          </EmbedContainer>
+        </>
+      )}
+      {process.env.GATSBY_FB_APP_ID && (
+        <>
+          <HorizontalRule />
+          <EmbedContainer>
+            <FbComments href={href} />
+          </EmbedContainer>
+        </>
+      )}
       <Subscription />
       {next.length > 0 && (
         <NextArticle narrow>
@@ -335,7 +347,7 @@ const FooterNext = styled.h3`
   }
 `;
 
-const DiscusContainer = styled.div`
+const EmbedContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -343,6 +355,10 @@ const DiscusContainer = styled.div`
   margin: 0 auto 40px;
 
   > div {
+    width: 100%;
+  }
+
+  iframe {
     width: 100%;
   }
 

@@ -12,10 +12,22 @@ import { useStaticQuery, graphql } from "gatsby";
 const Subscription: React.FC<{}> = () => {
   const {
     ghostSettings: { title },
+    site: {
+      siteMetadata: { subscribeWidget },
+    },
   } = useStaticQuery(graphql`
     query {
       ghostSettings {
         title
+      }
+      site {
+        siteMetadata {
+          subscribeWidget {
+            title
+            helpText
+            successMessage
+          }
+        }
       }
     }
   `);
@@ -40,13 +52,19 @@ const Subscription: React.FC<{}> = () => {
     <Section narrow>
       <SubscriptionContainer>
         <Content>
-          <Heading>
-            Join our email list and get notified about new content
-          </Heading>
+          <Heading
+            dangerouslySetInnerHTML={{
+              __html: `${
+                subscribeWidget.title
+                  ? subscribeWidget.title
+                  : "Subscribe to " + title
+              }`,
+            }}
+          />
           <Text>
-            Be the first to receive our latest content with the ability to
-            opt-out at anytime. We promise to not spam your inbox or share your
-            email with any third parties.
+            {subscribeWidget.helpText
+              ? subscribeWidget.helpText
+              : `Get the latest posts delivered right to your inbox.`}
           </Text>
           <Form onSubmit={onSubmit} hasError={error}>
             <Label htmlFor="email">Email</Label>
@@ -70,9 +88,22 @@ const Subscription: React.FC<{}> = () => {
             {error && <Error dangerouslySetInnerHTML={{ __html: error }} />}
           </Form>
           {succeeded && (
-            <SuccessText>
-              You've successfully subscribed to {title}.
-            </SuccessText>
+            <>
+              {subscribeWidget.successMessage && (
+                <SuccessText
+                  dangerouslySetInnerHTML={{
+                    __html: subscribeWidget.successMessage,
+                  }}
+                />
+              )}
+              {!subscribeWidget.successMessage && (
+                <SuccessText
+                  dangerouslySetInnerHTML={{
+                    __html: `You've successfully subscribed to ${title}.`,
+                  }}
+                />
+              )}
+            </>
           )}
         </Content>
       </SubscriptionContainer>

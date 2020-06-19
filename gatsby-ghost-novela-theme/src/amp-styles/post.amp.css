@@ -639,7 +639,7 @@ select {
 }
 
 amp-img img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .tags .tag {

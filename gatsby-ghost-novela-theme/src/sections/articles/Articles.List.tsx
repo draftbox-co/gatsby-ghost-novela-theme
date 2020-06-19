@@ -93,8 +93,6 @@ export default ArticlesList;
 const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
   if (!article) return null;
 
-  console.log(article, "article is here");
-
   const { gridLayout } = useContext(GridLayoutContext);
   const hasOverflow = narrow && article.title.length > 35;
   const imageSource = narrow ? article.hero.narrow : article.hero.regular;
@@ -102,8 +100,6 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
     imageSource &&
     Object.keys(imageSource).length !== 0 &&
     imageSource.constructor === Object;
-
-  console.log(hasHeroImage, "has hero image");
 
   const navigateToTag = (e: React.SyntheticEvent<any>, path) => {
     e.preventDefault();
