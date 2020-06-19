@@ -9,6 +9,8 @@ import ArticlesContextProvider from "../../sections/articles/Articles.List.Conte
 
 import { globalStyles } from "@styles";
 import { ArmadaFormsProvider } from "../../context/form-context";
+import { useStaticQuery, graphql } from "gatsby";
+import Helmet from "react-helmet";
 
 /**
  * <Layout /> needs to wrap every page as it provides styles, navigation,
@@ -16,6 +18,14 @@ import { ArmadaFormsProvider } from "../../context/form-context";
  * which hides a lot of the mess we need to create our Desktop and Mobile experiences.
  */
 const Layout: React.FC<{}> = ({ children }) => {
+  const { ghostSettings: {lang} } = useStaticQuery(graphql`
+    {
+      ghostSettings {
+        lang
+      }
+    }
+  `);
+
   const [colorMode] = useColorMode();
 
   useEffect(() => {
@@ -25,6 +35,11 @@ const Layout: React.FC<{}> = ({ children }) => {
   return (
     <ArmadaFormsProvider client={"5ecd130443daff001ff5ac21"}>
       <ArticlesContextProvider>
+        <Helmet
+          htmlAttributes={{
+            lang: lang ? lang : "auto",
+          }}
+        />
         <Container>
           <Global styles={globalStyles} />
           <NavigationHeader />

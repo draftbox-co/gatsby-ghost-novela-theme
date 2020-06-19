@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 
 import Headings from "@components/Headings";
 import Image, { ImagePlaceholder } from "@components/Image";
@@ -102,6 +102,11 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
 
   console.log(hasHeroImage, "has hero image");
 
+  const navigateToTag = (e: React.SyntheticEvent<any>, path) => {
+    e.preventDefault();
+    navigate(path);
+  };
+
   return (
     <ArticleLink to={`/${article.slug}`} data-a11y="false">
       <Item gridLayout={gridLayout}>
@@ -121,8 +126,8 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
           </Excerpt>
           <MetaData>
             {article.date} · {article.readingTime} ·{" "}
-            {article.tags && (
-              <TagLink as={Link} to={`/${article.tags[0].slug}`}>
+            {article.tags && article.tags.length > 0 && (
+              <TagLink onClick={(e) => navigateToTag(e, article.tags[0].slug)}>
                 {article.tags[0].name}
               </TagLink>
             )}
@@ -397,7 +402,7 @@ const ArticleLink = styled(Link)`
   `}
 `;
 
-const TagLink = styled.a`
+const TagLink = styled.span`
   color: ${(p) => p.theme.colors.grey};
   &:hover {
     text-decoration: underline;

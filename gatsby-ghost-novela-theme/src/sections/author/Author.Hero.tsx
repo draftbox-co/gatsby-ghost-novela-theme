@@ -17,7 +17,7 @@ const AuthorHero: React.FC<AuthorHeroProps> = ({ author }) => {
   return (
     <Hero>
       <HeroImage>
-        <RoundedImage src={author.profile_image} />
+        <RoundedImage alt="Author avatar" src={author.profile_image} />
       </HeroImage>
       <Heading>{author.name}</Heading>
       <Subheading>{author.bio}</Subheading>

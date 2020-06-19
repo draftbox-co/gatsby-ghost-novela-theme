@@ -120,7 +120,10 @@ const NavigationHeader: React.FC<{}> = () => {
           <Logo fill={fill} />
           <Hidden>Navigate back to the homepage</Hidden>
         </LogoLink>
-        <Hamburger onClick={(e) => setMenuToggled(!menuToggled)}>
+        <Hamburger
+          aria-label="Menu Toggle"
+          onClick={(e) => setMenuToggled(!menuToggled)}
+        >
           <Icons.HamBurgerIcon fill={fill} />
         </Hamburger>
         <NavControls className={menuToggled ? "menu-toggled" : ""}>

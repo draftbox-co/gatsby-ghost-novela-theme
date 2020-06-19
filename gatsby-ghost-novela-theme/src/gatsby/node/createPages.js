@@ -306,12 +306,12 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
 
   const articlesWithFlatTagNames = articles.map((article) => ({
     ...article,
-    tags: [...article.tags.map((tag) => tag.slug)],
+    flatTags: [...article.tags.map((tag) => tag.slug)],
   }));
 
   tags.forEach((tag) => {
     const articlesWithTag = articlesWithFlatTagNames.filter((article) =>
-      article.tags.includes(tag.slug)
+      article.flatTags.includes(tag.slug)
     );
 
     const path = slugify(tag.slug, "/tags");

@@ -59,6 +59,7 @@ const Contact = () => {
               Contact <span dangerouslySetInnerHTML={{ __html: title }}></span>
             </Heading>
             <Form onSubmit={(e) => handleSubmit(e)}>
+              <Label htmlFor="name">Your Name</Label>
               <Input
                 name="name"
                 type="text"
@@ -66,6 +67,7 @@ const Contact = () => {
                 placeholder="Your name (optional)"
                 onChange={(e) => handleChange(e.target.id, e.target.value)}
               />
+              <Label htmlFor="email">Your Name</Label>
               <Input
                 name="email"
                 type="email"
@@ -74,6 +76,7 @@ const Contact = () => {
                 placeholder="Your email address"
                 onChange={(e) => handleChange(e.target.id, e.target.value)}
               />
+              <Label htmlFor="message">Your Name</Label>
               <Textarea
                 required
                 name="message"
@@ -164,6 +167,12 @@ const Form = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
+`;
+
+const Label = styled.label`
+  position: fixed;
+  opacity: 0;
+  height: 1px;
 `;
 
 const Input = styled.input`

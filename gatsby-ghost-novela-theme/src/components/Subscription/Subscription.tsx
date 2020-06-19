@@ -49,8 +49,10 @@ const Subscription: React.FC<{}> = () => {
             email with any third parties.
           </Text>
           <Form onSubmit={onSubmit} hasError={error}>
+            <Label htmlFor="email">Email</Label>
             <Input
               placeholder="your@email.com"
+              id="email"
               name="email"
               type="email"
               value={email}
@@ -154,6 +156,12 @@ const Form = styled.form<{ hasError: string }>`
     top: 11px;
   `}
   }
+`;
+
+const Label = styled.label`
+  position: fixed;
+  opacity: 0;
+  height: 1px;
 `;
 
 const Input = styled.input<{ hasError: string }>`

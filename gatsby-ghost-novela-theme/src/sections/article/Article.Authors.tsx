@@ -43,7 +43,10 @@ const CoAuthors: React.FC<AuthorsProps> = ({ authors }) => {
       <CoAuthorsList style={listWidth}>
         {authors.map((author, index) => (
           <CoAuthorAvatar style={{ left: `${index * 15}px` }} key={author.name}>
-            <RoundedImage src={author.profile_image} />
+            <RoundedImage
+              alt={`Author avatar ${index}`}
+              src={author.profile_image}
+            />
           </CoAuthorAvatar>
         ))}
       </CoAuthorsList>
@@ -93,7 +96,7 @@ const ArticleAuthors: React.FC<AuthorsProps> = ({ authors }) => {
     return (
       <AuthorLink as={Link} to={`/${authors[0].slug}`}>
         <AuthorAvatar>
-          <RoundedImage src={authors[0].profile_image} />
+          <RoundedImage alt="Author avatar" src={authors[0].profile_image} />
         </AuthorAvatar>
         <strong>{authors[0].name}</strong>
         <HideOnMobile>,&nbsp;</HideOnMobile>
