@@ -4,20 +4,17 @@ module.exports = {
       resolve: `@draftbox-co/gatsby-ghost-novela-theme`,
       options: {
         siteConfig: {
-          siteUrl: `https://ghost-balsa-preview.draftbox.co`, // Site domain. Do not include a trailing slash!
-
-          postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
-
-          siteTitleMeta: `Ghost Gatsby Starter`, // This allows an alternative site title for meta data for pages.
-          siteDescriptionMeta: `A starter template to build amazing static websites with Ghost and Gatsby`, // This allows an alternative site description for meta data for pages.
-
-          shareImageWidth: 1000, // Change to the width of your default share image
-          shareImageHeight: 523, // Change to the height of your default share image
-
-          shortTitle: `Ghost`, // Used for App manifest e.g. Mobile Home Screen
-          siteIcon: `favicon.png`, // Logo in /static dir used for SEO, RSS, and App manifest
-          backgroundColor: `#e9e9e9`, // Used for Offline Manifest
-          themeColor: `#15171A`, // Used for Offline Manifest
+          siteUrl: "https://ghost-balsa-preview.draftbox.co",
+          postsPerPage: 12,
+          siteTitleMeta: "Built with Draftbox",
+          siteDescriptionMeta:
+            "Lightning fast, secure front-end for your WordPress or Ghost blog, without coding.",
+          shareImageWidth: 1000,
+          shareImageHeight: 523,
+          shortTitle: "Built with Draftbox",
+          siteIcon: "favicon.png",
+          backgroundColor: "#e9e9e9",
+          themeColor: "#15171A",
           apiUrl: "https://ghost.theasdfghjkl.com",
           header: {
             navigation: [
@@ -57,7 +54,7 @@ module.exports = {
             ],
           },
           subscribeWidget: {
-            title: "Subscribe to Draftbox",
+            title: "Subscribe to Built with Draftbox",
             helpText: "Get the latest posts delivered right to your inbox.",
             successMessage: "Thanks for subscribing to Built with Draftbox.",
           },
