@@ -4,7 +4,7 @@ module.exports = {
       resolve: `@draftbox-co/gatsby-ghost-novela-theme`,
       options: {
         siteConfig: {
-          siteUrl: `https://blog.getarmada.app`, // Site domain. Do not include a trailing slash!
+          siteUrl: `https://ghost-balsa-preview.draftbox.co`, // Site domain. Do not include a trailing slash!
 
           postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
 
@@ -32,7 +32,7 @@ module.exports = {
             ],
           },
           footer: {
-            copyright: "Built with Draftbox122",
+            copyright: "Built with Draftbox",
             navigation: [
               {
                 label: "Home",
@@ -57,7 +57,7 @@ module.exports = {
             ],
           },
           subscribeWidget: {
-            title: "Subscribe to Draftbox [new]",
+            title: "Subscribe to Draftbox",
             helpText: "Get the latest posts delivered right to your inbox.",
             successMessage: "Thanks for subscribing to Built with Draftbox.",
           },

@@ -75,7 +75,6 @@ const Article: Template = ({ pageContext, location }) => {
 
   const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
 
-
   useEffect(() => {
     const calculateBodySize = throttle(() => {
       const contentSection = contentSectionRef.current;
@@ -110,6 +109,7 @@ const Article: Template = ({ pageContext, location }) => {
     return () => window.removeEventListener("resize", calculateBodySize);
   }, []);
 
+
   return (
     <Layout>
       <MetaData data={{ ghostPost: article }} location={location} />
@@ -121,7 +121,10 @@ const Article: Template = ({ pageContext, location }) => {
         <ArticleControls />
       </MobileControls>
       {/* <div dangerouslySetInnerHTML={{__html: article.body}}></div> */}
-      <ArticleBody ref={contentSectionRef}>
+      <ArticleBody
+        className={Object.keys(article.hero.full).length === 0 ? "no-hero" : ""}
+        ref={contentSectionRef}
+      >
         <MDXRenderer content={article.body}>
           {/* <ArticleShare /> */}
         </MDXRenderer>
@@ -231,6 +234,10 @@ const ArticleBody = styled.article`
   ${mediaqueries.phablet`
     padding: 60px 0 20px;
   `}
+
+  &.no-hero {
+    padding-top: 0;
+  }
 `;
 
 const TagsContainer = styled.div`

@@ -9,6 +9,7 @@ import Image from "@components/Image";
 import mediaqueries from "@styles/media";
 
 import { IArticle } from "@types";
+import ImagePlaceholderAlt from "@components/Image/Image.Placeholder.alt";
 
 interface ArticlesNextProps {
   articles: IArticle[];
@@ -50,6 +51,8 @@ const GridItem: React.FC<GridItemProps> = ({ article, narrow }) => {
   const hasOverflow = narrow && article.title.length > 35;
   const imageSource = narrow ? article.hero.narrow : article.hero.regular;
 
+  console.log(imageSource, "image source");
+
   return (
     <ArticleLink
       to={`/${article.slug}`}
@@ -58,7 +61,11 @@ const GridItem: React.FC<GridItemProps> = ({ article, narrow }) => {
     >
       <Item>
         <ImageContainer>
-          <Image src={imageSource} />
+          {Object.keys(imageSource).length > 0 ? (
+            <Image src={imageSource} />
+          ) : (
+            <ImagePlaceholderAlt firstLetter={article.title[0]} />
+          )}
         </ImageContainer>
         <Title dark hasOverflow={hasOverflow}>
           {article.title}

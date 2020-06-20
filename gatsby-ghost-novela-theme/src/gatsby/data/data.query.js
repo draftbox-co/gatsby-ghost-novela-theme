@@ -8,8 +8,6 @@ const GatsbyFluid_withWebp = `
   src
   srcSet
   sizes
-  srcWebp
-  srcSetWebp
 `;
 
 module.exports.ghost = {

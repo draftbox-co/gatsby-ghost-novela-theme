@@ -226,6 +226,7 @@ const FooterLink = styled.a`
 `;
 
 const CreditsContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
