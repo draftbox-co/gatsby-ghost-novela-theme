@@ -10,7 +10,7 @@ Turn your Ghost blog into a lightning fast static website. This Gatsby theme is 
 
 ## Demo
 
-Play with the [Demo](https://ghost-balsa-preview.draftbox.co/) to get a first impression.
+Play with the [Demo](https://ghost-novela-preview.draftbox.co/) to get a first impression.
 
 ## Features
 
@@ -29,7 +29,7 @@ Play with the [Demo](https://ghost-balsa-preview.draftbox.co/) to get a first im
 
 ## Quick Start
 
-Head over to the [starter repo](https://github.com/draftbox-co/gatsby-ghost-balsa-starter) to get up and running quickly! The starter is recommended if you are creating a new site.
+Head over to the [starter repo](https://github.com/draftbox-co/gatsby-ghost-novela-starter) to get up and running quickly! The starter is recommended if you are creating a new site.
 
 ## Installation
 

@@ -4,7 +4,7 @@ module.exports = {
       resolve: `@draftbox-co/gatsby-ghost-novela-theme`,
       options: {
         siteConfig: {
-          siteUrl: "https://ghost-balsa-preview.draftbox.co",
+          siteUrl: "https://ghost-novela-preview.draftbox.co",
           postsPerPage: 12,
           siteTitleMeta: "Built with Draftbox",
           siteDescriptionMeta:
@@ -20,11 +20,11 @@ module.exports = {
             navigation: [
               {
                 label: "Home",
-                url: "https://ghost-balsa-preview.draftbox.co/",
+                url: "https://ghost-novela-preview.draftbox.co/",
               },
               {
                 label: "Contact",
-                url: "https://ghost-balsa-preview.draftbox.co/contact",
+                url: "https://ghost-novela-preview.draftbox.co/contact",
               },
             ],
           },
@@ -33,19 +33,19 @@ module.exports = {
             navigation: [
               {
                 label: "Home",
-                url: "https://ghost-balsa-preview.draftbox.co/",
+                url: "https://ghost-novela-preview.draftbox.co/",
               },
               {
                 label: "Sitemap",
-                url: "https://ghost-balsa-preview.draftbox.co/sitemap.xml",
+                url: "https://ghost-novela-preview.draftbox.co/sitemap.xml",
               },
               {
                 label: "RSS",
-                url: "https://ghost-balsa-preview.draftbox.co/rss.xml",
+                url: "https://ghost-novela-preview.draftbox.co/rss.xml",
               },
               {
                 label: "Contact",
-                url: "https://ghost-balsa-preview.draftbox.co/contact",
+                url: "https://ghost-novela-preview.draftbox.co/contact",
               },
               {
                 label: "External Link",
