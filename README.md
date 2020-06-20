@@ -1,64 +1,64 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Starter for creating a Gatsby Theme workspace
-</h1>
+[![Draftbox](https://res.cloudinary.com/thinkcdnimages/image/upload/v1589291053/Draftbox/draftbox-for-github.svg)](https://draftbox.co)
 
-```shell
-gatsby new my-theme https://github.com/gatsbyjs/gatsby-starter-theme-workspace
-cd my-theme
-yarn workspace example develop
+# gatsby-ghost-novela-theme
+
+A Gatsby theme plugin for creating blogs from headless Ghost CMS.
+
+Turn your Ghost blog into a lightning fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
+
+> This theme is being used at [Draftbox](https://draftbox.co). Get lightning fast, secure front-end for your WordPress or Ghost blog, in 5 minutes or less, without coding. For our fellow devs, we also provide code export feature.
+
+## Demo
+
+Play with the [Demo](https://ghost-balsa-preview.draftbox.co/) to get a first impression.
+
+## Features
+
+- Novela theme by Narrative
+- SEO optimized
+- Fully responsive
+- Gatsby images
+- Styled 404 page
+- RSS Feed
+- AMP Pages
+- Sitemap
+- Contact Form
+- Subscribe Form
+- Social Sharing
+- Composable and extensible
+
+## Quick Start
+
+Head over to the [starter repo](https://github.com/draftbox-co/gatsby-ghost-balsa-starter) to get up and running quickly! The starter is recommended if you are creating a new site.
+
+## Installation
+
+This repository contains the example code **and** the Gatsby theme. If you are here to install the Gatsby theme plugin in your existing project, check out the [theme specific README](/gatsby-ghost-novela-theme/README.md) for further details.
+
+In case you want to work with this repository (for local development, pull requests, etc.):
+
+1. Clone or fork this repository:
+
+```bash
+git clone https://github.com/draftbox-co/gatsby-ghost-novela-theme.git
+cd gatsby-ghost-novela-theme
 ```
 
-## Layout
+2. Run `yarn` to install dependencies.
 
-```text
-.
-├── README.md
-├── gatsby-theme-minimal
-│   ├── README.md
-│   ├── gatsby-config.js
-│   ├── index.js
-│   └── package.json
-├── example
-│   ├── README.md
-│   ├── gatsby-config.js
-│   ├── package.json
-│   └── src
-├── package.json
-└── yarn.lock
+3. Run `yarn workspace example develop` to start the example locally.
 
-3 directories, 10 files
-```
+## Authors
 
-### `gatsby-theme-minimal`
+- Arun Priyadarshi ([@Gunnerforlife](https://github.com/Gunnerforlife)) – [Draftbox](https://draftbox.co)
+- Keyur Raval ([@thandaanda](https://github.com/thandaanda)) – [Draftbox](https://draftbox.co)
+- Shyam Lohar ([@shyamlohar](https://github.com/shyamlohar)) – [Draftbox](https://draftbox.co)
+- Tanmay Desai ([@tanmaydesai89](https://github.com/tanmaydesai89)) – [Draftbox](https://draftbox.co)
 
-This directory is the theme package itself. You should rename this at
-some point to be `gatsby-theme-{my-theme-name}`. Also change the
-`package.json` name field and the corresponding dependency in the
-example directory's `package.json`/`gatsby-config.js` to match the chosen name.
+## Contributions
 
-- `gatsby-theme-minimal/`
-  - `gatsby-config.js`: An empty gatsby-config that you can use as a starting point for building functionality into your theme.
-  - `index.js`: Since themes also function as plugins, this is an empty file that
-    gatsby needs to use this theme as a plugin.
-  - `package.json`: The dependencies that your theme will pull in when people install it. `gatsby` should be a `peerDependency`.
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
 
-### `example`
+# Copyright & License
 
-This is an example usage of your theme. It should look the same as the
-site of someone who installed and used your theme from npm.
-
-- `example/`
-  - `gatsby-config.js`: Specifies which theme to use and any other one-off config a site might need.
-  - `src/`: Source code such as one-off pages or components that might live in
-    a user's site.
-
-You can run the example with:
-
-```shell
-yarn workspace example develop
-```
+Copyright (c) 2020 [Draftbox](https://draftbox.co) - Released under the [MIT license](LICENSE).
