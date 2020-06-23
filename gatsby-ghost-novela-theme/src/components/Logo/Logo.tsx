@@ -8,11 +8,12 @@ import { graphql, useStaticQuery } from "gatsby";
 
 const Logo: Icon = ({ fill = "white" }) => {
   const {
-    ghostSettings: { logo },
+    ghostSettings: { logo, title },
   } = useStaticQuery(graphql`
     {
       ghostSettings {
         logo
+        title
       }
     }
   `);
@@ -22,7 +23,7 @@ const Logo: Icon = ({ fill = "white" }) => {
       {logo ? (
         <img className="logo" src={logo} alt="" />
       ) : (
-        <LogoAlt>Logo</LogoAlt>
+        <LogoAlt>{title}</LogoAlt>
       )}
     </LogoContainer>
   );

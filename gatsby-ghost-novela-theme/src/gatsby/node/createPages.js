@@ -102,7 +102,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     const ghostPages = await graphql(query.ghost.pages);
     const ghostSettingsData = await graphql(query.ghost.siteSettings);
 
-
     dataSources.ghost.articles = ghostArticles.data.articles.edges.map(
       normalize.ghost.articles
     );
@@ -113,7 +112,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     );
 
     dataSources.ghost.pages = ghostPages.data.pages.edges.map(
-      (page) => page.node
+      normalize.ghost.articles
     );
 
     dataSources.ghost.tags = ghostTags.data.tags.edges.map((tag) => tag.node);
@@ -278,7 +277,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       },
       { social: [] }
     );
-
 
     const path = slugify(author.slug, authorsPath);
 

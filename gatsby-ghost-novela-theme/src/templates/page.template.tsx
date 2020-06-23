@@ -19,13 +19,11 @@ import { Template } from "@types";
 import { MetaData } from "@components/meta";
 import PageHero from "../sections/page/Page.Hero";
 
-
 const Page: Template = ({ pageContext, location }) => {
   const contentSectionRef = useRef<HTMLElement>(null);
 
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [contentHeight, setContentHeight] = useState<number>(0);
-
 
   const { article } = pageContext;
 
@@ -74,7 +72,10 @@ const Page: Template = ({ pageContext, location }) => {
         <ArticleControls />
       </MobileControls>
       {/* <div dangerouslySetInnerHTML={{__html: article.body}}></div> */}
-      <ArticleBody ref={contentSectionRef}>
+      <ArticleBody
+        className={Object.keys(article.hero.full).length === 0 ? "no-hero" : ""}
+        ref={contentSectionRef}
+      >
         <MDXRenderer content={article.body}>
           <ArticleShare />
         </MDXRenderer>
@@ -114,6 +115,10 @@ const ArticleBody = styled.article`
   ${mediaqueries.phablet`
     padding: 60px 0;
   `}
+
+  &.no-hero {
+    padding-top: 0;
+  }
 `;
 
 const NextArticle = styled(Section)`

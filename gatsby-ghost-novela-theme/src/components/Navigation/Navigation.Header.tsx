@@ -219,6 +219,10 @@ const LogoLink = styled(Link)<{ back: string }>`
     left: 0
   `}
 
+  ${mediaqueries.phablet`
+    max-width: 70%;
+  `}
+
   &[data-a11y="true"]:focus::after {
     content: "";
     position: absolute;

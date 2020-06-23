@@ -126,7 +126,7 @@ const Article: Template = ({ pageContext, location }) => {
         ref={contentSectionRef}
       >
         <MDXRenderer content={article.body}>
-          {/* <ArticleShare /> */}
+          <ArticleShare />
         </MDXRenderer>
       </ArticleBody>
       <TagsContainer>
