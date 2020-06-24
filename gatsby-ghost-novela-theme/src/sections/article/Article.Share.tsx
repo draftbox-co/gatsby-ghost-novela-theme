@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
-import { useColorMode } from 'theme-ui';
+import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled";
+import { keyframes } from "@emotion/core";
+import { useColorMode } from "theme-ui";
 
-import Icons from '@icons';
+import Icons from "@icons";
 
 import {
   getHighlightedTextPositioning,
@@ -11,7 +11,7 @@ import {
   getSelectionText,
   getWindowDimensions,
   getBreakpointFromTheme,
-} from '@utils';
+} from "@utils";
 
 interface MenuFloatState {
   x: number;
@@ -23,12 +23,12 @@ interface MenuFloatState {
  * Values we get to be able to ensure the positionting context are correct!
  * Padding is derviced from the CSS value in Editor
  */
-const MENU_WIDTH: number = 225;
+const MENU_WIDTH: number = 265;
 const MENU_HEIGHT: number = 46;
 
 const ArticleShare: React.FC<{}> = () => {
   const [colorMode] = useColorMode();
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [focus, setFocus] = useState(false);
   const [canTweet, setCanTweet] = useState(true);
   const [{ x, y, show }, setPosition] = useState<MenuFloatState>({
@@ -38,10 +38,10 @@ const ArticleShare: React.FC<{}> = () => {
   });
 
   const share = generateShare(text);
-  const isDark = colorMode === 'dark';
+  const isDark = colorMode === "dark";
 
   useEffect(() => {
-    const events: string[] = ['keydown', 'keyup', 'mouseup', 'resize'];
+    const events: string[] = ["keydown", "keyup", "mouseup", "resize"];
 
     function handleMenuFloatSettings() {
       /**
@@ -51,18 +51,18 @@ const ArticleShare: React.FC<{}> = () => {
        * the window.selection values will give the previous ranges instead of the current!
        */
       setTimeout(() => {
-        const article = document.getElementsByTagName('article')[0];
-        const paragraphOffset = document.getElementsByTagName('p')[0]
+        const article = document.getElementsByTagName("article")[0];
+        const paragraphOffset = document.getElementsByTagName("p")[0]
           .offsetLeft;
 
         if (!article) return;
 
         // We want to not show the menu float in code blocks
         const codeBlocks = Array.from(
-          article.getElementsByClassName('prism-code'),
+          article.getElementsByClassName("prism-code")
         );
-        const isHighlightedInCodeBlock = codeBlocks.some(block =>
-          window.getSelection().containsNode(block, true),
+        const isHighlightedInCodeBlock = codeBlocks.some((block) =>
+          window.getSelection().containsNode(block, true)
         );
 
         if (isHighlightedInCodeBlock) return;
@@ -72,8 +72,8 @@ const ArticleShare: React.FC<{}> = () => {
         const { width, height } = getSelectionDimensions();
         const { x, y } = getHighlightedTextPositioning();
         const { width: windowWidth } = getWindowDimensions();
-        const tablet = getBreakpointFromTheme('tablet');
-        const desktop = getBreakpointFromTheme('desktop');
+        const tablet = getBreakpointFromTheme("tablet");
+        const desktop = getBreakpointFromTheme("desktop");
 
         /**
          * Because the article is offset to the side to compensate for the progress bar
@@ -111,14 +111,14 @@ const ArticleShare: React.FC<{}> = () => {
     }
 
     // attach all events
-    events.forEach(event =>
-      window.addEventListener(event, handleMenuFloatSettings),
+    events.forEach((event) =>
+      window.addEventListener(event, handleMenuFloatSettings)
     );
 
     return () => {
       // remove all events after mount
-      events.forEach(event =>
-        window.removeEventListener(event, handleMenuFloatSettings),
+      events.forEach((event) =>
+        window.removeEventListener(event, handleMenuFloatSettings)
       );
     };
   }, [show]);
@@ -136,11 +136,11 @@ const ArticleShare: React.FC<{}> = () => {
   }, [show]);
 
   function handleCopyClick() {
-    const tempInput = document.createElement('input');
+    const tempInput = document.createElement("input");
     document.body.appendChild(tempInput);
-    tempInput.setAttribute('value', text);
+    tempInput.setAttribute("value", text);
     tempInput.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(tempInput);
   }
 
@@ -160,17 +160,20 @@ const ArticleShare: React.FC<{}> = () => {
   return (
     <MenuFloat
       style={{
-        position: 'absolute',
+        position: "absolute",
         left: `${x}px`,
         top: `${y}px`,
-        display: show && focus ? 'flex' : 'none',
-        pointerEvents: show && focus ? 'initial' : 'none',
+        display: show && focus ? "flex" : "none",
+        pointerEvents: show && focus ? "initial" : "none",
       }}
       isDark={isDark}
     >
       <MenuText>Share: </MenuText>
       <ReferralLink disabled={!canTweet} share={share.twitter}>
         <Icons.Twitter width="18px" height="15px" />
+      </ReferralLink>
+      <ReferralLink share={share.mail}>
+        <Icons.Mailto width="18px" height="15px" />
       </ReferralLink>
       <ReferralLink disabled={false} share={share.linkedin}>
         <Icons.LinkedIn width="16px" height="16px" />
@@ -192,14 +195,14 @@ function ReferralLink({ disabled, share, children }) {
 
     window.open(
       share,
-      '',
-      'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600',
+      "",
+      "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600"
     );
   }
 
   return (
     <MenuShare
-      href={disabled ? '' : share}
+      href={disabled ? "" : share}
       onClick={handleClick}
       disabled={disabled}
     >
@@ -216,6 +219,7 @@ function generateShare(shareText: string) {
   return {
     twitter: `https://twitter.com/intent/tweet?text="${shareText}" — ${url}`,
     linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${shareText}&title=${shareText}`,
+    mail: `mailto:?subject=${''}&body=${shareText}`,
   };
 }
 
@@ -249,8 +253,8 @@ const MenuFloat = styled.div<{ isDark: boolean }>`
   width: ${MENU_WIDTH}px;
   height: ${MENU_HEIGHT}px;
   padding: 7px 11px 7px 19px;
-  color: ${p => p.theme.colors.grey};
-  background: ${p => (p.isDark ? '#fafafa' : '#000')};
+  color: ${(p) => p.theme.colors.grey};
+  background: ${(p) => (p.isDark ? "#fafafa" : "#000")};
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
@@ -258,7 +262,7 @@ const MenuFloat = styled.div<{ isDark: boolean }>`
   animation: ${popUpwards} 200ms forwards;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
@@ -268,13 +272,13 @@ const MenuFloat = styled.div<{ isDark: boolean }>`
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 8px solid ${p => (p.isDark ? '#fafafa' : '#000')};
+    border-top: 8px solid ${(p) => (p.isDark ? "#fafafa" : "#000")};
     transition: border-color 200ms;
   }
 
   svg {
     path {
-      fill: ${p => (p.isDark ? '#000' : '#fff')};
+      fill: ${(p) => (p.isDark ? "#000" : "#fff")};
     }
   }
 `;
@@ -294,11 +298,11 @@ const MenuShare = styled.a<{ disabled: boolean }>`
   display: flex;
   align-items: center;
   padding: 16px 11px;
-  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
 
   svg {
     path {
-      fill: ${p => (p.disabled ? '#F89797' : '')};
+      fill: ${(p) => (p.disabled ? "#F89797" : "")};
     }
   }
 `;

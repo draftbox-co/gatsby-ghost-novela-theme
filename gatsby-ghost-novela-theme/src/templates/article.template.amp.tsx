@@ -89,7 +89,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 
           <div className="comment-button-container">
             <button>
-              <a href="/">Leave a comment</a>
+              <a href={`/${data.ghostPost.slug}`}>Leave a comment</a>
             </button>
           </div>
         </article>
@@ -103,6 +103,7 @@ export const pageQuery = graphql`
     ghostPost(slug: { eq: $slug }) {
       title
       html
+      slug
       primary_tag {
         name
         slug

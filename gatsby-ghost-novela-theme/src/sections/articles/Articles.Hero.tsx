@@ -36,7 +36,7 @@ const siteSettingsQuery = graphql`
   }
 `;
 
-const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
+const ArticlesHero: React.FC = () => {
   const { gridLayout = "tiles", hasSetGridLayout, setGridLayout } = useContext(
     GridLayoutContext
   );

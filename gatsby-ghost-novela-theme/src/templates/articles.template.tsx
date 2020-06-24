@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 
 import Section from "@components/Section";
-import SEO from "@components/SEO";
 import Layout from "@components/Layout";
 import Paginator from "@components/Navigation/Navigation.Paginator";
 
@@ -15,13 +14,12 @@ import mediaqueries from "@styles/media";
 
 const ArticlesPage: Template = ({ location, pageContext }) => {
   const articles = pageContext.group;
-  const authors = pageContext.additionalContext.authors;
 
   return (
     <Layout>
       <MetaData location={location} />
       {/* <SEO pathname={location.pathname} /> */}
-      <ArticlesHero authors={authors} />
+      <ArticlesHero />
       <Section narrow>
         <ArticlesList articles={articles} />
         <ArticlesPaginator show={pageContext.pageCount > 1}>
