@@ -109,7 +109,6 @@ const Article: Template = ({ pageContext, location }) => {
     return () => window.removeEventListener("resize", calculateBodySize);
   }, []);
 
-
   return (
     <Layout>
       <MetaData data={{ ghostPost: article }} location={location} />
@@ -128,70 +127,71 @@ const Article: Template = ({ pageContext, location }) => {
         <MDXRenderer content={article.body}>
           <ArticleShare />
         </MDXRenderer>
+        <TagsContainer>
+          {article.tags.map((tag, i) => (
+            <Tag key={i} to={`/${tag.slug}`} as={Link}>
+              {tag.name}
+            </Tag>
+          ))}
+        </TagsContainer>
+        <SocialShareContainer>
+          <ShareLabel>Share:</ShareLabel>
+          <ShareButtonsContainer>
+            <ShareButton
+              href={facebookShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Share"
+            >
+              <FacebookIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={twitterShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter Share"
+            >
+              <TwitterIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={linkedInShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Linkedin Share"
+            >
+              <LinkedInIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={mailShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mail Share"
+            >
+              <MailToIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton>
+              <CopyLink textToCopy={href} fill="#73737D" />
+            </ShareButton>
+          </ShareButtonsContainer>
+        </SocialShareContainer>
+        {process.env.GATSBY_DISQUS_SHORTNAM && (
+          <>
+            <HorizontalRule />
+            <EmbedContainer>
+              <Disqus slug={article.slug} title={article.title} />
+            </EmbedContainer>
+          </>
+        )}
+        {process.env.GATSBY_FB_APP_ID && (
+          <>
+            <HorizontalRule />
+            <EmbedContainer>
+              <FbComments href={href} />
+            </EmbedContainer>
+          </>
+        )}
       </ArticleBody>
-      <TagsContainer>
-        {article.tags.map((tag, i) => (
-          <Tag key={i} to={`/${tag.slug}`} as={Link}>
-            {tag.name}
-          </Tag>
-        ))}
-      </TagsContainer>
-      <SocialShareContainer>
-        <ShareLabel>Share:</ShareLabel>
-        <ShareButtonsContainer>
-          <ShareButton
-            href={facebookShareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook Share"
-          >
-            <FacebookIcon fill="#73737D" />
-          </ShareButton>
-          <ShareButton
-            href={twitterShareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter Share"
-          >
-            <TwitterIcon fill="#73737D" />
-          </ShareButton>
-          <ShareButton
-            href={linkedInShareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Linkedin Share"
-          >
-            <LinkedInIcon fill="#73737D" />
-          </ShareButton>
-          <ShareButton
-            href={mailShareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Mail Share"
-          >
-            <MailToIcon fill="#73737D" />
-          </ShareButton>
-          <ShareButton>
-            <CopyLink textToCopy={href} fill="#73737D" />
-          </ShareButton>
-        </ShareButtonsContainer>
-      </SocialShareContainer>
-      {process.env.GATSBY_DISQUS_SHORTNAM && (
-        <>
-          <HorizontalRule />
-          <EmbedContainer>
-            <Disqus slug={article.slug} title={article.title} />
-          </EmbedContainer>
-        </>
-      )}
-      {process.env.GATSBY_FB_APP_ID && (
-        <>
-          <HorizontalRule />
-          <EmbedContainer>
-            <FbComments href={href} />
-          </EmbedContainer>
-        </>
-      )}
+
       <Subscription />
       {next.length > 0 && (
         <NextArticle narrow>
@@ -219,7 +219,7 @@ const MobileControls = styled.div`
 
 const ArticleBody = styled.article`
   position: relative;
-  padding: 160px 0 35px;
+  padding: 100px 0 35px;
   padding-left: 68px;
   transition: background 0.2s linear;
 
