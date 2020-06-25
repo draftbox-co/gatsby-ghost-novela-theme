@@ -129,7 +129,7 @@ const Article: Template = ({ pageContext, location }) => {
         </MDXRenderer>
         <TagsContainer>
           {article.tags.map((tag, i) => (
-            <Tag key={i} to={`/${tag.slug}`} as={Link}>
+            <Tag key={i} to={`/tag/${tag.slug}`} as={Link}>
               {tag.name}
             </Tag>
           ))}

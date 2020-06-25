@@ -82,7 +82,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
           )}
           {data.ghostPost?.primary_tag && <div className="tags">
             <span>Tag:</span>
-            <a className="tag" href={`/${data.ghostPost.primary_tag.slug}`}>
+            <a className="tag" href={`/tag/${data.ghostPost.primary_tag.slug}`}>
               {data.ghostPost.primary_tag.name}
             </a>
           </div>}

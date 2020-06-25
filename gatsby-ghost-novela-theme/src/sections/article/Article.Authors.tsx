@@ -66,7 +66,7 @@ const CoAuthors: React.FC<AuthorsProps> = ({ authors }) => {
                 <AuthorLink
                   // as={author.authorsPage ? Link : "div"}
                   as={Link}
-                  to={`/${author.slug}`}
+                  to={`/author/${author.slug}`}
                 >
                   <CoAuthorAvatarOpen>
                     <RoundedImage src={author.profile_image} />
@@ -94,7 +94,7 @@ const ArticleAuthors: React.FC<AuthorsProps> = ({ authors }) => {
     return <CoAuthors authors={authors} />;
   } else {
     return (
-      <AuthorLink as={Link} to={`/${authors[0].slug}`}>
+      <AuthorLink as={Link} to={`/author/${authors[0].slug}`}>
         <AuthorAvatar>
           <RoundedImage alt="Author avatar" src={authors[0].profile_image} />
         </AuthorAvatar>
