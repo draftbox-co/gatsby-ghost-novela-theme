@@ -233,8 +233,8 @@ const ArticleLink = styled(Link)<{ narrow: string }>`
       0 30px 50px -30px rgba(0, 0, 0, 0.3);
   }
 
-  &:hover h2,
-  &:focus h2 {
+  &:hover h3,
+  &:focus h3 {
     color: ${(p) => p.theme.colors.accent};
   }
 

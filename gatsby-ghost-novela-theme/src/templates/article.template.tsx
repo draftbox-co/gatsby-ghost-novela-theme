@@ -174,7 +174,7 @@ const Article: Template = ({ pageContext, location }) => {
             </ShareButton>
           </ShareButtonsContainer>
         </SocialShareContainer>
-        {process.env.GATSBY_DISQUS_SHORTNAM && (
+        {process.env.GATSBY_DISQUS_SHORTNAME && (
           <>
             <HorizontalRule />
             <EmbedContainer>

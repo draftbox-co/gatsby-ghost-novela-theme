@@ -28,7 +28,7 @@ module.exports = ({ actions }) => {
             const mdx = htmlToMdx(source.html);
             return mdx;
           } else {
-            return "";
+            return htmlToMdx(`<div></div>`);
           }
         },
       };
