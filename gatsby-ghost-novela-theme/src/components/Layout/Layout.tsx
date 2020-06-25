@@ -18,7 +18,9 @@ import Helmet from "react-helmet";
  * which hides a lot of the mess we need to create our Desktop and Mobile experiences.
  */
 const Layout: React.FC<{}> = ({ children }) => {
-  const { ghostSettings: {lang} } = useStaticQuery(graphql`
+  const {
+    ghostSettings: { lang },
+  } = useStaticQuery(graphql`
     {
       ghostSettings {
         lang
@@ -33,7 +35,7 @@ const Layout: React.FC<{}> = ({ children }) => {
   }, [colorMode]);
 
   return (
-    <ArmadaFormsProvider client={"5ecd130443daff001ff5ac21"}>
+    <ArmadaFormsProvider client={process.env.GATSBY_FORM_URL}>
       <ArticlesContextProvider>
         <Helmet
           htmlAttributes={{

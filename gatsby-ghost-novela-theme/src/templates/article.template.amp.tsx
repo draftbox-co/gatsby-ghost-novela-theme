@@ -40,9 +40,9 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               dangerouslySetInnerHTML={{ __html: data.ghostPost.title }}
             ></h1>
             <div className="post-meta">
-              <div className="post-meta-avatars">
+              {data.ghostPost.primary_author && <div className="post-meta-avatars">
                 <p className="author">{data.ghostPost.primary_author.name}</p>
-              </div>
+              </div>}
               <time
                 className="post-date"
                 dateTime="{{date format='DD-MM-YYYY'}}"
@@ -80,12 +80,12 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               }}
             ></section>
           )}
-          <div className="tags">
+          {data.ghostPost?.primary_tag && <div className="tags">
             <span>Tag:</span>
             <a className="tag" href={`/${data.ghostPost.primary_tag.slug}`}>
               {data.ghostPost.primary_tag.name}
             </a>
-          </div>
+          </div>}
 
           <div className="comment-button-container">
             <button>
