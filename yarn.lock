@@ -9559,10 +9559,10 @@ html-tag-names@^1.1.5:
   resolved "https://registry.yarnpkg.com/html-tag-names/-/html-tag-names-1.1.5.tgz#f537420c16769511283f8ae1681785fbc89ee0a9"
   integrity sha512-aI5tKwNTBzOZApHIynaAwecLBv8TlZTEy/P4Sj2SzzAhBrGuI8yGZ0UIXVPQzOHGS+to2mjb04iy6VWt/8+d8A==
 
-html-to-compiled-mdx@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/html-to-compiled-mdx/-/html-to-compiled-mdx-1.0.0.tgz#b57fe02ccdeedf76b27b425fcc28e577929ae7d8"
-  integrity sha512-8FampL2V5+cBoe/ZUuR8pIbv5im4XmK6/24C2Sog1RdUoYIaN+U8TNyDPuI4Fvob44eRoks+DtN2efHgSJ3p4A==
+html-to-compiled-mdx@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/html-to-compiled-mdx/-/html-to-compiled-mdx-1.0.1.tgz#3a42cc85019e1afc55619cf620e85acc55f8a2c2"
+  integrity sha512-yESNMqmqecVEBlSYfDcqAjQ8Be/ceevksYVyluh3uJ3FUEMoLDtZJggYPkO1dRL+l6ynypsmTnd/XSo1nfPY5w==
   dependencies:
     "@babel/core" "7.2.0"
     "@babel/plugin-proposal-object-rest-spread" "7.10.1"
@@ -9574,6 +9574,7 @@ html-to-compiled-mdx@^1.0.0:
     babel-plugin-remove-export-keywords "1.6.5"
     camelcase-css "2.0.1"
     change-case "4.1.1"
+    hast-util-to-html "^7.1.1"
     rehype "11.0.0"
     rehype-parse "7.0.0"
     rehype-remark "8.0.0"

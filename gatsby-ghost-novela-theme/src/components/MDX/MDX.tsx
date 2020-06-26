@@ -1,25 +1,26 @@
-import React from 'react';
+import React from "react";
 
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import { MDXProvider } from "@mdx-js/react";
 
-import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { useColorMode } from 'theme-ui';
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
+import { useColorMode } from "theme-ui";
 
-import Anchor from '@components/Anchor';
-import Blockquote from '@components/Blockquote';
-import Code from '@components/Code';
-import Headings from '@components/Headings';
-import HorizontalRule from '@components/HorizontalRule';
-import Lists from '@components/Lists';
-import Paragraph from '@components/Paragraph';
-import Tables from '@components/Tables';
-import { ImageZoom } from '@components/Image';
-import Figcaption from '@components/Figcaption';
-import * as shortcodes from '@blocks/kit';
-import mediaqueries from '@styles/media';
-import { toKebabCase } from '@utils';
+import Anchor from "@components/Anchor";
+import Blockquote from "@components/Blockquote";
+import Code from "@components/Code";
+import Headings from "@components/Headings";
+import HorizontalRule from "@components/HorizontalRule";
+import Lists from "@components/Lists";
+import Paragraph from "@components/Paragraph";
+import Tables from "@components/Tables";
+import { ImageZoom } from "@components/Image";
+import Figcaption from "@components/Figcaption";
+import * as shortcodes from "@blocks/kit";
+import mediaqueries from "@styles/media";
+import { toKebabCase } from "@utils";
+import Iframe from "@components/Iframe";
 
 const components = {
   ...shortcodes,
@@ -43,6 +44,7 @@ const components = {
   th: Tables.HeadCell,
   td: Tables.Cell,
   figcaption: Figcaption,
+  iframe: Iframe,
 };
 
 interface MDXProps {
@@ -55,7 +57,7 @@ const MDX: React.FC<MDXProps> = ({ content, children, ...props }) => {
   return (
     <MDXProvider components={components}>
       <MDXBody>
-        <MDXRenderer isDark={colorMode === 'dark'} {...props}>
+        <MDXRenderer isDark={colorMode === "dark"} {...props}>
           {content}
         </MDXRenderer>
         {children}
@@ -67,9 +69,9 @@ const MDX: React.FC<MDXProps> = ({ content, children, ...props }) => {
 export default MDX;
 
 const IMAGE_WIDTHS = {
-  regular: '680px',
-  large: '1004px',
-  full: '100vw',
+  regular: "680px",
+  large: "1004px",
+  full: "100vw",
 };
 
 const ARTICLE_WIDTH = css`
@@ -125,7 +127,7 @@ const HeadingsCSS = css`
   }
 `;
 
-const PrismCSS = p => css`
+const PrismCSS = (p) => css`
   .prism-code {
     overflow: auto;
     width: 100%;
@@ -142,7 +144,7 @@ const PrismCSS = p => css`
       border-left: 3px solid transparent;
 
       ${Object.keys(p.theme.colors.prism)
-        .map(key => {
+        .map((key) => {
           return `.${toKebabCase(key)}{color:${p.theme.colors.prism[key]};}`;
         })
         .reduce((curr, next) => curr + next, ``)};

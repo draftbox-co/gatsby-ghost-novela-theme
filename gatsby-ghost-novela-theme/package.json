@@ -79,7 +79,7 @@
     "gatsby-transformer-remark": "^2.6.9",
     "gatsby-transformer-sharp": "^2.2.4",
     "gatsby-transformer-yaml": "^2.2.4",
-    "html-to-compiled-mdx": "^1.0.0",
+    "html-to-compiled-mdx": "^1.0.1",
     "lodash": "^4.17.15",
     "prism-react-renderer": "^0.1.7",
     "react-facebook": "^8.1.4",
