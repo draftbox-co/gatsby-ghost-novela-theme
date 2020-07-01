@@ -1,6 +1,5 @@
 var toHtml = require("hast-util-to-html");
-const resolve = require("hast-util-to-mdast/lib/util/resolve");
-const all = require("hast-util-to-mdast/lib/all");
+const link = require("hast-util-to-mdast/lib/handlers/link");
 var visit = require("unist-util-visit");
 
 function iframe(h, node) {
@@ -64,11 +63,7 @@ function a(h, node) {
       value: `<BookmarkCard title="${boomarkCardData.title}" description="${boomarkCardData.description}" author="${boomarkCardData.author}" publisher="${boomarkCardData.publisher}" thumbnail="${boomarkCardData.thumbnail}" url="${boomarkCardData.url}" />`,
     };
   } else {
-    var props = {
-      title: node.properties.title || null,
-      url: resolve(h, node.properties.href),
-    };
-    return h(node, "link", props, all(h, node));
+    link(h, node);
   }
 }
 
