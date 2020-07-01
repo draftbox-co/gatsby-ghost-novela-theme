@@ -21,6 +21,7 @@ import * as shortcodes from "@blocks/kit";
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
 import Iframe from "@components/Iframe";
+import BookmarkCard from "@components/BookmarkCard";
 
 const components = {
   ...shortcodes,
@@ -45,6 +46,7 @@ const components = {
   td: Tables.Cell,
   figcaption: Figcaption,
   iframe: Iframe,
+  BookmarkCard,
 };
 
 interface MDXProps {

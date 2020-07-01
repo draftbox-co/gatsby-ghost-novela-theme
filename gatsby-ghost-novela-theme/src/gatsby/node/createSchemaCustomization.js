@@ -1,5 +1,6 @@
-const htmlToMdx = require("html-to-compiled-mdx");
+const htmlToMdx = require("@draftbox-co/html-to-compiled-mdx");
 const readingTime = require("reading-time");
+const handlers = require("../../utils/handlers");
 
 module.exports = ({ actions }) => {
   const { createFieldExtension, createTypes } = actions;
@@ -25,10 +26,10 @@ module.exports = ({ actions }) => {
       return {
         resolve(source) {
           if (source.html) {
-            const mdx = htmlToMdx(source.html);
+            const mdx = htmlToMdx(source.html, handlers);
             return mdx;
           } else {
-            return htmlToMdx(`<div></div>`);
+            return htmlToMdx(`<div></div>`, handlers);
           }
         },
       };

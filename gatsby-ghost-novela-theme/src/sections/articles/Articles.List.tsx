@@ -135,11 +135,19 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
             {article.excerpt}
           </Excerpt>
           <MetaData>
-            {article.date} · {article.readingTime} ·{" "}
+            {article.date} · {article.readingTime}
             {article.tags && article.tags.length > 0 && (
-              <TagLink onClick={(e) => navigateToTag(e, `/tag/${article.tags[0].slug}`)}>
-                {article.tags[0].name}
-              </TagLink>
+              <>
+                {" "}
+                ·{" "}
+                <TagLink
+                  onClick={(e) =>
+                    navigateToTag(e, `/tag/${article.tags[0].slug}`)
+                  }
+                >
+                  {article.tags[0].name}
+                </TagLink>
+              </>
             )}
           </MetaData>
         </div>

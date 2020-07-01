@@ -223,6 +223,10 @@ const ArticleBody = styled.article`
   padding-left: 68px;
   transition: background 0.2s linear;
 
+  &.no-hero {
+    padding-top: 0;
+  }
+
   ${mediaqueries.desktop`
     padding-left: 53px;
   `}
@@ -233,11 +237,12 @@ const ArticleBody = styled.article`
 
   ${mediaqueries.phablet`
     padding: 60px 0 20px;
+
+    &.no-hero {
+      padding-top: 60px;
+    }
   `}
 
-  &.no-hero {
-    padding-top: 0;
-  }
 `;
 
 const TagsContainer = styled.div`

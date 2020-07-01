@@ -355,6 +355,10 @@ const IconWrapper = styled.button<{ isDark: boolean }>`
   transition: opacity 0.3s ease;
   margin-left: 30px;
 
+  ${mediaqueries.desktop_up`
+  zoom: 80%;
+  `}
+
   &:hover {
     opacity: 1;
   }
