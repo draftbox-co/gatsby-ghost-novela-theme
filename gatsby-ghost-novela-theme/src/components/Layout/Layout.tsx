@@ -18,15 +18,21 @@ import Helmet from "react-helmet";
  * which hides a lot of the mess we need to create our Desktop and Mobile experiences.
  */
 const Layout: React.FC<{}> = ({ children }) => {
-  const {
-    ghostSettings: { lang },
-  } = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     {
-      ghostSettings {
-        lang
+      site {
+        siteMetadata {
+          language
+        }
       }
     }
   `);
+
+  const {
+    site: {
+      siteMetadata: { language },
+    },
+  } = data;
 
   const [colorMode] = useColorMode();
 
@@ -39,7 +45,7 @@ const Layout: React.FC<{}> = ({ children }) => {
       <ArticlesContextProvider>
         <Helmet
           htmlAttributes={{
-            lang: lang ? lang : "auto",
+            lang: language ? language : "auto",
           }}
         />
         <Container>

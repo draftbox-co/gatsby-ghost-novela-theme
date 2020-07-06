@@ -5,25 +5,43 @@ import mediaqueries from "@styles/media";
 
 import { Icon } from "@types";
 import { graphql, useStaticQuery } from "gatsby";
+import url from "url";
+import { useColorMode } from "theme-ui";
 
 const Logo: Icon = ({ fill = "white" }) => {
+  const [colorMode] = useColorMode();
+
   const {
-    ghostSettings: { logo, title },
+    site: {
+      siteMetadata: { logoUrl, alternateLogoUrl, siteTitle, siteUrl },
+    },
   } = useStaticQuery(graphql`
     {
-      ghostSettings {
-        logo
-        title
+      site {
+        siteMetadata {
+          siteUrl
+          siteTitle
+          logoUrl
+          alternateLogoUrl
+        }
       }
     }
   `);
 
   return (
     <LogoContainer>
-      {logo ? (
-        <img className="logo" src={logo} alt="" />
+      {logoUrl ? (
+        <img
+          className="logo"
+          src={
+            colorMode === "dark"
+              ? url.resolve(siteUrl, alternateLogoUrl)
+              : url.resolve(siteUrl, logoUrl)
+          }
+          alt=""
+        />
       ) : (
-        <LogoAlt>{title}</LogoAlt>
+        <LogoAlt>{siteTitle}</LogoAlt>
       )}
     </LogoContainer>
   );

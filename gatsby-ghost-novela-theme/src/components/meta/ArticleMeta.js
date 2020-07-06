@@ -22,22 +22,33 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
   );
   const primaryTag = publicTags[0] || ``;
   const shareImage = ghostPost.feature_image
-    ? ghostPost.feature_image
-    : _.get(settings, `cover_image`, null);
+    ? url.resolve(config.siteUrl, ghostPost.feature_image)
+    : config.coverUrl ||
+      config.facebookCard.imageUrl ||
+      config.twitterCard.imageUrl
+    ? url.resolve(
+        config.siteUrl,
+        config.coverUrl ||
+          config.facebookCard.imageUrl ||
+          config.twitterCard.imageUrl
+      )
+    : null;
   const publisherLogo =
-    settings.logo || config.siteIcon
-      ? url.resolve(config.siteUrl, settings.logo || config.siteIcon)
+    config.logoUrl || settings.logo
+      ? url.resolve(config.siteUrl, config.logoUrl || settings.logo)
       : null;
 
   const jsonLd = {
     "@context": `https://schema.org/`,
     "@type": `Article`,
-    author: {
-      "@type": `Person`,
-      name: author.name,
-      image: author.image ? author.image : undefined,
-      sameAs: author.sameAsArray ? author.sameAsArray : undefined,
-    },
+    author: author
+      ? {
+          "@type": `Person`,
+          name: author.name,
+          image: author.image ? author.image : undefined,
+          sameAs: author.sameAsArray ? author.sameAsArray : undefined,
+        }
+      : null,
     keywords: publicTags.length ? publicTags.join(`, `) : undefined,
     headline: ghostPost.meta_title || ghostPost.title,
     url: canonical,
@@ -70,7 +81,9 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet
+        htmlAttributes={{ lang: config.language ? config.language : "auto" }}
+      >
         <title>{ghostPost.meta_title || ghostPost.title}</title>
         {!amp && <link rel="ampHtml" href={`${canonical}/amp`} />}
         <meta
@@ -96,6 +109,9 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
           }
         />
         <meta property="og:url" content={canonical} />
+        {config.facebookCard.appId !== "" && (
+          <meta property="fb:app_id" content={config.facebookCard.appId} />
+        )}
         <meta
           property="article:published_time"
           content={ghostPost.published_at}
@@ -123,22 +139,19 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
           }
         />
         <meta name="twitter:url" content={canonical} />
-        <meta name="twitter:label1" content="Written by" />
-        <meta name="twitter:data1" content={author.name} />
+        {author && <meta name="twitter:label1" content="Written by" />}
+        {author && <meta name="twitter:data1" content={author.name} />}
         {primaryTag && <meta name="twitter:label2" content="Filed under" />}
         {primaryTag && <meta name="twitter:data2" content={primaryTag} />}
 
-        {settings.twitter && (
-          <meta
-            name="twitter:site"
-            content={`https://twitter.com/${settings.twitter.replace(
-              /^@/,
-              ``
-            )}/`}
-          />
+        {config.twitterCard.username && (
+          <meta name="twitter:site" content={config.twitterCard.username} />
         )}
-        {settings.twitter && (
+        {/* {settings.twitter && (
           <meta name="twitter:creator" content={settings.twitter} />
+        )} */}
+        {author.twitter && (
+          <meta name="twitter:creator" content={author.twitter} />
         )}
         <script type="application/ld+json">
           {JSON.stringify(jsonLd, undefined, 4)}

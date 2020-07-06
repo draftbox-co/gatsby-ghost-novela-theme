@@ -35,5 +35,29 @@ export const siteMetadataFields = graphql`
     siteIcon
     backgroundColor
     themeColor
+    siteTitle
+    siteDescription
+    language
+    logoUrl
+    alternateLogoUrl
+    coverUrl
+    metadata {
+      title
+      description
+    }
+    twitterCard {
+      title
+      description
+      imageUrl
+      username
+    }
+    facebookCard {
+      title
+      description
+      imageUrl
+      appId
+      height
+      width
+    }
   }
 `;
