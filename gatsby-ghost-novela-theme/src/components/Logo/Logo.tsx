@@ -30,7 +30,7 @@ const Logo: Icon = ({ fill = "white" }) => {
 
   return (
     <LogoContainer>
-      {logoUrl ? (
+      {logoUrl || alternateLogoUrl ? (
         <img
           className="logo"
           src={
