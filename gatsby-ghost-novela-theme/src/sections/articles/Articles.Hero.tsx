@@ -29,9 +29,11 @@ const authorQuery = graphql`
 
 const siteSettingsQuery = graphql`
   {
-    ghostSettings {
-      title
-      description
+    site {
+      siteMetadata {
+        siteTitle
+        siteDescription
+      }
     }
   }
 `;
@@ -44,8 +46,8 @@ const ArticlesHero: React.FC = () => {
   // const results = useStaticQuery(authorQuery);
   const siteSettings = useStaticQuery(siteSettingsQuery);
 
-  const title = siteSettings.ghostSettings.title;
-  const description = siteSettings.ghostSettings.description;
+  const title = siteSettings.site.siteMetadata.siteTitle;
+  const description = siteSettings.site.siteMetadata.siteDescription;
   // const hero = results.site.edges[0].node.siteMetadata.hero;
   const tilesIsActive = hasSetGridLayout && gridLayout === "tiles";
   // const featuredAuthor = authors.find((author) => author.featured);
@@ -159,7 +161,7 @@ const HeroDescription = styled.p`
   color: ${(p) => p.theme.colors.grey};
   font-size: 20px;
   margin-top: 10px;
-`
+`;
 
 const GridButton = styled.button<{ active: boolean }>`
   position: relative;
