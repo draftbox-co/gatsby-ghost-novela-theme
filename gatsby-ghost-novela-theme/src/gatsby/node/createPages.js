@@ -57,7 +57,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     basePath = "/",
     authorsPath = "/authors",
     authorsPage = true,
-    pageLength = 6,
+    // pageLength = 6,
     sources = {},
     mailchimp = "",
   } = themeOptions;
@@ -67,10 +67,13 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       site {
         siteMetadata {
           siteUrl
+          postsPerPage
         }
       }
     }
   `);
+
+  const pageLength = data.site.siteMetadata.postsPerPage;
 
   // Defaulting to look at the local MDX files as sources.
   const { local = true, contentful = false } = sources;

@@ -18,7 +18,6 @@ const WebsiteMeta = ({
 }) => {
   const config = settings.site.siteMetadata;
   settings = settings.allGhostSettings.edges[0].node;
-  console.log({ config });
   const publisherLogo = url.resolve(config.siteUrl, config.logoUrl);
   let shareImage =
     config.coverUrl ||
