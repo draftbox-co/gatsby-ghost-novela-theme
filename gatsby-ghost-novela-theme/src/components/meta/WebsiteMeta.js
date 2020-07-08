@@ -59,7 +59,7 @@ const WebsiteMeta = ({
       "@type": `WebPage`,
       "@id": config.siteUrl,
     },
-    description: config.siteDescription,
+    description: config.metadata.description || config.siteDescription,
   };
 
   return (

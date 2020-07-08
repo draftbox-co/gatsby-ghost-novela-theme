@@ -13,7 +13,6 @@ import { tags as tagsHelper } from "@tryghost/helpers";
 const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
   const ghostPost = data;
   const config = settings.site.siteMetadata;
-  settings = settings.allGhostSettings.edges[0].node;
 
   const author = getAuthorProperties(ghostPost.primary_author);
   const publicTags = _.map(
@@ -33,9 +32,9 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
           config.twitterCard.imageUrl
       )
     : null;
-  const publisherLogo =
-    config.logoUrl || settings.logo
-      ? url.resolve(config.siteUrl, config.logoUrl || settings.logo)
+    const publisherLogo =
+    config.logoUrl || config.alternateLogoUrl
+      ? url.resolve(config.siteUrl, config.logoUrl || config.alternateLogoUrl)
       : null;
 
   const jsonLd = {
@@ -64,7 +63,7 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
       : undefined,
     publisher: {
       "@type": `Organization`,
-      name: settings.title,
+      name: config.siteTitle,
       logo: {
         "@type": `ImageObject`,
         url: publisherLogo,
@@ -92,7 +91,7 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
         />
         {!amp && <link rel="canonical" href={canonical} />}
 
-        <meta property="og:site_name" content={settings.title} />
+        <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:type" content="article" />
         <meta
           property="og:title"
@@ -147,9 +146,6 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
         {config.twitterCard.username && (
           <meta name="twitter:site" content={config.twitterCard.username} />
         )}
-        {/* {settings.twitter && (
-          <meta name="twitter:creator" content={settings.twitter} />
-        )} */}
         {author.twitter && (
           <meta name="twitter:creator" content={author.twitter} />
         )}

@@ -17,7 +17,23 @@ import ArticleShare from "../sections/article/Article.Share";
 
 import { Template } from "@types";
 import { MetaData } from "@components/meta";
-import PageHero from "../sections/page/Page.Hero";
+
+import Icons from "@icons";
+import CopyLink from "@components/Misc/CopyLink";
+import ArticleHero from "../sections/article/Article.Hero";
+
+const icons = {
+  linkedin: Icons.LinkedIn,
+  twitter: Icons.Twitter,
+  facebook: Icons.Facebook,
+  mailto: Icons.Mailto,
+};
+
+const LinkedInIcon = Icons.LinkedIn;
+const FacebookIcon = Icons.Facebook;
+const TwitterIcon = Icons.Twitter;
+const MailToIcon = Icons.Mailto;
+const CopyIcon = Icons.Copy;
 
 const Page: Template = ({ pageContext, location }) => {
   const contentSectionRef = useRef<HTMLElement>(null);
@@ -26,6 +42,22 @@ const Page: Template = ({ pageContext, location }) => {
   const [contentHeight, setContentHeight] = useState<number>(0);
 
   const { article } = pageContext;
+
+  const [href, sethref] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      sethref(window.location.href);
+    }
+  }, []);
+
+  const twitterShareUrl = `https://twitter.com/share?text=${article.title}&url=${href}`;
+
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${href}`;
+
+  const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${href}&title=${article.title}`;
+
+  const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
 
   useEffect(() => {
     const calculateBodySize = throttle(() => {
@@ -64,7 +96,7 @@ const Page: Template = ({ pageContext, location }) => {
   return (
     <Layout>
       <MetaData data={{ ghostPage: article }} location={location} />
-      <PageHero article={article} />
+      <ArticleHero article={article} authors={article.authors}/>
       <ArticleAside contentHeight={contentHeight}>
         <Progress contentHeight={contentHeight} />
       </ArticleAside>
@@ -79,6 +111,46 @@ const Page: Template = ({ pageContext, location }) => {
         <MDXRenderer content={article.body}>
           <ArticleShare />
         </MDXRenderer>
+        <SocialShareContainer>
+          <ShareLabel>Share:</ShareLabel>
+          <ShareButtonsContainer>
+            <ShareButton
+              href={facebookShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Share"
+            >
+              <FacebookIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={twitterShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter Share"
+            >
+              <TwitterIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={linkedInShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Linkedin Share"
+            >
+              <LinkedInIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={mailShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mail Share"
+            >
+              <MailToIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton>
+              <CopyLink textToCopy={href} fill="#73737D" />
+            </ShareButton>
+          </ShareButtonsContainer>
+        </SocialShareContainer>
       </ArticleBody>
       <Subscription />
     </Layout>
@@ -162,3 +234,38 @@ const FooterNext = styled.h3`
 const FooterSpacer = styled.div`
   margin-bottom: 65px;
 `;
+
+const SocialShareContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 40px;
+  ${mediaqueries.desktop`
+    max-width: 507px;
+  `}
+  ${mediaqueries.tablet`
+    max-width: 486px;
+  `};
+  ${mediaqueries.phablet`
+    padding: 0 20px;
+  `};
+`;
+
+const ShareLabel = styled.div`
+  color: ${(p) => p.theme.colors.grey};
+`;
+
+const ShareButtonsContainer = styled.div`
+  display: flex;
+  margin-left: 10px;
+`;
+
+const ShareButton = styled.a`
+  margin-right: 20px;
+  svg {
+    width: 18px;
+    height: 30px;
+  }
+`;
+

@@ -15,7 +15,7 @@ const commonStyles = p => css`
 `;
 
 const h1 = styled.h1`
-  word-break: break-all;
+  word-break: break-word;
   font-size: 52px;
   line-height: 1.15;
   ${commonStyles};
