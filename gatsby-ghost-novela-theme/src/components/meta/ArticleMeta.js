@@ -65,18 +65,18 @@ const ArticleMetaGhost = ({ data, settings, canonical, amp }) => {
           height: config.shareImageHeight,
         }
       : undefined,
-    publisher: publisherLogo
-      ? {
-          "@type": `Organization`,
-          name: config.siteTitle,
-          logo: {
+    publisher: {
+      "@type": `Organization`,
+      name: config.siteTitle,
+      logo: publisherLogo
+        ? {
             "@type": `ImageObject`,
             url: publisherLogo,
             width: 60,
             height: 60,
-          },
-        }
-      : null,
+          }
+        : undefined,
+    },
     description: ghostPost.meta_description || ghostPost.excerpt,
     mainEntityOfPage: {
       "@type": `WebPage`,
