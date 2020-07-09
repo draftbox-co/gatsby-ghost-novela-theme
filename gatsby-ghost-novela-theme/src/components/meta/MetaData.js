@@ -34,7 +34,7 @@ const MetaData = ({
     return <AuthorMeta data={ghostAuthor} canonical={canonical} />;
   } else if (ghostPage) {
     return (
-      <WebsiteMeta data={ghostPage} canonical={canonical} type="WebSite" />
+      <ArticleMeta data={ghostPage} canonical={canonical} />
     );
   } else {
     title = title || config.siteTitle;

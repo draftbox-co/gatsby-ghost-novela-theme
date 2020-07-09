@@ -17,8 +17,14 @@ const WebsiteMeta = ({
   type,
 }) => {
   const config = settings.site.siteMetadata;
+
   settings = settings.allGhostSettings.edges[0].node;
-  const publisherLogo = url.resolve(config.siteUrl, config.logoUrl);
+
+  const publisherLogo =
+    config.logoUrl || config.alternateLogoUrl
+      ? url.resolve(config.siteUrl, config.logoUrl || config.alternateLogoUrl)
+      : null;
+
   let shareImage =
     config.coverUrl ||
     config.facebookCard.imageUrl ||
@@ -45,16 +51,18 @@ const WebsiteMeta = ({
           height: config.shareImageHeight,
         }
       : undefined,
-    publisher: {
-      "@type": `Organization`,
-      name: config.siteTitle,
-      logo: {
-        "@type": `ImageObject`,
-        url: publisherLogo,
-        width: 60,
-        height: 60,
-      },
-    },
+    publisher: publisherLogo
+      ? {
+          "@type": `Organization`,
+          name: config.siteTitle,
+          logo: {
+            "@type": `ImageObject`,
+            url: publisherLogo,
+            width: 60,
+            height: 60,
+          },
+        }
+      : null,
     mainEntityOfPage: {
       "@type": `WebPage`,
       "@id": config.siteUrl,

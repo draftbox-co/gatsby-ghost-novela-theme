@@ -16,10 +16,23 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   location,
   pageContext,
 }) => {
+  // Article meta component looks for seo image in Post.hero.seo.src so we are normalizing data before passing it to Article Meta
+
+  // Todo : Pass article as a  context from createPages
+
+  const article = {
+    ghostPost: {
+      ...data.ghostPost,
+      hero: {
+        seo: { src: data.ghostPost?.localFeatureImage?.seo?.fixed?.src },
+      },
+    },
+  };
+
   return (
     <>
       <MetaData
-        data={data}
+        data={article}
         location={location}
         amp={pageContext.amp}
         type="article"
@@ -40,9 +53,11 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               dangerouslySetInnerHTML={{ __html: data.ghostPost.title }}
             ></h1>
             <div className="post-meta">
-              {data.ghostPost.primary_author && <div className="post-meta-avatars">
-                <p className="author">{data.ghostPost.primary_author.name}</p>
-              </div>}
+              {data.ghostPost.primary_author && (
+                <div className="post-meta-avatars">
+                  <p className="author">{data.ghostPost.primary_author.name}</p>
+                </div>
+              )}
               <time
                 className="post-date"
                 dateTime="{{date format='DD-MM-YYYY'}}"
@@ -80,12 +95,17 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               }}
             ></section>
           )}
-          {data.ghostPost?.primary_tag && <div className="tags">
-            <span>Tag:</span>
-            <a className="tag" href={`/tag/${data.ghostPost.primary_tag.slug}`}>
-              {data.ghostPost.primary_tag.name}
-            </a>
-          </div>}
+          {data.ghostPost?.primary_tag && (
+            <div className="tags">
+              <span>Tag:</span>
+              <a
+                className="tag"
+                href={`/tag/p${data.ghostPost.primary_tag.slug}`}
+              >
+                {data.ghostPost.primary_tag.name}
+              </a>
+            </div>
+          )}
 
           <div className="comment-button-container">
             <button>
@@ -104,6 +124,14 @@ export const pageQuery = graphql`
       title
       html
       slug
+      og_title
+      og_description
+      feature_image
+      twitter_title
+      twitter_description
+      meta_title
+      meta_description
+      excerpt
       primary_tag {
         name
         slug
@@ -120,6 +148,11 @@ export const pageQuery = graphql`
         childImageSharp {
           fluid {
             srcSet
+            src
+          }
+        }
+        seo: childImageSharp {
+          fixed(width: 1200, quality: 100) {
             src
           }
         }
