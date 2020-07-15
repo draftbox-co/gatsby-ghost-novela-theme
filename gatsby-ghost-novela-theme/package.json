@@ -1,7 +1,7 @@
 {
   "name": "@draftbox-co/gatsby-ghost-novela-theme",
   "description": "A Gatsby theme plugin for creating blogs from headless Ghost CMS.",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "main": "index.js",
   "author": "Draftbox",
   "homepage": "https://github.com/draftbox-co/gatsby-ghost-novela-theme",
@@ -37,7 +37,7 @@
   "dependencies": {
     "@armada-inc/gatsby-plugin-amp": "^0.2.3",
     "@blocks/kit": "^0.0.28",
-    "@draftbox-co/html-to-compiled-mdx": "1.0.2",
+    "@draftbox-co/html-to-compiled-mdx": "^1.0.3",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "@mdx-js/mdx": "^1.6.5",
@@ -87,7 +87,7 @@
     "react-facebook": "^8.1.4",
     "react-helmet": "^5.2.1",
     "react-live": "^2.2.0",
-    "react-medium-image-zoom": "^4.0.2",
+    "react-medium-image-zoom": "^4.2.0",
     "react-outside-click-handler": "^1.2.4",
     "reading-time": "^1.2.0",
     "remark-slug": "^5.1.2",
