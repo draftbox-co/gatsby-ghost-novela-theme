@@ -63,7 +63,7 @@ function a(h, node) {
       value: `<BookmarkCard title="${boomarkCardData.title}" description="${boomarkCardData.description}" author="${boomarkCardData.author}" publisher="${boomarkCardData.publisher}" thumbnail="${boomarkCardData.thumbnail}" url="${boomarkCardData.url}" />`,
     };
   } else {
-    link(h, node);
+    return link(h, node);
   }
 }
 
