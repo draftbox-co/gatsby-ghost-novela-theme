@@ -27,7 +27,6 @@ module.exports = (themeOptions) => {
       `gatsby-plugin-mdx`,
       `gatsby-plugin-catch-links`,
       `gatsby-plugin-force-trailing-slashes`,
-      `gatsby-plugin-offline`,
       {
         resolve: `gatsby-source-filesystem`,
         options: {
@@ -69,11 +68,11 @@ module.exports = (themeOptions) => {
         },
       },
       {
-        resolve: `@armada-inc/gatsby-plugin-amp`,
+        resolve: `@draftbox-co/gatsby-plugin-amp`,
         options: {
           canonicalBaseUrl: siteConfig.siteUrl,
           components: [`amp-form`],
-          excludedPaths: [`/404*`, `/`],
+          excludedPaths: [`/404*`, `/`, `/offline*`],
           pathIdentifier: `amp/`,
           relAmpHtmlPattern: `{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}`,
           useAmpClientIdApi: true,
@@ -162,6 +161,8 @@ module.exports = (themeOptions) => {
             `/404`,
             `/404.html`,
             `/offline-plugin-app-shell-fallback`,
+            '/offline',
+            '/offline.html'
           ],
           createLinkInHead: true,
           addUncaughtPages: true,
