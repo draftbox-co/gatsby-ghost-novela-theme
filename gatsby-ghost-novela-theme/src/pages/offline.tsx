@@ -3,7 +3,7 @@ import Layout from "@components/Layout";
 import styled from "@emotion/styled";
 import { Link } from "gatsby";
 
-const ErrorPage = () => {
+const OfflinePage = () => {
   return (
     <Layout>
       <ErrorContainer>
@@ -53,4 +53,4 @@ const BacktoPage = styled.a`
   text-align: center;
 `;
 
-export default ErrorPage;
+export default OfflinePage;
