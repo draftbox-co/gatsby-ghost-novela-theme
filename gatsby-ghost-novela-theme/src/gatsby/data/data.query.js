@@ -203,8 +203,10 @@ module.exports.ghost = {
     }
   }`,
   siteSettings: `{
-    ghostSettings {
-      title
+    site {
+      siteMetadata {
+        siteTitle
+      }
     }
   }`,
 };

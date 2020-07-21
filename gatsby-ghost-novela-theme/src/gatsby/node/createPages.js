@@ -120,7 +120,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
 
     dataSources.ghost.tags = ghostTags.data.tags.edges.map((tag) => tag.node);
 
-    ghostSettings = ghostSettingsData.data.ghostSettings;
+    websiteTitle = ghostSettingsData.data.site.siteMetadata.siteTitle;
   } catch (error) {
     console.log(error);
   }
@@ -195,7 +195,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       component: templates.ampPage,
       context: {
         slug: article.slug,
-        title: ghostSettings.title,
+        title: websiteTitle,
         amp: true,
       },
     });

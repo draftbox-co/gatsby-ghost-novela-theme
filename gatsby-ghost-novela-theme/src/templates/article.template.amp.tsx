@@ -41,7 +41,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         <nav className="blog-title">
           <Link
             to="/"
-            dangerouslySetInnerHTML={{ __html: data.ghostPost.title }}
+            dangerouslySetInnerHTML={{ __html: pageContext.title }}
           ></Link>
         </nav>
       </header>
@@ -109,7 +109,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 
           <div className="comment-button-container">
             <button>
-              <a href={`/${data.ghostPost.slug}`}>Leave a comment</a>
+              <a href={`/${data.ghostPost.slug}`}>View original article</a>
             </button>
           </div>
         </article>
