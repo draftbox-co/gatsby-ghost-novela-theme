@@ -26,6 +26,7 @@ import { Styled } from "theme-ui";
 import HorizontalRule from "@components/HorizontalRule";
 import Disqus from "@components/disqus";
 import FbComments from "@components/fb-comments";
+import { InView } from "react-intersection-observer";
 
 const icons = {
   linkedin: Icons.LinkedIn,
@@ -50,6 +51,14 @@ const siteQuery = graphql`
 
 const Article: Template = ({ pageContext, location }) => {
   const [href, sethref] = useState("");
+
+  const [showComments, setShowComments] = useState(false);
+
+  const handleCommentsVisibility = (inView) => {
+    if (inView && !showComments) {
+      setShowComments(true);
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -174,7 +183,11 @@ const Article: Template = ({ pageContext, location }) => {
             </ShareButton>
           </ShareButtonsContainer>
         </SocialShareContainer>
-        {process.env.GATSBY_DISQUS_SHORTNAME && (
+        <InView
+          as="div"
+          onChange={(inView) => handleCommentsVisibility(inView)}
+        ></InView>
+        {process.env.GATSBY_DISQUS_SHORTNAME && showComments && (
           <>
             <HorizontalRule />
             <EmbedContainer>
@@ -182,7 +195,7 @@ const Article: Template = ({ pageContext, location }) => {
             </EmbedContainer>
           </>
         )}
-        {process.env.GATSBY_FB_APP_ID && (
+        {process.env.GATSBY_FB_APP_ID && showComments && (
           <>
             <HorizontalRule />
             <EmbedContainer>
