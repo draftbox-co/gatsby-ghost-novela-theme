@@ -22,6 +22,8 @@ import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
 import Iframe from "@components/Iframe";
 import BookmarkCard from "@components/BookmarkCard";
+import Video from "@components/Video";
+import Audio from "@components/Audio";
 
 const components = {
   ...shortcodes,
@@ -47,6 +49,8 @@ const components = {
   figcaption: Figcaption,
   iframe: Iframe,
   BookmarkCard,
+  video: Video,
+  audio: Audio,
 };
 
 interface MDXProps {

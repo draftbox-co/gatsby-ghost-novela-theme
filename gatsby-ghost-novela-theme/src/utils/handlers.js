@@ -10,6 +10,14 @@ function figcaption(h, node) {
   return h(node, "html", toHtml(node, { space: "html" }));
 }
 
+function video(h, node) {
+  return h(node, "html", toHtml(node, { space: "html" }));
+}
+
+function audio(h, node) {
+  return h(node, "html", toHtml(node, { space: "html" }));
+}
+
 function a(h, node) {
   if (
     node.properties &&
@@ -67,4 +75,4 @@ function a(h, node) {
   }
 }
 
-module.exports = { iframe, a, figcaption };
+module.exports = { iframe, a, figcaption, video, audio };
