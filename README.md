@@ -59,6 +59,13 @@ cd gatsby-ghost-novela-theme
 
 PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
 
+## Credits
+Inspired from [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost)
+
+Theme Ported from [Novela](https://github.com/narative/gatsby-theme-novela)
+
+Special Thanks to [Ghost](https://ghost.org)
+
 # Copyright & License
 
 Copyright (c) 2020 [Draftbox](https://draftbox.co) - Released under the [MIT license](LICENSE).
