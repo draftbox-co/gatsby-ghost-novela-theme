@@ -1,6 +1,7 @@
 var toHtml = require("hast-util-to-html");
 const link = require("hast-util-to-mdast/lib/handlers/link");
 var visit = require("unist-util-visit");
+const fs = require("fs");
 
 function iframe(h, node) {
   return h(node, "html", toHtml(node, { space: "html" }));
@@ -18,11 +19,12 @@ function audio(h, node) {
   return h(node, "html", toHtml(node, { space: "html" }));
 }
 
-function a(h, node) {
+
+function figure(h, node) {
   if (
     node.properties &&
     node.properties.className &&
-    node.properties.className.includes("kg-bookmark-container")
+    node.properties.className.includes("kg-bookmark-card")
   ) {
     const boomarkCardData = {
       title: "",
@@ -68,11 +70,24 @@ function a(h, node) {
     });
     return {
       type: "html",
-      value: `<BookmarkCard title="${boomarkCardData.title}" description="${boomarkCardData.description}" author="${boomarkCardData.author}" publisher="${boomarkCardData.publisher}" thumbnail="${boomarkCardData.thumbnail}" url="${boomarkCardData.url}" />`,
+      value: `<BookmarkCard title="${boomarkCardData.title}" description="${boomarkCardData.description}" author="${boomarkCardData.author}" publisher="${boomarkCardData.publisher}" thumbnail="${boomarkCardData.thumbnail}" url="${boomarkCardData.url}" ></BookmarkCard>`,
     };
   } else {
-    return link(h, node);
+    visit(node, function(node) {
+      if (node.tagName && node.tagName === "svg") {
+        delete node.properties["xmlnsXLink"];
+      }
+    });
+    return h(
+      node,
+      "html",
+      toHtml(node, {
+        space: "html",
+        closeSelfClosing: true,
+        allowDangerousHtml: true,
+      })
+    );
   }
 }
 
-module.exports = { iframe, a, figcaption, video, audio };
+module.exports = { iframe, figcaption, video, audio, figure };

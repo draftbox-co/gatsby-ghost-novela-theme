@@ -24,6 +24,7 @@ import Iframe from "@components/Iframe";
 import BookmarkCard from "@components/BookmarkCard";
 import Video from "@components/Video";
 import Audio from "@components/Audio";
+import Figure from "@components/Figure";
 
 const components = {
   ...shortcodes,
@@ -51,6 +52,7 @@ const components = {
   BookmarkCard,
   video: Video,
   audio: Audio,
+  figure: Figure,
 };
 
 interface MDXProps {
