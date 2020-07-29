@@ -54,6 +54,13 @@ const LogoContainer = styled.div`
     height: 32px;
   }
 
+  ${mediaqueries.phablet`
+    .logo {
+      height: auto;
+      width:70%
+    }
+  `}
+
   .Logo__Mobile {
     display: none;
   }
