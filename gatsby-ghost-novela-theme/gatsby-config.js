@@ -161,8 +161,8 @@ module.exports = (themeOptions) => {
             `/404`,
             `/404.html`,
             `/offline-plugin-app-shell-fallback`,
-            '/offline',
-            '/offline.html'
+            "/offline",
+            "/offline.html",
           ],
           createLinkInHead: true,
           addUncaughtPages: true,
@@ -174,7 +174,60 @@ module.exports = (themeOptions) => {
         options: {
           content: `Draftbox`,
         },
-      }
+      },
+      {
+        resolve: `@draftbox-co/gatsby-plugin-webfonts`,
+        options: {
+          fonts: {
+            google: [
+              {
+                family: "Merriweather",
+                variants: ["400", "400i", "600", "700"],
+                //subsets: ['latin']
+                //text: 'Hello'
+                fontDisplay: "swap",
+                strategy: "selfHosted", // 'base64' || 'cdn'
+              },
+            ]
+          },
+          formats: ["woff2", "woff"],
+          useMinify: true,
+          usePreload: true,
+          usePreconnect: true,
+          blacklist: ["/amp"],
+        },
+      },
+      {
+        resolve: `@draftbox-co/gatsby-plugin-css-variables`,
+        options: {
+          variables: [
+            { varName: "--accent-color", value: "#6166DC" },
+            { varName: "--accent-color-dark", value: "#E9DAAC" },
+            { varName: "--success-color", value: "#46B17B" },
+            { varName: "--success-color-dark", value: "#46B17B" },
+            {
+              varName: "--merriweather-font",
+              value: `'Merriweather', Georgia, Serif`,
+            },
+            {
+              varName: "--merriweather-font-semibold",
+              value: `600`,
+            },
+            {
+              varName: "--merriweather-font-bold",
+              value: `700`,
+            },
+            {
+              varName: "--system-font",
+              value: `'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif`,
+            },
+            {
+              varName: "--monospace-font",
+              value: `Operator Mono", Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace`,
+            },
+          ],
+        },
+      },
     ],
   };
 };
