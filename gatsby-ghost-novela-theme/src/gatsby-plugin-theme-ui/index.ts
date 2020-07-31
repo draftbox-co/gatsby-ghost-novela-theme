@@ -15,8 +15,7 @@ const breakpoints = [
 
 const fonts = {
   serif: "var(--merriweather-font)",
-  sansSerif:
-    "'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif",
+  sansSerif: "var(--system-font)",
   monospace: "var(--monospace-font)",
 };
 

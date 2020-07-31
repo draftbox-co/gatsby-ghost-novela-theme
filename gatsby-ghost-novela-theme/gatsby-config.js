@@ -223,7 +223,7 @@ module.exports = (themeOptions) => {
             },
             {
               varName: "--monospace-font",
-              value: `Operator Mono", Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace`,
+              value: `"Operator Mono", Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace`,
             },
           ],
         },
