@@ -83,10 +83,9 @@ export default SocialLinks;
 
 const SocialIconContainer = styled.a`
   position: relative;
+  margin-left: 3.2rem;
   text-decoration: none;
   max-width: 16px;
-  margin: 2rem;
-  margin-top: 0;
 
   svg {
     height: 18px;
@@ -103,6 +102,14 @@ const SocialIconContainer = styled.a`
     }
   }
 
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
   &[data-a11y="true"]:focus::after {
     content: "";
     position: absolute;
@@ -115,6 +122,9 @@ const SocialIconContainer = styled.a`
     border-radius: 5px;
   }
 
+  ${mediaqueries.tablet`
+    margin: 0 2.2rem;
+  `};
 `;
 
 const Hidden = styled.span`
