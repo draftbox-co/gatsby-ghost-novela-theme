@@ -125,9 +125,6 @@ export default Footer;
 
 const FooterContainer = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   // padding-bottom: 80px;
   color: ${(p) => p.theme.colors.grey};
 
@@ -156,7 +153,8 @@ const HoritzontalRule = styled.div`
 `;
 
 const FooterText = styled.div`
-    width: 33%;
+    width: 100%;
+    text-align: center;
 
     ${mediaqueries.phablet`
       width: 100%;
@@ -187,25 +185,18 @@ const FooterGradient = styled.div`
 
 const SocialLinksContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 33%;
-
-  ${mediaqueries.phablet`
-    width: 100%;
-    justify-content: center;
-  `}
+  width: 100%;
 `;
 
 const FooterLinksContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 33%;
-
-  ${mediaqueries.phablet`
   width: 100%;
-`}
+  margin: 40px auto;
 
   ${mediaqueries.tablet`
   margin: 40px auto;
@@ -215,6 +206,7 @@ const FooterLinksContainer = styled.div`
 const FooterLink = styled.a`
   color: ${(p) => p.theme.colors.grey};
   margin-right: 20px;
+  padding-bottom: 10px;
 
   :last-child {
     margin-right: 0;
