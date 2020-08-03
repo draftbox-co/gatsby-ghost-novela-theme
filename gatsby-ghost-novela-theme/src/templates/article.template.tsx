@@ -84,8 +84,6 @@ const Article: Template = ({ pageContext, location }) => {
 
   let pinterestShareUrl = `https://www.pinterest.com/pin/create/button/?url=${href}&description=${article.title}`;
 
-  console.log({ article });
-
   if (article.localFeatureImage && article.localFeatureImage.publicURL) {
     pinterestShareUrl += `&media=${origin +
       article.localFeatureImage.publicURL}`;
