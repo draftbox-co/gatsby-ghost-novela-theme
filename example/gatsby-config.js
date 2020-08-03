@@ -54,6 +54,7 @@ module.exports = {
             ],
           },
           subscribeWidget: {
+            visible: true,
             title: "Subscribe to Built with Draftbox",
             helpText: "Get the latest posts delivered right to your inbox.",
             successMessage: "Thanks for subscribing to Built with Draftbox.",
@@ -64,6 +65,12 @@ module.exports = {
             instagram: "https://www.instagram.com/",
             linkedin: "https://linkedin.com",
             github: "https://github.com/draftbox-co",
+            pinterest: "",
+            youtube: "",
+            dribbble: "",
+            behance: "",
+            externalLink: "",
+            whatsapp: "",
           },
           contactWidget: {
             title: "Contact Built with Draftbox",

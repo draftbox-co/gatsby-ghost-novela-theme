@@ -23,6 +23,7 @@ const Subscription: React.FC<{}> = () => {
       site {
         siteMetadata {
           subscribeWidget {
+            visible
             title
             helpText
             successMessage
@@ -46,6 +47,10 @@ const Subscription: React.FC<{}> = () => {
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.currentTarget.value);
     setError("");
+  }
+
+  if (!subscribeWidget.visible) {
+    return null;
   }
 
   return (
