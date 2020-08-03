@@ -23,7 +23,7 @@ const siteQuery = graphql`
           pinterest
           whatsapp
           youtube
-          dribble
+          dribbble
           behance
           externalLink
         }

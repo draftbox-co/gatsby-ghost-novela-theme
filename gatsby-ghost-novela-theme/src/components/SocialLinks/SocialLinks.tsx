@@ -14,7 +14,7 @@ interface SocialLinksProps {
 
 const icons = {
   behance: Icons.Behance,
-  dribble: Icons.Dribbble,
+  dribbble: Icons.Dribbble,
   linkedin: Icons.LinkedIn,
   twitter: Icons.Twitter,
   facebook: Icons.Facebook,
