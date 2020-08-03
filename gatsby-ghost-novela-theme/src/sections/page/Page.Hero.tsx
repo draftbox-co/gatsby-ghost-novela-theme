@@ -149,7 +149,7 @@ const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
 
     strong {
       display: block;
-      font-weight: 500;
+      font-weight: var(--system-font-semibold);
       margin-bottom: 5px;
     }
   `}

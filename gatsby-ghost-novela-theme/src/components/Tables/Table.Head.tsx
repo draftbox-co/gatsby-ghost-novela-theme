@@ -5,7 +5,7 @@ const Head = styled.thead`
   border-collapse: collapse;
   position: relative;
   line-height: 1.756;
-  font-weight: var(--merriweather-font-semibold);
+  font-weight: var(--merriweather-font-bold);
   color: ${p => p.theme.colors.primary};
   font-family: ${p => p.theme.fonts.serif};
   transition: ${p => p.theme.colorModeTransition};

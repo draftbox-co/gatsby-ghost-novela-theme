@@ -60,7 +60,7 @@ const OrderedList = styled.ol`
   li::before {
     counter-increment: list;
     content: counter(list) '.';
-    font-weight: 600;
+    font-weight: var(--system-font-semibold);
     position: absolute;
     left: -3rem;
     top: -0.3rem;

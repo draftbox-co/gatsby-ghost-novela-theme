@@ -38,7 +38,7 @@ const ErrorContainer = styled.div`
 
 const ErrorTitle = styled.div`
   font-size: 22px;
-  font-weight: bold;
+  font-weight: var(--system-font-bold);
   color: ${(p) => p.theme.colors.primary};
 `;
 

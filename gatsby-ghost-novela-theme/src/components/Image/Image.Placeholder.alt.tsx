@@ -12,7 +12,7 @@ const Container = styled.div`
   height: 100%;
   color: #898989;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
 
   ${mediaqueries.phablet`
     font-size: 28px;

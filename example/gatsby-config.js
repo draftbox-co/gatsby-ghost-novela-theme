@@ -117,10 +117,6 @@ module.exports = {
                 value: `Montserrat`,
               },
               {
-                varName: "--merriweather-font-semibold",
-                value: `600`,
-              },
-              {
                 varName: "--merriweather-font-bold",
                 value: `700`,
               },
@@ -138,7 +134,7 @@ module.exports = {
               },
               {
                 varName: "--system-font-bold",
-                value: `800`,
+                value: `700`,
               },
               {
                 varName: "--monospace-font",
@@ -151,8 +147,8 @@ module.exports = {
             ],
             fonts: [
               {
-                family: "Montserrat",
-                variants: ["600", "700"],
+                family: "Merriweather",
+                variants: ["700"],
                 //subsets: ['latin']
                 //text: 'Hello'
                 fontDisplay: "swap",
@@ -166,8 +162,8 @@ module.exports = {
                 fontDisplay: "swap",
                 strategy: "selfHosted", // 'base64' || 'cdn'
               },
-            ]
-          }
+            ],
+          },
         },
         ghostConfig: {
           development: {

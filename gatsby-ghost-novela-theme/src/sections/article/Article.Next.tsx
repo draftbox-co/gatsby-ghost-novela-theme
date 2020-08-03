@@ -205,7 +205,7 @@ const Excerpt = styled.p<{ narrow: boolean; hasOverflow: boolean }>`
 `;
 
 const MetaData = styled.div`
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
   font-size: 16px;
   color: ${(p) => p.theme.colors.grey};
   opacity: 0.33;

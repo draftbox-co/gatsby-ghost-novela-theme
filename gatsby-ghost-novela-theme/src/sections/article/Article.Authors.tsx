@@ -222,7 +222,7 @@ const NameContainer = styled.strong`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
   cursor: pointer;
 
   ${mediaqueries.desktop`
@@ -238,7 +238,7 @@ const AuthorNameOpen = styled.strong`
   position: relative;
   cursor: pointer;
   color: ${(p) => p.theme.colors.secondary};
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
 `;
 
 const IconContainer = styled.div`
@@ -304,7 +304,7 @@ const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
 
     strong {
       display: block;
-      font-weight: semi-bold;
+      font-weight: var(--system-font-semibold);
       margin-bottom: 5px;
     }
   `}

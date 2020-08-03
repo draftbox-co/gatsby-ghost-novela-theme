@@ -139,7 +139,7 @@ const HeadingContainer = styled.div`
 
 const HeroHeading = styled.h1`
   font-style: normal;
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
   font-size: 52px;
   line-height: 1.15;
   color: ${(p) => p.theme.colors.primary};

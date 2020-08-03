@@ -232,7 +232,7 @@ const FooterNext = styled.h3`
   position: relative;
   opacity: 0.25;
   margin-bottom: 100px;
-  font-weight: 400;
+  font-weight: var(--system-font-normal);
   color: ${(p) => p.theme.colors.primary};
 
   ${mediaqueries.tablet`
