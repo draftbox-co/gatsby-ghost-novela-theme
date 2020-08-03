@@ -15,7 +15,7 @@ module.exports = (themeOptions) => {
 
   siteConfig.apiUrl = finalConfig.apiUrl;
 
-  return {
+  const configOptions = {
     pathPrefix: "",
     siteMetadata: siteConfig,
     plugins: [
@@ -176,58 +176,28 @@ module.exports = (themeOptions) => {
         },
       },
       {
-        resolve: `@draftbox-co/gatsby-plugin-webfonts`,
-        options: {
-          fonts: {
-            google: [
-              {
-                family: "Merriweather",
-                variants: ["400", "400i", "600", "700"],
-                //subsets: ['latin']
-                //text: 'Hello'
-                fontDisplay: "swap",
-                strategy: "selfHosted", // 'base64' || 'cdn'
-              },
-            ]
-          },
-          formats: ["woff2", "woff"],
-          useMinify: true,
-          usePreload: true,
-          usePreconnect: true,
-          blacklist: ["/amp"],
-        },
-      },
-      {
         resolve: `@draftbox-co/gatsby-plugin-css-variables`,
         options: {
-          variables: [
-            { varName: "--accent-color", value: "#6166DC" },
-            { varName: "--accent-color-dark", value: "#E9DAAC" },
-            { varName: "--success-color", value: "#46B17B" },
-            { varName: "--success-color-dark", value: "#46B17B" },
-            {
-              varName: "--merriweather-font",
-              value: `'Merriweather', Georgia, Serif`,
-            },
-            {
-              varName: "--merriweather-font-semibold",
-              value: `600`,
-            },
-            {
-              varName: "--merriweather-font-bold",
-              value: `700`,
-            },
-            {
-              varName: "--system-font",
-              value: `'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif`,
-            },
-            {
-              varName: "--monospace-font",
-              value: `"Operator Mono", Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace`,
-            },
-          ],
+          variables: siteConfig.themeConfig.variables,
         },
       },
     ],
   };
+
+  if (siteConfig.themeConfig.fonts && siteConfig.themeConfig.fonts.length > 0) {
+    configOptions.plugins.push({
+      resolve: `@draftbox-co/gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: siteConfig.themeConfig.fonts,
+        },
+        formats: ["woff2", "woff"],
+        useMinify: true,
+        usePreload: true,
+        usePreconnect: true,
+        blacklist: ["/amp"],
+      },
+    })
+  }
+  return configOptions;
 };

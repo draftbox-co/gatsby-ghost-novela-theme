@@ -12,7 +12,7 @@ export const Figure = styled.figure`
   max-width: 680px;
 
   b {
-    font-weight: 800;
+    font-weight: var(--system-font-bold);
   }
 
   ${mediaqueries.desktop`

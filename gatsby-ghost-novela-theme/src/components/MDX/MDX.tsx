@@ -147,6 +147,7 @@ const PrismCSS = (p) => css`
     border-radius: 5px;
     font-family: ${p.theme.fonts.monospace};
     background: ${p.theme.colors.prism.background};
+    font-weight: var(--monospace-font-normal);
 
     .token-line {
       border-left: 3px solid transparent;

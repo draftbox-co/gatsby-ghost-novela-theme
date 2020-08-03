@@ -1,7 +1,7 @@
 export default {
   pre: {
     variant: `prism`,
-    fontFamily: `"Operator Mono", monospace`,
+    fontFamily: `var(--monospace-font), monospace`,
     tabSize: 4,
     hyphens: `none`,
     color: `white`,
@@ -11,7 +11,7 @@ export default {
     p: 3,
   },
   code: {
-    fontFamily: `"Operator Mono", monospace`,
+    fontFamily: `var(--monospace-font), monospace`,
     fontSize: `inherit`,
   },
   inlineCode: {
