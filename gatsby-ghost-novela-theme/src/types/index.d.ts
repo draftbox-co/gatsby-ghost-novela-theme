@@ -82,6 +82,7 @@ export interface IArticle {
   id: string;
   localFeatureImage: {
     childImageSharp: any;
+    publicURL: string;
   };
   hero: {
     full: IGatsbyImageFluid;

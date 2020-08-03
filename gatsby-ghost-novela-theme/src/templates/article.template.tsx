@@ -28,18 +28,13 @@ import Disqus from "@components/disqus";
 import FbComments from "@components/fb-comments";
 import { InView } from "react-intersection-observer";
 
-const icons = {
-  linkedin: Icons.LinkedIn,
-  twitter: Icons.Twitter,
-  facebook: Icons.Facebook,
-  mailto: Icons.Mailto,
-};
-
 const LinkedInIcon = Icons.LinkedIn;
 const FacebookIcon = Icons.Facebook;
 const TwitterIcon = Icons.Twitter;
 const MailToIcon = Icons.Mailto;
 const CopyIcon = Icons.Copy;
+const PinterestIcon = Icons.Pinterest;
+const WhatsappIcon = Icons.Whatsapp;
 
 const siteQuery = graphql`
   {
@@ -52,6 +47,8 @@ const siteQuery = graphql`
 const Article: Template = ({ pageContext, location }) => {
   const [href, sethref] = useState("");
 
+  const [origin, setOrigin] = useState("");
+
   const [showComments, setShowComments] = useState(false);
 
   const handleCommentsVisibility = (inView) => {
@@ -63,6 +60,7 @@ const Article: Template = ({ pageContext, location }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       sethref(window.location.href);
+      setOrigin(window.location.origin);
     }
   }, []);
 
@@ -83,6 +81,19 @@ const Article: Template = ({ pageContext, location }) => {
   const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${href}&title=${article.title}`;
 
   const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
+
+  let pinterestShareUrl = `https://www.pinterest.com/pin/create/button/?url=${href}&description=${article.title}`;
+
+  console.log({ article });
+
+  if (article.localFeatureImage && article.localFeatureImage.publicURL) {
+    pinterestShareUrl += `&media=${origin +
+      article.localFeatureImage.publicURL}`;
+  }
+
+  const whatsAppShareUrl = `https://wa.me/?text=${encodeURIComponent(
+    article.title + "\n" + href
+  )}`;
 
   useEffect(() => {
     const calculateBodySize = throttle(() => {
@@ -169,6 +180,22 @@ const Article: Template = ({ pageContext, location }) => {
               aria-label="Linkedin Share"
             >
               <LinkedInIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={pinterestShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest Share"
+            >
+              <PinterestIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={whatsAppShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest Share"
+            >
+              <WhatsappIcon fill="#73737D" />
             </ShareButton>
             <ShareButton
               href={mailShareUrl}

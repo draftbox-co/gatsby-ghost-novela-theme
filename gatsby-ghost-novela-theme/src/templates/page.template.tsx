@@ -34,6 +34,8 @@ const FacebookIcon = Icons.Facebook;
 const TwitterIcon = Icons.Twitter;
 const MailToIcon = Icons.Mailto;
 const CopyIcon = Icons.Copy;
+const PinterestIcon = Icons.Pinterest;
+const WhatsappIcon = Icons.Whatsapp;
 
 const Page: Template = ({ pageContext, location }) => {
   const contentSectionRef = useRef<HTMLElement>(null);
@@ -44,10 +46,12 @@ const Page: Template = ({ pageContext, location }) => {
   const { article } = pageContext;
 
   const [href, sethref] = useState("");
+  const [origin, setOrigin] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       sethref(window.location.href);
+      setOrigin(window.location.origin);
     }
   }, []);
 
@@ -58,6 +62,17 @@ const Page: Template = ({ pageContext, location }) => {
   const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${href}&title=${article.title}`;
 
   const mailShareUrl = `mailto:?subject=${article.title}&body=${href}`;
+
+  let pinterestShareUrl = `https://www.pinterest.com/pin/create/button/?url=${href}&description=${article.title}`;
+
+  if (article.localFeatureImage && article.localFeatureImage.publicURL) {
+    pinterestShareUrl += `&media=${origin +
+      article.localFeatureImage.publicURL}`;
+  }
+
+  const whatsAppShareUrl = `https://wa.me/?text=${encodeURIComponent(
+    article.title + "\n" + href
+  )}`;
 
   useEffect(() => {
     const calculateBodySize = throttle(() => {
@@ -96,7 +111,7 @@ const Page: Template = ({ pageContext, location }) => {
   return (
     <Layout>
       <MetaData data={{ ghostPage: article }} location={location} />
-      <ArticleHero article={article} authors={article.authors}/>
+      <ArticleHero article={article} authors={article.authors} />
       <ArticleAside contentHeight={contentHeight}>
         <Progress contentHeight={contentHeight} />
       </ArticleAside>
@@ -137,6 +152,22 @@ const Page: Template = ({ pageContext, location }) => {
               aria-label="Linkedin Share"
             >
               <LinkedInIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={pinterestShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest Share"
+            >
+              <PinterestIcon fill="#73737D" />
+            </ShareButton>
+            <ShareButton
+              href={whatsAppShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest Share"
+            >
+              <WhatsappIcon fill="#73737D" />
             </ShareButton>
             <ShareButton
               href={mailShareUrl}
@@ -268,4 +299,3 @@ const ShareButton = styled.a`
     height: 30px;
   }
 `;
-

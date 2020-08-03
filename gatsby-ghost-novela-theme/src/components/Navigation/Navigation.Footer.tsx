@@ -20,6 +20,12 @@ const siteQuery = graphql`
           instagram
           linkedin
           github
+          pinterest
+          whatsapp
+          youtube
+          dribble
+          behance
+          externalLink
         }
         footer {
           navigation {
@@ -43,6 +49,7 @@ const Footer: React.FC<{}> = () => {
       siteMetadata: { socialLinks = [], footer, siteUrl, apiUrl },
     },
   } = results;
+
 
   Object.keys(socialLinks).forEach((key) => {
     if (socialLinks[key]) {
