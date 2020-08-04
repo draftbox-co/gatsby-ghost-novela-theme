@@ -88,7 +88,13 @@ const Subscription: React.FC<{}> = () => {
               subscribed={succeeded}
               disabled={succeeded}
             >
-              {succeeded ? <CheckMarkIcon /> : "Subscribe"}
+              {succeeded ? (
+                <CheckMarkIcon />
+              ) : submitting ? (
+                "Subscribing..."
+              ) : (
+                "Subscribe"
+              )}
             </Button>
             {error && <Error dangerouslySetInnerHTML={{ __html: error }} />}
           </Form>

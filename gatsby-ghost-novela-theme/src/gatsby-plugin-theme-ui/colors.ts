@@ -34,7 +34,7 @@ export default {
       progress: "#fff",
       card: "#1D2128",
       error: "#EE565B",
-      success: "var(--success-color)",
+      success: "var(--success-color-dark)",
       errorBackground: "rgba(238, 86, 91, 0.1)",
       horizontalRule: "rgba(255, 255, 255, 0.15)",
       inputBackground: "rgba(255, 255, 255, 0.07)",

@@ -107,7 +107,13 @@ const Contact = () => {
               subscribed={succeeded}
               disabled={succeeded}
             >
-              {succeeded ? <CheckMarkIcon /> : "Send"}
+              {succeeded ? (
+                <CheckMarkIcon />
+              ) : submitting ? (
+                "Sending..."
+              ) : (
+                "Send"
+              )}
             </Button>
             {succeeded && (
               <SuccessText>
