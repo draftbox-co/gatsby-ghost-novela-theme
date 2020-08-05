@@ -107,7 +107,13 @@ const Contact = () => {
               subscribed={succeeded}
               disabled={succeeded}
             >
-              {succeeded ? <CheckMarkIcon /> : "Send"}
+              {succeeded ? (
+                <CheckMarkIcon />
+              ) : submitting ? (
+                "Sending..."
+              ) : (
+                "Send"
+              )}
             </Button>
             {succeeded && (
               <SuccessText>
@@ -271,7 +277,7 @@ const Button = styled.button<{ hasError: string; subscribed: boolean }>`
     ${(p) => (p.hasError ? p.theme.colors.error : p.theme.colors.accent)};
   color: ${(p) => (p.hasError ? p.theme.colors.error : p.theme.colors.accent)};
   background: ${(p) => (p.subscribed ? p.theme.colors.accent : "transparent")};
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
   border-radius: 35px;
   letter-spacing: 0.42px;
   transition: border-color 0.2s var(--ease-in-out-quad),

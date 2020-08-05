@@ -66,6 +66,7 @@ module.exports.ghost = {
               }
             }
             extension
+            publicURL
           }
           hero: localFeatureImage {
             full: childImageSharp {
@@ -146,6 +147,7 @@ module.exports.ghost = {
                 srcSetWebp
               }
             }
+            publicURL
             extension
           }
           hero: localFeatureImage {

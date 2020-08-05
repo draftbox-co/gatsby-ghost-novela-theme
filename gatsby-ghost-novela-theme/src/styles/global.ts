@@ -15,10 +15,8 @@ export const globalStyles = css`
   }
 
   @font-face {
-    font-family: "-apple-system", "BlinkMacSystemFont", "San Francisco",
-      "Helvetica Neue", "Helvetica", "Ubuntu", "Roboto", "Noto", "Segoe UI",
-      "Arial", sans-serif;
-    font-weight: 400;
+    font-family: var(--system-font);
+    font-weight: var(--system-font-normal);
     font-style: normal;
   }
 
@@ -44,12 +42,10 @@ export const globalStyles = css`
   }
 
   body {
-    font-family: "-apple-system", "BlinkMacSystemFont", "San Francisco",
-      "Helvetica Neue", "Helvetica", "Ubuntu", "Roboto", "Noto", "Segoe UI",
-      "Arial", sans-serif;
+    font-family: var(--system-font);
     font-size: 1.6rem;
     margin: 0;
-    font-weight: 400;
+    font-weight: var(--system-font-normal);
     height: 100%;
   }
 
@@ -81,9 +77,7 @@ export const globalStyles = css`
   textarea,
   select,
   button {
-    font-family: "-apple-system", "BlinkMacSystemFont", "San Francisco",
-      "Helvetica Neue", "Helvetica", "Ubuntu", "Roboto", "Noto", "Segoe UI",
-      "Arial", sans-serif;
+    font-family: var(--system-font);
   }
 
   .underline {
@@ -104,7 +98,8 @@ export const globalStyles = css`
   kbd,
   pre,
   samp {
-    font-family: monospace;
+    font-family: var(--monospace-font);
+    font-weight: var(--monospace-font-normal);
   }
 
   fieldset,

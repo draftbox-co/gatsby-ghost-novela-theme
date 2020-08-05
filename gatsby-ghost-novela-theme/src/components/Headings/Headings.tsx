@@ -9,7 +9,7 @@ import mediaqueries from "@styles/media";
  */
 
 const commonStyles = p => css`
-  font-weight: bold;
+  font-weight: var(--merriweather-font-bold);
   color: ${p.theme.colors.primary};
   font-family: ${p.theme.fonts.serif};
 `;

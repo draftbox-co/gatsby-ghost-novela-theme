@@ -181,7 +181,7 @@ const paginationItemMixin = (p) => css`
 `;
 
 const PageButton = styled(Link)`
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
   font-size: 18px;
   text-decoration: none;
   color: ${(p) => p.theme.colors.primary};
@@ -195,7 +195,7 @@ const PageButton = styled(Link)`
 `;
 
 const PageNumberBUtton = styled(Link)`
-  font-weight: 400;
+  font-weight: var(--system-font-normal);
   font-size: 18px;
   text-decoration: none;
   color: ${(p) => p.theme.colors.primary};
@@ -217,7 +217,7 @@ const Spacer = styled.span`
 `;
 
 const MobileReference = styled.span`
-  font-weight: 400;
+  font-weight: var(--system-font-normal);
   ${paginationItemMixin}
   color: ${(p) => p.theme.colors.primary};
 

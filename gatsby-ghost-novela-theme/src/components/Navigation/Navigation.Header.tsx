@@ -264,7 +264,6 @@ const NavControls = styled.div`
 
   ${mediaqueries.phablet`
     padding: 20px 0;
-    right: -5px;
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
@@ -285,11 +284,12 @@ const NavbarLinksContainer = styled.div`
   margin-top: 3px;
 
   ${mediaqueries.phablet`
-  margin-left: 20px;
+  margin-left: 0;
   margin-top: 3px;
   margin-bottom: 20px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  width: 100%;
 `}
 `;
 
@@ -298,7 +298,7 @@ const NavLink = styled.a`
   margin-right: 32px;
 
   &:hover {
-    text-decoration: underline;
+    color: ${(p) => p.theme.colors.primary};
   }
 
   ${mediaqueries.phablet`
@@ -312,7 +312,8 @@ const NavControlsSettings = styled.div`
   align-items: center;
 
   ${mediaqueries.phablet`
-  right: -5px;
+  width: 100%;
+  justify-content: flex-end;
 `}
 `;
 

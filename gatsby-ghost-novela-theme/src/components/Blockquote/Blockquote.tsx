@@ -21,7 +21,7 @@ const Blockquote = styled.blockquote`
     margin: 0 auto;
     font-size: 36px;
     line-height: 1.32;
-    font-weight: bold;
+    font-weight: var(--merriweather-font-bold);
 
     ${mediaqueries.tablet`
       font-size: 26px;

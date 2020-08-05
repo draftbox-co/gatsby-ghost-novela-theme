@@ -78,6 +78,6 @@ const LogoContainer = styled.div`
 
 const LogoAlt = styled.h1`
   color: ${(p) => p.theme.colors.primary};
-  font-weight: bold;
+  font-weight: var(--system-font-bold);
   font-size: 22px;
 `;

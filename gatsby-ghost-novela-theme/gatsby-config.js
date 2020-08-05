@@ -15,7 +15,7 @@ module.exports = (themeOptions) => {
 
   siteConfig.apiUrl = finalConfig.apiUrl;
 
-  return {
+  const configOptions = {
     pathPrefix: "",
     siteMetadata: siteConfig,
     plugins: [
@@ -161,8 +161,8 @@ module.exports = (themeOptions) => {
             `/404`,
             `/404.html`,
             `/offline-plugin-app-shell-fallback`,
-            '/offline',
-            '/offline.html'
+            "/offline",
+            "/offline.html",
           ],
           createLinkInHead: true,
           addUncaughtPages: true,
@@ -174,7 +174,30 @@ module.exports = (themeOptions) => {
         options: {
           content: `Draftbox`,
         },
-      }
+      },
+      {
+        resolve: `@draftbox-co/gatsby-plugin-css-variables`,
+        options: {
+          variables: siteConfig.themeConfig.variables,
+        },
+      },
     ],
   };
+
+  if (siteConfig.themeConfig.fonts && siteConfig.themeConfig.fonts.length > 0) {
+    configOptions.plugins.push({
+      resolve: `@draftbox-co/gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: siteConfig.themeConfig.fonts,
+        },
+        formats: ["woff2", "woff"],
+        useMinify: true,
+        usePreload: true,
+        usePreconnect: true,
+        blacklist: ["/amp"],
+      },
+    })
+  }
+  return configOptions;
 };

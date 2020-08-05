@@ -76,7 +76,7 @@ const BookmarkDescription = styled(Paragraph)`
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.5em;
-  font-weight: 400;
+  font-weight: var(--system-font-normal);
   color: ${(p) => p.theme.colors.grey};
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

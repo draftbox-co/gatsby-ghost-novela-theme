@@ -34,7 +34,7 @@ const Heading = styled.h1`
   font-family: ${(p) => p.theme.fonts.sansSerif};
   color: ${(p) => p.theme.colors.primary};
   margin-bottom: 15px;
-  font-weight: 600;
+  font-weight: var(--system-font-semibold);
 
   ${mediaqueries.tablet`
   `}
