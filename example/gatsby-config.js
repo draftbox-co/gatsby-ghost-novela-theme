@@ -114,7 +114,7 @@ module.exports = {
               { varName: "--success-color-dark", value: "#46B17B" },
               {
                 varName: "--merriweather-font",
-                value: `Montserrat`,
+                value: `Merriweather`,
               },
               {
                 varName: "--merriweather-font-bold",
