@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Highlight, { defaultProps, Language } from 'prism-react-renderer'
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import styled from "@emotion/styled";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import theme from "prism-react-renderer/themes/oceanicNext";
@@ -9,7 +9,7 @@ import mediaqueries from "@styles/media";
 import { copyToClipboard } from "@utils";
 
 interface CopyProps {
-  toCopy: string
+  toCopy: string;
 }
 
 const Copy: React.FC<CopyProps> = ({ toCopy }) => {
@@ -47,9 +47,9 @@ function calculateLinesToHighlight(meta) {
   if (RE.test(meta)) {
     const lineNumbers = RE.exec(meta)[1]
       .split(",")
-      .map(v => v.split("-").map(y => parseInt(y, 10)));
+      .map((v) => v.split("-").map((y) => parseInt(y, 10)));
 
-    return index => {
+    return (index) => {
       const lineNumber = index + 1;
       const inRange = lineNumbers.some(([start, end]) =>
         end ? lineNumber >= start && lineNumber <= end : lineNumber === start
@@ -86,48 +86,54 @@ const CodePrism: React.FC<CodePrismProps> = ({
       </Container>
     );
   } else {
-    return (
-      <Highlight {...defaultProps} code={codeString} language={language}>
-        {({ className, tokens, getLineProps, getTokenProps }) => {
-          return (
-            <div style={{ overflow: "auto" }}>
-              <pre className={className} style={{ position: "relative" }}>
-                <Copy toCopy={codeString} />
-                {tokens.map((line, index) => {
-                  const { className } = getLineProps({
-                    line,
-                    key: index,
-                    className: shouldHighlightLine(index)
-                      ? "highlight-line"
-                      : ""
-                  });
+    if (codeString) {
+      return (
+        <Highlight {...defaultProps} code={codeString} language={language}>
+          {({ className, tokens, getLineProps, getTokenProps }) => {
+            return (
+              <div style={{ overflow: "auto" }}>
+                <pre className={className} style={{ position: "relative" }}>
+                  <Copy toCopy={codeString} />
+                  {tokens.map((line, index) => {
+                    const { className } = getLineProps({
+                      line,
+                      key: index,
+                      className: shouldHighlightLine(index)
+                        ? "highlight-line"
+                        : "",
+                    });
 
-                  return (
-                    <div key={index} className={className}>
-                      <span className="number-line">{index + 1}</span>
-                      {line.map((token, key) => {
-                        const { className, children } = getTokenProps({
-                          token,
-                          key
-                        });
+                    return (
+                      <div key={index} className={className}>
+                        <span className="number-line">{index + 1}</span>
+                        {line.map((token, key) => {
+                          const { className, children } = getTokenProps({
+                            token,
+                            key,
+                          });
 
-                        return (
-                          <span key={key} className={className}>
-                            {children}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-              </pre>
-            </div>
-          );
-        }}
-      </Highlight>
-    );
+                          return (
+                            <span key={key} className={className}>
+                              {children}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </pre>
+              </div>
+            );
+          }}
+        </Highlight>
+      );
+    } else if (props.children) {
+      return <code>{props.children}</code>;
+    } else {
+      return null;
+    }
   }
-}
+};
 
 export default CodePrism;
 
@@ -151,7 +157,7 @@ const CopyButton = styled.button`
     top: -2%;
     width: 104%;
     height: 104%;
-    border: 2px solid ${p => p.theme.colors.accent};
+    border: 2px solid ${(p) => p.theme.colors.accent};
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.01);
   }
@@ -169,12 +175,12 @@ const Container = styled.div`
   font-size: 13px;
   margin: 15px auto 50px;
   border-radius: 5px;
-  font-family: ${p => p.theme.fonts.monospace} !important;
+  font-family: ${(p) => p.theme.fonts.monospace} !important;
 
   textarea,
   pre {
     padding: 32px !important;
-    font-family: ${p => p.theme.fonts.monospace} !important;
+    font-family: ${(p) => p.theme.fonts.monospace} !important;
   }
 
   ${mediaqueries.desktop`
