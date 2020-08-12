@@ -33,6 +33,7 @@ const siteSettingsQuery = graphql`
       siteMetadata {
         siteTitle
         siteDescription
+        logoUrl
       }
     }
   }
@@ -48,6 +49,7 @@ const ArticlesHero: React.FC = () => {
 
   const title = siteSettings.site.siteMetadata.siteTitle;
   const description = siteSettings.site.siteMetadata.siteDescription;
+  const logoUrl = siteSettings.site.siteMetadata.logoUrl;
   // const hero = results.site.edges[0].node.siteMetadata.hero;
   const tilesIsActive = hasSetGridLayout && gridLayout === "tiles";
   // const featuredAuthor = authors.find((author) => author.featured);
@@ -64,12 +66,12 @@ const ArticlesHero: React.FC = () => {
       {/* <HeadingContainer style={{ maxWidth: `${hero.maxWidth}px` }}>
         <HeroHeading dangerouslySetInnerHTML={{ __html: hero.heading }} />
       </HeadingContainer> */}
-      <HeadingContainer style={{ maxWidth: `600px` }}>
+      <HeadingContainer style={{ maxWidth: `600px` }} className={!logoUrl ? `no-logo` : ``}>
         <HeroHeading dangerouslySetInnerHTML={{ __html: title }} />
         <HeroDescription>{description}</HeroDescription>
       </HeadingContainer>
-      <SubheadingContainer>
-        {/* <Bio author={featuredAuthor} /> */}
+      {/* <SubheadingContainer>
+        <Bio author={featuredAuthor} />
         <GridControlsContainer>
           <GridButton
             onClick={() => setGridLayout("tiles")}
@@ -90,7 +92,7 @@ const ArticlesHero: React.FC = () => {
             <Icons.Rows />
           </GridButton>
         </GridControlsContainer>
-      </SubheadingContainer>
+      </SubheadingContainer> */}
     </Section>
   );
 };
@@ -134,6 +136,10 @@ const HeadingContainer = styled.div`
 
   ${mediaqueries.tablet`
     width: 100%;
+
+    &.no-logo {
+      margin: 50px 0 100px;
+    }
   `}
 `;
 

@@ -134,9 +134,9 @@ const Article: Template = ({ pageContext, location }) => {
       <ArticleAside contentHeight={contentHeight}>
         <Progress contentHeight={contentHeight} />
       </ArticleAside>
-      <MobileControls>
+      {/* <MobileControls>
         <ArticleControls />
-      </MobileControls>
+      </MobileControls> */}
       {/* <div dangerouslySetInnerHTML={{__html: article.body}}></div> */}
       <ArticleBody
         className={Object.keys(article.hero.full).length === 0 ? "no-hero" : ""}
@@ -250,7 +250,7 @@ const MobileControls = styled.div`
   transition: background 0.2s linear;
   text-align: center;
 
-  ${mediaqueries.tablet_up`
+  ${mediaqueries.phablet_up`
     display: none;
   `}
 `;
@@ -258,7 +258,7 @@ const MobileControls = styled.div`
 const ArticleBody = styled.article`
   position: relative;
   padding: 100px 0 35px;
-  padding-left: 68px;
+  // padding-left: 68px;
   transition: background 0.2s linear;
 
   &.no-hero {
@@ -266,7 +266,7 @@ const ArticleBody = styled.article`
   }
 
   ${mediaqueries.desktop`
-    padding-left: 53px;
+    // padding-left: 53px;
   `}
   
   ${mediaqueries.tablet`
@@ -277,7 +277,8 @@ const ArticleBody = styled.article`
     padding: 60px 0 20px;
 
     &.no-hero {
-      padding-top: 60px;
+      padding-top: 0px;
+      padding-bottom: 60px;
     }
   `}
 
@@ -293,7 +294,7 @@ const TagsContainer = styled.div`
   justify-content: flex-start;
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`
@@ -329,7 +330,7 @@ const SocialShareContainer = styled.div`
   margin: 0 auto 40px;
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`
@@ -417,7 +418,7 @@ const EmbedContainer = styled.div`
   }
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`

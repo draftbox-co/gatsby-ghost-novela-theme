@@ -38,10 +38,11 @@ const Logo: Icon = ({ fill = "white" }) => {
               ? url.resolve(siteUrl, alternateLogoUrl)
               : url.resolve(siteUrl, logoUrl)
           }
-          alt=""
+          alt={siteTitle}
         />
       ) : (
-        <LogoAlt>{siteTitle}</LogoAlt>
+        ``
+        // <LogoAlt>{siteTitle}</LogoAlt>
       )}
     </LogoContainer>
   );
@@ -51,7 +52,7 @@ export default Logo;
 
 const LogoContainer = styled.div`
   .logo {
-    height: 32px;
+    height: 40px;
   }
 
   ${mediaqueries.phablet`
@@ -79,5 +80,6 @@ const LogoContainer = styled.div`
 const LogoAlt = styled.h1`
   color: ${(p) => p.theme.colors.primary};
   font-weight: var(--system-font-bold);
-  font-size: 22px;
+  font-size: 30px;
+  line-height: 1;
 `;

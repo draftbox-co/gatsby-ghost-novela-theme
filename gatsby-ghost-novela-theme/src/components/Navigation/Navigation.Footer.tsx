@@ -74,6 +74,7 @@ const Footer: React.FC<{}> = () => {
                 url.startsWith(apiUrl) ? (
                 <FooterLink
                   key={index}
+                  activeClassName="active"
                   to={`${
                     url.startsWith("/")
                       ? url
@@ -211,6 +212,7 @@ const FooterLinksContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 40%;
+  margin-top: 1px;
 
   ${mediaqueries.tablet`
   width: 100%;
@@ -226,6 +228,10 @@ const FooterLink = styled.a`
   margin: 10px 15px;
 
   :hover {
+    color: ${(p) => p.theme.colors.primary};
+  }
+
+  &.active {
     color: ${(p) => p.theme.colors.primary};
   }
 `;

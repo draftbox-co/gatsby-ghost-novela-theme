@@ -81,6 +81,7 @@ const Subscription: React.FC<{}> = () => {
               value={email}
               onChange={handleEmailChange}
               hasError={error}
+              required
             />
             <Button
               type="submit"
@@ -129,7 +130,7 @@ const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 64px 0 55px;
-  margin: 10px auto 100px;
+  margin: 20px auto 100px;
   background: ${(p) => p.theme.colors.card};
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
   z-index: 1;
@@ -147,8 +148,8 @@ const SubscriptionContainer = styled.div`
 
 const Content = styled.div`
   margin: 0 auto;
-  width: 100%;
-  max-width: 640px;
+  width: auto;
+  max-width: 680px;
 
   ${mediaqueries.tablet`
     h3 {
@@ -186,16 +187,17 @@ const Form = styled.form<{ hasError: string }>`
   position: relative;
 
   &::after {
-    content: ">";
+    content: "►";
     position: absolute;
-    left: 21px;
-    top: 10px;
+    left: 15px;
+    top: 15px;
+    line-height: 1;
     color: ${(p) =>
       p.hasError ? p.theme.colors.error : p.theme.colors.accent};
 
     ${mediaqueries.tablet`
-    left: 34px;
-    top: 11px;
+    left: 30px;
+    top: 16px;
   `}
   }
 `;
@@ -281,11 +283,6 @@ const Button = styled.button<{ hasError: string; subscribed: boolean }>`
     border: none;
     border-radius: 0;
     border-top: 1px solid ${p.theme.colors.horizontalRule};
-
-    &:hover {
-      color: initial;
-      background: initial;
-    }
   `}
 `;
 

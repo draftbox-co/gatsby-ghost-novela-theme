@@ -15,7 +15,7 @@ const OrderedList = styled.ol`
   max-width: 680px;
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`

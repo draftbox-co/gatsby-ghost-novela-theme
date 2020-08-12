@@ -11,7 +11,7 @@ export const Audio = styled.audio`
   }
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`

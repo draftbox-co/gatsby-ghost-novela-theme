@@ -16,7 +16,7 @@ const Paragraph = styled.p`
   }
 
   ${mediaqueries.desktop`
-    max-width: 507px;
+    max-width: 680px;
   `}
 
   ${mediaqueries.tablet`

@@ -41,12 +41,21 @@ export const globalStyles = css`
     line-height: 1.4;
   }
 
+  body, html {
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--system-font);
     font-size: 1.6rem;
-    margin: 0;
     font-weight: var(--system-font-normal);
     height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
   article {

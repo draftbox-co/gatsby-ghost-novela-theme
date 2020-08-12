@@ -19,6 +19,7 @@ const siteQuery = graphql`
     site {
       siteMetadata {
         siteUrl
+        logoUrl
         apiUrl
         header {
           navigation {
@@ -96,6 +97,7 @@ const NavigationHeader: React.FC<{}> = () => {
     site: {
       siteMetadata: {
         siteUrl,
+        logoUrl,
         apiUrl,
         header: { navigation },
       },
@@ -130,13 +132,16 @@ const NavigationHeader: React.FC<{}> = () => {
           <Icons.HamBurgerIcon fill={fill} />
         </Hamburger>
         <NavControls className={menuToggled ? "menu-toggled" : ""}>
-          <NavbarLinksContainer>
+          <NavbarLinksContainer
+            className = {!logoUrl ? `no-logo` : ``}  
+          >
             {navigation.map(({ url, label }, index) => {
               return url.startsWith("/") ||
                 url.startsWith(siteUrl) ||
                 url.startsWith(apiUrl) ? (
                 <NavLink
                   key={index}
+                  activeClassName="active"
                   to={`${
                     url.startsWith("/")
                       ? url
@@ -204,7 +209,7 @@ const NavContainer = styled.div`
     padding-top: 50px;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
     flex-wrap: wrap;
   `}
 `;
@@ -219,7 +224,7 @@ const LogoLink = styled(Link)<{ back: string }>`
     left: 0
   `}
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
     max-width: 70%;
   `}
 
@@ -249,7 +254,7 @@ const Hamburger = styled.button`
     width: 20px;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
     display: block
   `}
 `;
@@ -262,7 +267,7 @@ const NavControls = styled.div`
   align-items: center;
   width: auto;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
     padding: 20px 0;
     width: 100%;
     flex-direction: column;
@@ -278,12 +283,18 @@ const NavControls = styled.div`
 
 const NavbarLinksContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-right: auto;
   margin-left: 60px;
   margin-top: 3px;
+  margin-bottom: 3px;
 
-  ${mediaqueries.phablet`
+  &.no-logo {
+    margin-left: 2px;
+  }
+
+  ${mediaqueries.tablet`
   margin-left: 0;
   margin-top: 3px;
   margin-bottom: 20px;
@@ -296,12 +307,19 @@ const NavbarLinksContainer = styled.div`
 const NavLink = styled.a`
   color: ${(p) => p.theme.colors.grey};
   margin-right: 32px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 18px;
 
   &:hover {
     color: ${(p) => p.theme.colors.primary};
   }
 
-  ${mediaqueries.phablet`
+  &.active {
+    color: ${(p) => p.theme.colors.primary};
+  }
+
+  ${mediaqueries.tablet`
   margin-right: 0;
   margin-bottom: 20px;
 `}
@@ -311,7 +329,7 @@ const NavControlsSettings = styled.div`
   display: flex;
   align-items: center;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
   width: 100%;
   justify-content: flex-end;
 `}

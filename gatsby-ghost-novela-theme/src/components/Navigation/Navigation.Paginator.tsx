@@ -236,7 +236,7 @@ const Frame = styled.nav`
 
   ${mediaqueries.tablet`
     .Paginator__pageLink, ${Spacer} { display: none; }
-    left: -15px;
+    // left: -15px;
   `}
 
   ${mediaqueries.desktop_up`

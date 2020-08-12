@@ -16,7 +16,7 @@ export const Figure = styled.figure`
   }
 
   ${mediaqueries.desktop`
-  max-width: 507px;
+  max-width: 680px;
 `}
 
   ${mediaqueries.tablet`

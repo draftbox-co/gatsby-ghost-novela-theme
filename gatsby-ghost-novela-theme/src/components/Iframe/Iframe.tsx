@@ -12,7 +12,7 @@ const Iframe = styled.iframe`
   }
 
   ${mediaqueries.desktop`
-  max-width: 507px;
+  max-width: 680px;
 `}
 
   ${mediaqueries.tablet`

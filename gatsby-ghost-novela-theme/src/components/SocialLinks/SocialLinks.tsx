@@ -125,5 +125,5 @@ const Hidden = styled.span`
   visibility: hidden;
   opacity: 0;
   overflow: hidden;
-  display: inline-block;
+  display: none;
 `;

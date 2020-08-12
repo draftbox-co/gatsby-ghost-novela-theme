@@ -8,22 +8,40 @@ import mediaqueries from "@styles/media";
 import { IArticle, IAuthor } from "@types";
 
 import ArticleAuthors from "./Article.Authors";
+import { graphql, useStaticQuery } from "gatsby";
 
 interface ArticleHeroProps {
   article: IArticle;
   authors: IAuthor[];
 }
 
+const siteSettingsQuery = graphql`
+  {
+    site {
+      siteMetadata {
+        logoUrl
+      }
+    }
+  }
+`;
+
+
+
 const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
+  const siteSettings = useStaticQuery(siteSettingsQuery);
+  const logoUrl = siteSettings.site.siteMetadata.logoUrl;
+  console.log(logoUrl, 'logoUrl');
+  const logoClass = !logoUrl ? "no-logo" : "";
   const hasCoAUthors = article.authors.length > 1;
   const hasHeroImage =
     article.hero &&
     Object.keys(article.hero.full).length !== 0 &&
     article.hero.full.constructor === Object;
+  const heroImageClass = !hasHeroImage ? "no-hero" : "";
 
   return (
     <Hero>
-      <Header className={hasHeroImage ? "" : "no-hero"}>
+      <Header className={`${logoClass} ${heroImageClass}`}>
         <HeroHeading>{article.title}</HeroHeading>
         <HeroSubtitle hasCoAUthors={hasCoAUthors}>
           <ArticleAuthors authors={authors} />
@@ -87,12 +105,12 @@ const Header = styled.header`
   position: relative;
   z-index: 10;
   margin:100px auto 120px;
-  padding-left: 68px;
-  max-width: 749px;
+  // padding-left: 68px;
+  max-width: 680px;
 
   ${mediaqueries.desktop`
-    padding-left: 53px;
-    max-width: calc(507px + 53px);
+    // padding-left: 53px;
+    max-width: 680px;
     margin: 100px auto 70px;
   `}
 
@@ -104,10 +122,10 @@ const Header = styled.header`
 
   ${mediaqueries.phablet`
     margin: 80px auto;
-    padding: 0 40px;
+    padding: 0 20px;
 
-    &.no-hero {
-      margin-bottom: 10px;
+    &.no-logo {
+      margin: 50px 0 100px;
     }
   `}
 
