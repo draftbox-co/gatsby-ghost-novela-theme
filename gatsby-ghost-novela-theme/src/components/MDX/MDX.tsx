@@ -139,7 +139,7 @@ const PrismCSS = (p) => css`
   .prism-code {
     overflow: auto;
     width: 100%;
-    max-width: 744px;
+    max-width: 680px;
     margin: 0 auto;
     padding: 32px;
     font-size: 13px;

@@ -105,7 +105,7 @@ const NavigationHeader: React.FC<{}> = () => {
   } = useStaticQuery(siteQuery);
 
   const [colorMode] = useColorMode();
-  const fill = colorMode === "dark" ? "#fff" : "#000";
+  const fill = colorMode === "dark" ? "#fff" : "#111216";
 
   return (
     <Section>
@@ -132,9 +132,7 @@ const NavigationHeader: React.FC<{}> = () => {
           <Icons.HamBurgerIcon fill={fill} />
         </Hamburger>
         <NavControls className={menuToggled ? "menu-toggled" : ""}>
-          <NavbarLinksContainer
-            className = {!logoUrl ? `no-logo` : ``}  
-          >
+          <NavbarLinksContainer>
             {navigation.map(({ url, label }, index) => {
               return url.startsWith("/") ||
                 url.startsWith(siteUrl) ||
@@ -255,7 +253,8 @@ const Hamburger = styled.button`
   }
 
   ${mediaqueries.tablet`
-    display: block
+    display: block;
+    padding: 0 8px;
   `}
 `;
 
@@ -268,7 +267,7 @@ const NavControls = styled.div`
   width: auto;
 
   ${mediaqueries.tablet`
-    padding: 20px 0;
+    padding: 20px 8px;
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
@@ -289,10 +288,6 @@ const NavbarLinksContainer = styled.div`
   margin-left: 60px;
   margin-top: 3px;
   margin-bottom: 3px;
-
-  &.no-logo {
-    margin-left: 2px;
-  }
 
   ${mediaqueries.tablet`
   margin-left: 0;

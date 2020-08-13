@@ -15,23 +15,7 @@ interface ArticleHeroProps {
   authors: IAuthor[];
 }
 
-const siteSettingsQuery = graphql`
-  {
-    site {
-      siteMetadata {
-        logoUrl
-      }
-    }
-  }
-`;
-
-
-
 const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
-  const siteSettings = useStaticQuery(siteSettingsQuery);
-  const logoUrl = siteSettings.site.siteMetadata.logoUrl;
-  console.log(logoUrl, 'logoUrl');
-  const logoClass = !logoUrl ? "no-logo" : "";
   const hasCoAUthors = article.authors.length > 1;
   const hasHeroImage =
     article.hero &&
@@ -41,7 +25,7 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({ article, authors }) => {
 
   return (
     <Hero>
-      <Header className={`${logoClass} ${heroImageClass}`}>
+      <Header className={heroImageClass}>
         <HeroHeading>{article.title}</HeroHeading>
         <HeroSubtitle hasCoAUthors={hasCoAUthors}>
           <ArticleAuthors authors={authors} />
@@ -123,10 +107,6 @@ const Header = styled.header`
   ${mediaqueries.phablet`
     margin: 80px auto;
     padding: 0 20px;
-
-    &.no-logo {
-      margin: 50px 0 100px;
-    }
   `}
 
   @media screen and (max-height: 700px) {
@@ -160,6 +140,7 @@ const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
   ${(p) => mediaqueries.phablet`
     font-size: 14px;
     flex-direction: column;
+    padding-left: ${(p) => p.hasCoAUthors ? "20px" : "0"};
 
     ${p.hasCoAUthors &&
       `
@@ -172,7 +153,6 @@ const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
           bottom: -10px;
           border: 1px solid ${p.theme.colors.horizontalRule};
           opacity: 0.5;
-          border-radius: 5px;
         }
     `}
 
@@ -201,14 +181,14 @@ const HeroImage = styled.div`
 
   ${mediaqueries.phablet`
     margin: 0 auto;
-    width: calc(100vw - 40px);
-    height: 220px;
+    width: 100vw;
+    height: auto;
     &.no-hero {
       display: none;
     }
 
     & > div {
-      height: 220px;
+      height: 100%;
     }
 `}
 `;

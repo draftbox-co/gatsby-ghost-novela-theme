@@ -66,7 +66,7 @@ const ArticlesHero: React.FC = () => {
       {/* <HeadingContainer style={{ maxWidth: `${hero.maxWidth}px` }}>
         <HeroHeading dangerouslySetInnerHTML={{ __html: hero.heading }} />
       </HeadingContainer> */}
-      <HeadingContainer style={{ maxWidth: `600px` }} className={!logoUrl ? `no-logo` : ``}>
+      <HeadingContainer style={{ maxWidth: `600px` }}>
         <HeroHeading dangerouslySetInnerHTML={{ __html: title }} />
         <HeroDescription>{description}</HeroDescription>
       </HeadingContainer>
@@ -136,10 +136,6 @@ const HeadingContainer = styled.div`
 
   ${mediaqueries.tablet`
     width: 100%;
-
-    &.no-logo {
-      margin: 50px 0 100px;
-    }
   `}
 `;
 

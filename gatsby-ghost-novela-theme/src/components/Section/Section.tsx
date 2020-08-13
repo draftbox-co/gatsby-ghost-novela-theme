@@ -19,7 +19,7 @@ const Section = styled.section<{ narrow?: boolean }>`
           max-width: 527px;
         `
       : mediaqueries.tablet`
-          padding: 0 4rem;
+          padding: 0 20px;
           max-width: 567px;
         `}
 

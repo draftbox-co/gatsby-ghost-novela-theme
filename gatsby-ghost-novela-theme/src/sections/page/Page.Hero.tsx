@@ -107,19 +107,11 @@ const Header = styled.header`
     padding-left: 0;
     margin: 100px auto 70px;
     max-width: 480px;
-
-    &.no-logo {
-      margin: 50px 0 100px;
-    }
   `}
 
   ${mediaqueries.phablet`
     margin: 80px auto;
     padding: 0 40px;
-
-    &.no-logo {
-      margin: 50px 0 100px;
-    }
   `}
 
   @media screen and (max-height: 700px) {

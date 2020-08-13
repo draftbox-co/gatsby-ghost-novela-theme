@@ -40,7 +40,7 @@ const BookmarkContainer = styled.a`
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2),
     0 9px 18px -9px rgba(0, 0, 0, 0.22);
   border-bottom: none;
-  max-width: 744px;
+  max-width: 680px;
   margin: auto;
   margin-bottom: 35px;
 
@@ -80,6 +80,7 @@ const BookmarkDescription = styled(Paragraph)`
   color: ${(p) => p.theme.colors.grey};
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-size: 15px;
 `;
 
 const BookmarkMeta = styled(Paragraph)`
@@ -92,7 +93,7 @@ const BookmarkAuthor = styled.span`
   color: ${(p) => p.theme.colors.grey};
   margin-bottom: 0 !important;
   margin-top: 12px !important;
-  font-size: 16px;
+  font-size: 14px;
   margin-right: 4px;
   position: relative;
   max-width: 40%;
@@ -102,7 +103,7 @@ const BookmarkPublisher = styled.span`
   color: ${(p) => p.theme.colors.grey};
   margin-bottom: 0 !important;
   margin-top: 12px !important;
-  font-size: 16px;
+  font-size: 14px;
   overflow: hidden;
   max-width: 215px;
   line-height: 1.5em;
