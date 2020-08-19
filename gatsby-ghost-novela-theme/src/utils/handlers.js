@@ -21,6 +21,7 @@ function audio(h, node) {
 
 
 function figure(h, node) {
+
   if (
     node.properties &&
     node.properties.className &&
@@ -32,6 +33,14 @@ function figure(h, node) {
       url: node.properties.href,
     };
     visit(node, function(node) {
+      if (
+        node.properties &&
+        node.properties.className &&
+        node.properties.className.includes("kg-bookmark-container") &&
+        node.tagName == "a"
+      ) {
+        boomarkCardData.url = node.properties.href;
+      }
       if (
         node.properties &&
         node.properties.className &&

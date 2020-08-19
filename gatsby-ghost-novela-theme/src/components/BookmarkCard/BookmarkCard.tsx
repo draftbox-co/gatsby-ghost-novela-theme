@@ -13,7 +13,7 @@ const BookmarkCard = (props) => {
       rel="norefferer noopener"
     >
       <BookmarkContent>
-        <Heading.h3>{props.title}</Heading.h3>
+        <BookmarkHeading>{props.title}</BookmarkHeading>
         <BookmarkDescription>{props.description}</BookmarkDescription>
         <BookmarkMeta>
           {props.author !== "undefined" && (
@@ -139,6 +139,10 @@ const ThumbnailImage = styled.img`
     width: 100%;
     border-radius: 3px 3px 0 0 !important;
   `};
+`;
+
+const BookmarkHeading = styled(Heading.h3)`
+  font-size: 20px;
 `;
 
 export default BookmarkCard;

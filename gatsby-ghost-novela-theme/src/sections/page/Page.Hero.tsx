@@ -24,7 +24,6 @@ const siteSettingsQuery = graphql`
 
 const siteSettings = useStaticQuery(siteSettingsQuery);
 const logoUrl = siteSettings.site.siteMetadata.logoUrl;
-console.log(logoUrl, 'logoUrl');
 
 const PageHero: React.FC<ArticleHeroProps> = ({ article }) => {
   const hasHeroImage =

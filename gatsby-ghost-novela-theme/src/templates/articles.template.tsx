@@ -27,9 +27,11 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
           <Paginator {...pageContext} />
         </ArticlesPaginator>
       </Section>
+      <SubscriptionMargin show={pageContext.pageCount == 1}>
       <Subscription
         home="true"
       />
+      </SubscriptionMargin>
       <ArticlesGradient />
     </Layout>
   );
@@ -57,4 +59,12 @@ const ArticlesPaginator = styled.div<{ show: boolean }>`
       display: flex;
       justify-content: center;
     `};
+`;
+
+const SubscriptionMargin = styled.div<{show: boolean}>`
+  ${(p) => p.show && `margin-top: 80px;`}
+
+  ${mediaqueries.tablet`
+    margin-top:50px;
+  `}
 `;

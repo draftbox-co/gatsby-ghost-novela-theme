@@ -52,8 +52,15 @@ const ArticleShare: React.FC<{}> = () => {
        */
       setTimeout(() => {
         const article = document.getElementsByTagName("article")[0];
-        const paragraphOffset = document.getElementsByTagName("p")[0]
-          .offsetLeft;
+        let paragraphOffset = 0;
+        if (
+          document.getElementsByTagName("p") &&
+          document.getElementsByTagName("p").length >= 0
+        ) {
+          paragraphOffset = document.getElementsByTagName("p")[0].offsetLeft;
+        }
+        
+          
 
         if (!article) return;
 
